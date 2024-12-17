@@ -6,7 +6,7 @@ Feature: As a registered user, I want to have a payment page where I can pay for
   Scenario: TC01: QueryCart customer completes the shopping with valid cart number in Stripe Test Mode and should go to the home page when he/she presses the continue shopping button
 
 
-  Scenario: TC01: QueryCart customer completes the purchase with valid cart number in Stripe Test Mode and receives succses messageeeeeeeeeeeee
+  Scenario: TC01: QueryCart customer completes the purchase with valid cart number in Stripe Test Mode and receives succses message
 
 
   Scenario: TC01: QueryCart customer receives error message with invalid card number in Stripe Test Mode
