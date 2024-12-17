@@ -1,13 +1,31 @@
 target/
+test-output/
+target/test-classes
+target/test-classes/hooks/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+*.class
+*.log
+*.jar
+*.war
+*.ear
+*.swp
+*.swo
+.~lock.
 
 ### IntelliJ IDEA ###
+.idea/
+/*.iml
+.idea/shelf
 .idea/modules.xml
 .idea/jarRepositories.xml
+.idea/misc.xml
+.idea/uiDesigner.xml
+.idea/vcs.xml
 .idea/compiler.xml
 .idea/libraries/
+.idea/workspace.xml
 *.iws
 *.iml
 *.ipr
@@ -36,3 +54,23 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Test Report and Temp Files ###
+/reports/
+/allure-results/
+/allure-report/
+*.tmp
+*.bak
+*.old
+
+# Cucumber
+/cucumber-html-reports/
+/cucumber.json
+/cucumber-reports/
+
+# Selenium
+/screenshots/
+
+# Log4j log files
+/logs/
+/Apps/
