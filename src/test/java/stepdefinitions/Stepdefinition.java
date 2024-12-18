@@ -110,13 +110,11 @@ public class Stepdefinition extends OptionsMet {
         OptionsMet.swipe(x,y,endX,endY);
         ReusableMethods.wait(2);
     }
-
-
     //****us11***
 
     @Then("User clicks the button with itemName {string}")
     public void user_clicks_the_button_with_item_name(String itemName) {
-     //  clickButtonByDescription(itemName);
+        //  clickButtonByDescription(itemName);
         ReusableMethods.wait(3);
         touchDown(874,667);
 

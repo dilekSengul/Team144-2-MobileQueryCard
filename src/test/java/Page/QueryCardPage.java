@@ -52,8 +52,8 @@ public class QueryCardPage {
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
     private WebElement confirmPasswordBox;
 
-   @AndroidFindBy(accessibility = "Wishlist")
-   public  WebElement wishListButton;
+    @AndroidFindBy(accessibility = "Wishlist")
+    public  WebElement wishListButton;
     public void LogoGorunurTest() {
 
         try {
