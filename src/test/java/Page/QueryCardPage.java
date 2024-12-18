@@ -13,8 +13,6 @@ import utilities.ConfigReader;
 import utilities.ReusableMethods;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
@@ -51,6 +49,26 @@ public class QueryCardPage {
     private WebElement newPasswordBox;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
     private WebElement confirmPasswordBox;
+
+    // SIGN UP PAGE - ONUR
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Sign Up\").instance(1)")
+    private WebElement signUpButtonSignUpPage;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(0)")
+    private WebElement nameFieldSignUpPage;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"This field is required\").instance(0)")
+    private WebElement nameErrorSignUpPage;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
+    private WebElement phoneFieldSignUpPage;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"This field is required\").instance(1)")
+    private WebElement phoneErrorSignUpPage;
+    @AndroidFindBy(xpath = "new UiSelector().description(\"This field is required\").instance(1)")
+    private WebElement phoneErrorPopupSignUpPage;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(2)")
+    private WebElement passwordFieldSignUpPage;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Passord is required\")")
+    private WebElement passwordErrorSignUpPage;
+    @AndroidFindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View[2]/android.view.View")
+    private WebElement errorPopupSignUpPage;
 
 
     public void LogoGorunurTest() {
@@ -117,6 +135,8 @@ public class QueryCardPage {
         confirmPasswordBox.sendKeys(newPassword);
 
     }
+
+
 
 }
 
