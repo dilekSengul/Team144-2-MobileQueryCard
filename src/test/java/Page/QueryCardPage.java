@@ -52,7 +52,8 @@ public class QueryCardPage {
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
     private WebElement confirmPasswordBox;
 
-
+    @AndroidFindBy(accessibility = "Wishlist")
+    public  WebElement wishListButton;
     public void LogoGorunurTest() {
 
         try {
@@ -116,6 +117,15 @@ public class QueryCardPage {
         confirmPasswordBox.click();
         confirmPasswordBox.sendKeys(newPassword);
 
+    }
+    public void LoginWithEmail(String registeredEmail, String registeredPassword) {
+        Actions actions = new Actions(getAppiumDriver());
+        phoneTextBoxClickAndSendKeys(ConfigReader.getProperty(registeredEmail));
+        actions.sendKeys(Keys.TAB).perform();
+        actions.sendKeys(ConfigReader.getProperty(registeredPassword)).perform();
+        ReusableMethods.wait(1);
+        actions.sendKeys(Keys.TAB).perform();
+        signInLoginClick();
     }
 
 }
