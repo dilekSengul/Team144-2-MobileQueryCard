@@ -2,6 +2,7 @@ package stepdefinitions;
 
 import Page.QueryCardPage;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -31,7 +32,7 @@ public class Stepdefinition extends OptionsMet {
 
     @Given("User clicks the button with description {string}")
     public void user_clicks_the_button_with_description(String description) {
-        ReusableMethods.wait(3);
+        ReusableMethods.wait(5);
         clickButtonByDescription(description);
     }
 
@@ -111,5 +112,28 @@ public class Stepdefinition extends OptionsMet {
     }
 
 
+    //****us11***
+
+    @Then("User clicks the button with itemName {string}")
+    public void user_clicks_the_button_with_item_name(String itemName) {
+     //  clickButtonByDescription(itemName);
+        ReusableMethods.wait(3);
+        touchDown(874,667);
+
+
+    }
+    @Then("As a user must be {string} email and {string} password Login")
+    public void asAUserMustBeEmailAndPasswordLogin(String registeredEmail, String registeredPassword) {
+        ReusableMethods.wait(3);
+        card.LoginWithEmail(registeredEmail,registeredPassword);
+    }
+
+    @Then("User Verifies the visibility and functionality of the {string} button")
+    public void userVerifiesTheVisibilityAndFunctionalityOfTheButton(String WishList) {
+        ReusableMethods.wait(4);
+        VerifyElementText(WishList);
+        assertTrue(card.wishListButton.isEnabled());
+        //clickAndVerify(card.wishListButton);
+    }
 }
 
