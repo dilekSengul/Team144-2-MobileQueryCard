@@ -144,6 +144,7 @@ public class QueryCardPage {
     private WebElement passwordErrorSignUpPage;
     @AndroidFindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View[2]/android.view.View")
     private WebElement popupSignUpPage;
+
 }
 
 
