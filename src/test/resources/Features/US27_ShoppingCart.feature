@@ -13,6 +13,7 @@ Feature: As a registered user, I want to have a cart on the site and I want to b
     Given QueryCart customer clicks on the shopping basket button
     # new UiSelector().description("Go to Shopping") Go to shoping butonu
   # new UiSelector().className("android.widget.ImageView").instance(0) # boş kutu simgesi
+  #deneme
 
   Scenario: TC08: QueryCart customer adds a product to the basket and should see ‘Go to Shopping’ when he presses the ‘remove’ button.
 
