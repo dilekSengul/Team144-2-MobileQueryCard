@@ -132,20 +132,18 @@ public class QueryCardPage {
     private WebElement signUpButtonSignUpPage;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(0)")
     private WebElement nameFieldSignUpPage;
-    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"This field is required\").instance(0)")
+    @AndroidFindBy(xpath = "//android.view.View[2]/android.widget.EditText[1]/android.view.View")
     private WebElement nameErrorSignUpPage;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
     private WebElement phoneFieldSignUpPage;
-    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"This field is required\").instance(1)")
+    @AndroidFindBy(xpath = "//android.view.View[2]/android.widget.EditText[2]/android.view.View")
     private WebElement phoneErrorSignUpPage;
-    @AndroidFindBy(xpath = "new UiSelector().description(\"This field is required\").instance(1)")
-    private WebElement phoneErrorPopupSignUpPage;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(2)")
     private WebElement passwordFieldSignUpPage;
-    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Passord is required\")")
+    @AndroidFindBy(xpath = "//android.view.View[2]/android.widget.EditText[3]/android.view.View")
     private WebElement passwordErrorSignUpPage;
     @AndroidFindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View[2]/android.view.View")
-    private WebElement errorPopupSignUpPage;
+    private WebElement popupSignUpPage;
 }
 
 
