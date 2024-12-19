@@ -27,7 +27,15 @@ Feature: User Registration
     Given User confirms to be on the homepage
     Then User verifies that "Profile" button is visible and clicks the button.
     When User verifies that "Sign Up" button is visible and clicks the button.
-    #Then User fills the all fields properly and click Sign Up button.
+    Then User fills the all fields properly and click Sign Up button.
+    And User should see the success message
+
+  Scenario: Verify that the SignUp module works with at least 7 character of password
+    Given User confirms to be on the homepage
+    Then User verifies that "Profile" button is visible and clicks the button.
+    When User verifies that "Sign Up" button is visible and clicks the button.
+    Then User fills the all fields properly and click Sign Up button.
+    And User should see the success message
 
   #Scenario: Switch from SignUp page to SignIn page
   #  Given I am on the SignUp page

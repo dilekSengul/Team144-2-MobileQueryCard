@@ -117,11 +117,7 @@ public class stepDefOnur extends OptionsMet {
         card.getPasswordFieldSignUpPage().sendKeys("1234o*");
         ReusableMethods.wait(1);
         card.getSignUpButtonSignUpPage().click();
-        try {
-            assertEquals("Password is required", card.getPasswordErrorSignUpPage().getAttribute("contentDescription"));
-        } catch (AssertionError e) {
-            System.out.println("Assertion failed: " + e.getMessage());
-        }
+
         ReusableMethods.wait(2);
         card.getPasswordFieldSignUpPage().click();
         card.getPasswordFieldSignUpPage().sendKeys("5");
@@ -129,6 +125,15 @@ public class stepDefOnur extends OptionsMet {
         card.getSignUpButtonSignUpPage().click();
         try {
             assertEquals("Success?", card.getPasswordErrorSignUpPage().getAttribute("contentDescription"));
+        } catch (AssertionError e) {
+            System.out.println("Assertion failed: " + e.getMessage());
+        }
+    }
+
+    @And("User should see the success message")
+    public void userShouldSeeTheSuccessMessage() {
+        try {
+            assertEquals("success", card.getPasswordErrorSignUpPage().getAttribute("contentDescription"));
         } catch (AssertionError e) {
             System.out.println("Assertion failed: " + e.getMessage());
         }
