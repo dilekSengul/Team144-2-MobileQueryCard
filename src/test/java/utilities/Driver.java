@@ -36,7 +36,8 @@ public class Driver {
                     options.setNewCommandTimeout(Duration.ofMinutes(20));
                     try {
                         driver = new AndroidDriver(
-                                new URL("http://127.0.0.1:4723/wd/hub"), options
+                  new URL("http://127.0.0.1:4723"), options
+
                         );
                     } catch (MalformedURLException e) {
                         throw new RuntimeException(e);
