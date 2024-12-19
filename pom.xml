@@ -35,7 +35,6 @@
             <artifactId>selenium-java</artifactId>
             <version>4.13.0</version>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/io.appium/java-client -->
         <dependency>
             <groupId>io.appium</groupId>
