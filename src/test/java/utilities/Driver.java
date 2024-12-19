@@ -28,7 +28,7 @@ public class Driver {
                 case "Android":
                     options = new UiAutomator2Options();
                     options.setPlatformName("Android").setAutomationName("UiAutomator2");
-                    options.setApp("src/test/java/Apps/querycart2006.apk");
+                    options.setApp("C:\\Users\\HP\\IdeaProjects\\Team144-2-MobileQueryCard\\src\\test\\java\\Apps\\querycart2006.apk");
                     options.setAppPackage("com.wise.querycart");
                     options.setAppActivity("com.wise.querycart.MainActivity");
                     options.setUdid("emulator-5554");
@@ -36,7 +36,7 @@ public class Driver {
                     options.setNewCommandTimeout(Duration.ofMinutes(20));
                     try {
                         driver = new AndroidDriver(
-                                new URL("http://0.0.0.0:4723"), options
+                                new URL("http://127.0.0.1:4723/wd/hub"), options
                         );
                     } catch (MalformedURLException e) {
                         throw new RuntimeException(e);
