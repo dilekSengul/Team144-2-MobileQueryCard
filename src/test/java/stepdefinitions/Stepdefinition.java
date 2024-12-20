@@ -1,8 +1,11 @@
 package stepdefinitions;
 
 import Page.QueryCardPage;
+import io.appium.java_client.AppiumBy;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -13,8 +16,7 @@ import utilities.ReusableMethods;
 import javax.sound.midi.InvalidMidiDataException;
 
 import static org.junit.Assert.assertTrue;
-import static utilities.Driver.getAppiumDriver;
-import static utilities.Driver.quitAppiumDriver;
+import static utilities.Driver.*;
 
 public class Stepdefinition extends OptionsMet {
     QueryCardPage card = new QueryCardPage();
@@ -127,11 +129,56 @@ public class Stepdefinition extends OptionsMet {
     }
 
     @Then("User Verifies the visibility and functionality of the {string} button")
-    public void userVerifiesTheVisibilityAndFunctionalityOfTheButton(String WishList) {
+    public void userVerifiesTheVisibilityAndFunctionalityOfTheButton(String text) {
         ReusableMethods.wait(4);
-        VerifyElementText(WishList);
-        assertTrue(card.wishListButton.isEnabled());
-        //clickAndVerify(card.wishListButton);
+
+        VerifyElementText(text);
+        clickButtonByDescription(text);
+    }
+    @Given("The user clicks the heart icon on the product named {string}")
+    public void the_user_clicks_the_heart_icon_on_the_product_named(String favoriyeEklenenUrun) throws InvalidMidiDataException {
+        ReusableMethods.wait(5);
+        swipe(530,2132,526,91);
+        ReusableMethods.wait(3);
+        swipe(419,1931,407,534);
+        card.getTheNortFaceArcticParkaHeartIcon().click();
+
+
+    }
+    @When("Verifies that they are redirected to the sign-in page with the message Sign in to continue shopping.")
+    public void verifies_that_they_are_redirected_to_the_sign_in_page_with_the_message() {
+        ReusableMethods.wait(3);
+        Assert.assertTrue(card.getSignInPageVerificationText().isDisplayed());
+    }
+    @Then("Then Clicks the {string} link")
+    public void thenClicksTheLink(String signUp) {
+        clickButtonByDescription(signUp);
+
+    }
+    @Then("Registers as a new user with {string},{string} and {string}")
+    public void registersAsANewUserWithAnd(String name, String phone, String password) {
+        ReusableMethods.wait(3);
+        // card.signUp(name,phone,Password);
+        card.registerNewUser(name,phone,password);
+
+    }
+    @Then("A Success notification is displayed.")
+    public void a_notification_is_displayed() {
+      //  ReusableMethods.wait(1);
+       // card.getSuccessMessage().isDisplayed();
+       // WebElement successMessage = getAppiumDriver().findElement(AppiumBy.xpath("//*[contains(@content-desc, 'item added')]"));
+       card.verifySuccessNotificationText();
+    }
+    @Then("Logs in as a user with the {string} and {string}")
+    public void logs_in_as_a_user_with_the_and(String phone, String Password) {
+        ReusableMethods.wait(3);
+        card.LoginWithPhone(phone,Password);
+    }
+
+    @Then("Sees the notification Added to Wishlist")
+    public void sees_the_notification() {
+        ReusableMethods.wait(4);
+        card.getAddedToWishlistNatification().isDisplayed();
     }
 }
 
