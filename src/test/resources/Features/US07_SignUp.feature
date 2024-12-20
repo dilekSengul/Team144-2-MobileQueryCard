@@ -5,7 +5,7 @@ Feature: User Registration
   Background: User opens the app
     * User makes driver adjustments
 
-  Scenario: SignUp form fields cannot be left blank
+  Scenario: Verifying that the SignUp form fields cannot be left blank
     Given User confirms to be on the homepage
     Then User verifies that "Profile" button is visible and clicks the button.
     When User verifies that "Sign Up" button is visible and clicks the button.

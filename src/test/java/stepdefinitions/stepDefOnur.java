@@ -164,6 +164,7 @@ public class stepDefOnur extends OptionsMet {
             System.out.println("Message: " + "\"" + card.getPopupSignUpPage().getAttribute("contentDescription")+"\"");
         } catch (AssertionError e) {
             System.out.println("Assertion failed: " + e.getMessage());
+            //WebElement successMessage = driver.findElement(AppiumBy.xpath("//*[contains(@content-desc, 'item added')]"));
         }
     }
 
