@@ -4,7 +4,6 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
-import org.junit.Assert;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Pause;
@@ -13,9 +12,7 @@ import org.openqa.selenium.interactions.Sequence;
 
 import javax.sound.midi.InvalidMidiDataException;
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 import static utilities.Driver.getAppiumDriver;
@@ -109,6 +106,13 @@ public class OptionsMet {
 
         // Öğeyle etkileşim
         element.click();
+
+    }
+
+    public static void assertElementText(String expectedMessage, String description) {
+        AndroidDriver driver = (AndroidDriver) getAppiumDriver();
+        WebElement webElement = driver.findElement(MobileBy.xpath("//*[contains(@content-desc, '"+description+"')]"));
+        assertTrue("the element does not contain the word \""+description+"\".",webElement.getAttribute("contentDescription").contains(expectedMessage));
 
     }
 

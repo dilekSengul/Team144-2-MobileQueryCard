@@ -159,17 +159,23 @@ public class stepDefOnur extends OptionsMet {
 
     @Then("User should see an {string} popup message")
     public void userShouldSeeAnPopupMessage(String expectedMessage) {
-        try {
-            assertTrue("the pop-up window does not contain the word \"success\".",card.getPopupSignUpPage().getAttribute("contentDescription").contains(expectedMessage));
-            System.out.println("Message: " + "\"" + card.getPopupSignUpPage().getAttribute("contentDescription")+"\"");
-        } catch (AssertionError e) {
-            System.out.println("Assertion failed: " + e.getMessage());
-            //WebElement successMessage = driver.findElement(AppiumBy.xpath("//*[contains(@content-desc, 'item added')]"));
-        }
+        //try {
+        //    assertTrue("the pop-up window does not contain the word \"success\".",card.getPopupSignUpPage().getAttribute("contentDescription").contains(expectedMessage));
+        //    System.out.println("Message: " + "\"" + card.getPopupSignUpPage().getAttribute("contentDescription")+"\"");
+        //} catch (AssertionError e) {
+        //    System.out.println("Assertion failed: " + e.getMessage());
+        //    //WebElement successMessage = driver.findElement(AppiumBy.xpath("//*[contains(@content-desc, 'item added')]"));
+        //}
+
     }
 
     @And("User verifies that the directed page is {string} page.")
     public void userVerifiesThatTheDirectedPageIsPage(String expectedPageHeader) {
         VerifyElementText(expectedPageHeader);
+    }
+
+    @Then("User should see an {string} message on {string} popup page.")
+    public void userShouldSeeAnMessageOnPopupPage(String expectedMessage, String element) {
+        assertElementText(expectedMessage, element);
     }
 }
