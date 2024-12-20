@@ -13,8 +13,6 @@ import utilities.ConfigReader;
 import utilities.ReusableMethods;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
@@ -51,7 +49,8 @@ public class QueryCardPage {
     private WebElement newPasswordBox;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
     private WebElement confirmPasswordBox;
-
+    @AndroidFindBy(accessibility = "Wishlist")
+    public  WebElement wishListButton;
 
     public void LogoGorunurTest() {
 
@@ -117,6 +116,34 @@ public class QueryCardPage {
         confirmPasswordBox.sendKeys(newPassword);
 
     }
+    public void LoginWithEmail(String registeredEmail, String registeredPassword) {
+        Actions actions = new Actions(getAppiumDriver());
+        phoneTextBoxClickAndSendKeys(ConfigReader.getProperty(registeredEmail));
+        actions.sendKeys(Keys.TAB).perform();
+        actions.sendKeys(ConfigReader.getProperty(registeredPassword)).perform();
+        ReusableMethods.wait(1);
+        actions.sendKeys(Keys.TAB).perform();
+        signInLoginClick();
+    }
+
+
+    // SIGN UP PAGE - ONUR
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Sign Up\").instance(1)")
+    private WebElement signUpButtonSignUpPage;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(0)")
+    private WebElement nameFieldSignUpPage;
+    @AndroidFindBy(xpath = "//android.view.View[2]/android.widget.EditText[1]/android.view.View")
+    private WebElement nameErrorSignUpPage;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
+    private WebElement phoneFieldSignUpPage;
+    @AndroidFindBy(xpath = "//android.view.View[2]/android.widget.EditText[2]/android.view.View")
+    private WebElement phoneErrorSignUpPage;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(2)")
+    private WebElement passwordFieldSignUpPage;
+    @AndroidFindBy(xpath = "//android.view.View[2]/android.widget.EditText[3]/android.view.View")
+    private WebElement passwordErrorSignUpPage;
+    @AndroidFindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View[2]/android.view.View")
+    private WebElement popupSignUpPage;
 
 }
 
