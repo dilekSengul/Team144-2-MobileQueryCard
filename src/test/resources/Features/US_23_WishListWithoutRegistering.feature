@@ -15,3 +15,6 @@
     Then The user clicks the heart icon on the product named "The North Face Arctic Parka."
     Then Sees the notification Added to Wishlist
     And Driver turns off
+
+
+    #ONURThen User should see an "Success" message on "Success" popup page.
