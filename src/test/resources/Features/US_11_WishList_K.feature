@@ -20,3 +20,5 @@ Feature: As a registered user, I would like to be able to create a favorites lis
     Then User clicks the button with itemName "Flower Print Foil T-shirt" and "0 (0  Reviews)" and "$65.00" added WishList
     Then Toaster is displayed
     And Driver turns off
+
+
