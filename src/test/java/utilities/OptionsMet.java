@@ -17,7 +17,7 @@ import java.util.Arrays;
 
 import static org.junit.Assert.assertTrue;
 import static utilities.Driver.getAppiumDriver;
-import static utilities.ElementVisibilityHelper.verifyElementVisibility;
+import static utilities.screenshotTester.verifyElementVisibility;
 
 public class OptionsMet {
     //
@@ -118,14 +118,22 @@ public class OptionsMet {
         System.out.println("element görünür/textAssertion basarılı");
     }
 
+    /**
+     * <h2>assertElementTextAndVisibility</h2>
+     * <p>Elementin görünürlüğünü text ile test eder</p>
+     * <p>Eğer locate yakalanamaz ise screenshot üzerinden test eder.</p>
+     * <p>Method kullanımı için örnek step:</p> <p>{@link stepdefinitions.stepDefOnur#userShouldSeeAnMessageOnPopupPage}</p>
+     */
+
     public static void assertElementTextAndVisibility(String expectedMessage, String elementDescription) throws Exception {
         try {
             assertElementText(expectedMessage, elementDescription);
         } catch (AssertionError | NoSuchElementException e) {
             System.out.println("Message:" + e.getMessage());
         }
-        //Bu kısmın normalde catch içerisinde olması lazım.
-        double threshold = 0.8; // %80 eşleşme oranı
+        //Aşağıdaki kısmın normalde catch içerisinde olması lazım.
+        // Şimdilik hem text hem ss ile test yaparak tutarlılığı ölçülüyor.
+        double threshold = 0.8; // %80 eşleşme oranı - template ve test esnasında yakalanan ss'lerin min eşleşme yüzdesi
         verifyElementVisibility("target/Screenshots/" + expectedMessage + ".png", threshold);
     }
 }

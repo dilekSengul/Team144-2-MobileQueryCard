@@ -12,10 +12,18 @@ import java.nio.file.Files;
 import static junit.framework.TestCase.assertTrue;
 
 
-public class ElementVisibilityHelper {
+public class screenshotTester {
     static {
-        nu.pattern.OpenCV.loadLocally(); // OpenCV Kütüphanesini Yükle
+        nu.pattern.OpenCV.loadLocally(); // OpenCV library java12 ve sonrası için buradan çağırılmalı.
     }
+
+    /**
+     * <h2>SCREENSHOT TESTER</h2>
+     * <p>Locate almakta zorlanılan elementi ekran görüntüsü ile test eder.</p>
+     * <p>Method kullanımı için ==> {@link utilities.OptionsMet#assertElementTextAndVisibility}</p>
+     */
+
+
 
     public static void verifyElementVisibility(String templatePath, double threshold) throws Exception {
 
@@ -38,7 +46,7 @@ public class ElementVisibilityHelper {
 
         //örtüşme sonucu üzerinden junit basit assertion
         try {
-            assertTrue("Element görünür değil!",isVisible);
+            assertTrue("element görünür değil",isVisible);
             System.out.println("element görünür/visibilityAssertion basarılı");
         }
         catch (AssertionError e) {
