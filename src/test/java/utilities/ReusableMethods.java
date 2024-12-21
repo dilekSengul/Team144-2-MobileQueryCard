@@ -16,7 +16,9 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import static java.time.Duration.ofMillis;
 import static java.util.Collections.singletonList;
+import static org.junit.Assert.assertTrue;
 import static utilities.Driver.getAppiumDriver;
+import static utilities.ElementVisibilityHelper.verifyElementVisibility;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
@@ -91,7 +93,7 @@ public class ReusableMethods {
 
         File source = ts.getScreenshotAs(OutputType.FILE);
         // full path to the screenshot location
-        String target = System.getProperty("user.dir") + "/target/Screenshots/" + name + date + ".png";
+        String target = System.getProperty("user.dir") + "/target/Screenshots/" + name +".png";
         File finalDestination = new File(target);
         // save the screenshot to the path given
         FileUtils.copyFile(source, finalDestination);
