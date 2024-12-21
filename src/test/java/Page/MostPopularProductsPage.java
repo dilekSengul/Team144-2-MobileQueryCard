@@ -36,6 +36,10 @@ public class MostPopularProductsPage {
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ScrollView\")")
     public WebElement mostPopularScroll;
 
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ScrollView\")")
+    public WebElement detailsButton;
+
+
     public void verifyMostPopularIsVisible() {
         ReusableMethods.wait(3);
         Assert.assertTrue("The Most Popular menu title is not visible on the home page navBar.", mostPopular.isDisplayed());
