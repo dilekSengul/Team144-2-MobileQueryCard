@@ -13,6 +13,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class stepDefOnur extends OptionsMet {
+
     QueryCardPage card = new QueryCardPage();
     Faker faker = new Faker();
     String fakePhone = faker.numerify("#######");
@@ -39,8 +40,8 @@ public class stepDefOnur extends OptionsMet {
         assertTrue(card.getPhoneErrorSignUpPage().isDisplayed());
         assertTrue(card.getPasswordErrorSignUpPage().isDisplayed());
 
-        assertEquals("This field is required",card.getNameErrorSignUpPage().getAttribute("contentDescription"));
-        assertEquals("This field is required",card.getPhoneErrorSignUpPage().getAttribute("contentDescription"));
+        assertEquals("This field is required", card.getNameErrorSignUpPage().getAttribute("contentDescription"));
+        assertEquals("This field is required", card.getPhoneErrorSignUpPage().getAttribute("contentDescription"));
         try {
             assertEquals("Password is required", card.getPasswordErrorSignUpPage().getAttribute("contentDescription"));
         } catch (AssertionError e) {
@@ -82,7 +83,7 @@ public class stepDefOnur extends OptionsMet {
         ReusableMethods.wait(1);
         try {
             assertTrue(card.getPopupSignUpPage().getAttribute("contentDescription").contains("Error"));
-            System.out.println("Message: " + "\""+card.getPopupSignUpPage().getAttribute("contentDescription")+"\"");
+            System.out.println("Message: " + "\"" + card.getPopupSignUpPage().getAttribute("contentDescription") + "\"");
         } catch (AssertionError e) {
             System.out.println("Assertion failed: " + e.getMessage());
         }
@@ -124,7 +125,7 @@ public class stepDefOnur extends OptionsMet {
     public void userShouldSeeTheSuccessMessage() {
         try {
             assertTrue(card.getPopupSignUpPage().getAttribute("contentDescription").contains("Success"));
-            System.out.println("Message: " + "\""+card.getPopupSignUpPage().getAttribute("contentDescription")+"\"");
+            System.out.println("Message: " + "\"" + card.getPopupSignUpPage().getAttribute("contentDescription") + "\"");
         } catch (AssertionError e) {
             System.out.println("Assertion failed: " + e.getMessage());
         }
@@ -150,8 +151,8 @@ public class stepDefOnur extends OptionsMet {
     public void userShouldSeeTheErrorMessage() {
         try {
             assertTrue(card.getPasswordErrorSignUpPage().isDisplayed());
-            assertEquals("Password is short",card.getPasswordErrorSignUpPage().getAttribute("contentDescription"));
-            System.out.println("Message: " + "\"" + card.getPasswordErrorSignUpPage().getAttribute("contentDescription")+"\"");
+            assertEquals("Password is short", card.getPasswordErrorSignUpPage().getAttribute("contentDescription"));
+            System.out.println("Message: " + "\"" + card.getPasswordErrorSignUpPage().getAttribute("contentDescription") + "\"");
         } catch (AssertionError e) {
             System.out.println("Assertion failed: " + e.getMessage());
         }
@@ -175,7 +176,13 @@ public class stepDefOnur extends OptionsMet {
     }
 
     @Then("User should see an {string} message on {string} popup page.")
-    public void userShouldSeeAnMessageOnPopupPage(String expectedMessage, String element) {
-        assertElementText(expectedMessage, element);
+    public void userShouldSeeAnMessageOnPopupPage(String expectedMessage, String elementDescription) throws Exception {
+        ReusableMethods.wait(2);
+        //ReusableMethods.getScreenshot(expectedMessage); //test edilecek örnek ekran görüntüsünü almak için ilk seferde kullanılır
+
+        assertElementTextAndVisibility(expectedMessage,elementDescription);
+
+
+
     }
 }

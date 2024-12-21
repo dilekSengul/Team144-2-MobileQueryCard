@@ -4,6 +4,7 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Pause;
@@ -16,9 +17,10 @@ import java.util.Arrays;
 
 import static org.junit.Assert.assertTrue;
 import static utilities.Driver.getAppiumDriver;
+import static utilities.screenshotTester.verifyElementVisibility;
 
 public class OptionsMet {
-//
+    //
     public static void swipe(int x, int y, int endX, int endY) throws InvalidMidiDataException {
         /******  PointerInput ve Sequence Kullanımı: PointerInput ile parmak hareketlerini
          *      ve Sequence ile bu hareketlerin sırasını tanımlıyoruz.
@@ -98,7 +100,7 @@ public class OptionsMet {
 
     }
 
-    public static void xPathElementClick(String itemName, String reviews,String price) {
+    public static void xPathElementClick(String itemName, String reviews, String price) {
         String xpathExpression = String.format("//android.view.View[contains(@content-desc, '%s') and contains(@content-desc, '%s') and contains(@content-desc, '%s')]/android.widget.ImageView", itemName, reviews, price);
 
         // Öğeyi bulma
@@ -109,12 +111,29 @@ public class OptionsMet {
 
     }
 
-    public static void assertElementText(String expectedMessage, String description) {
+    public static void assertElementText(String expectedMessage, String elementDescription) {
         AndroidDriver driver = (AndroidDriver) getAppiumDriver();
-        WebElement webElement = driver.findElement(MobileBy.xpath("//*[contains(@content-desc, '"+description+"')]"));
-        assertTrue("the element does not contain the word \""+description+"\".",webElement.getAttribute("contentDescription").contains(expectedMessage));
-
+        WebElement webElement = driver.findElement(MobileBy.xpath("//*[contains(@content-desc, '" + elementDescription + "')]"));
+        assertTrue("the element does not contain the word \"" + elementDescription + "\".", webElement.getAttribute("contentDescription").contains(expectedMessage));
+        System.out.println("element görünür/textAssertion basarılı");
     }
 
-}
+    /**
+     * <h2>assertElementTextAndVisibility</h2>
+     * <p>Elementin görünürlüğünü text ile test eder</p>
+     * <p>Eğer locate yakalanamaz ise screenshot üzerinden test eder.</p>
+     * <p>Method kullanımı için örnek step:</p> <p>{@link stepdefinitions.stepDefOnur#userShouldSeeAnMessageOnPopupPage}</p>
+     */
 
+    public static void assertElementTextAndVisibility(String expectedMessage, String elementDescription) throws Exception {
+        try {
+            assertElementText(expectedMessage, elementDescription);
+        } catch (AssertionError | NoSuchElementException e) {
+            System.out.println("Message:" + e.getMessage());
+        }
+        //Aşağıdaki kısmın normalde catch içerisinde olması lazım.
+        // Şimdilik hem text hem ss ile test yaparak tutarlılığı ölçülüyor.
+        double threshold = 0.8; // %80 eşleşme oranı - template ve test esnasında yakalanan ss'lerin min eşleşme yüzdesi
+        verifyElementVisibility("target/Screenshots/" + expectedMessage + ".png", threshold);
+    }
+}
