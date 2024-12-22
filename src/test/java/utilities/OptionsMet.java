@@ -5,11 +5,14 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Pause;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import javax.sound.midi.InvalidMidiDataException;
 import java.time.Duration;
@@ -110,6 +113,24 @@ public class OptionsMet {
         // Öğeyle etkileşim
         element.click();
 
+    }
+    public static void VerifyElementDescription(String description) {
+        AndroidDriver driver = (AndroidDriver) getAppiumDriver();
+
+        // Create a WebDriverWait instance
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));  // Wait for up to 10 seconds
+
+        // Wait until the element is visible using the XPath locator strategy
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//android.view.View[contains(@content-desc, '" + description + "')]")
+        ));
+
+        // Find the element after it's visible
+        WebElement webElement = driver.findElement(MobileBy.AndroidUIAutomator(
+                "new UiSelector().descriptionContains(\"" + description + "\")"));
+
+        // Verify the element is displayed
+        assertTrue(webElement.isDisplayed());
     }
 
 }

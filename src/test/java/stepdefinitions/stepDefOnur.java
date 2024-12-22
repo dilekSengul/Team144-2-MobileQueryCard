@@ -5,11 +5,15 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.OptionsMet;
 import utilities.ReusableMethods;
 
+import java.time.Duration;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
 import static utilities.Driver.getAppiumDriver;
 
 public class stepDefOnur extends OptionsMet {
@@ -18,6 +22,8 @@ public class stepDefOnur extends OptionsMet {
 
     @Then("User verifies that {string} button is visible and clicks the button.")
     public void userVerifiesThatButtonIsVisibleAndClicksTheButton(String element) {
+
+        ReusableMethods.wait(5);
         VerifyElementText(element);
         clickButtonByDescription(element);
     }
