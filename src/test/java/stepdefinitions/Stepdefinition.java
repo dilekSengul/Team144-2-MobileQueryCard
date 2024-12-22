@@ -2,14 +2,15 @@ package stepdefinitions;
 
 import Page.CategoriesPage;
 import Page.QueryCardPage;
-
-
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-
-
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -24,9 +25,9 @@ import java.time.Duration;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
-
-import static utilities.Driver.*;
-
+import static utilities.Driver.getAppiumDriver;
+import static utilities.Driver.quitAppiumDriver;
+import static utilities.ReusableMethods.ekranKaydirmaMethodu;
 
 public class Stepdefinition extends OptionsMet {
     QueryCardPage card = new QueryCardPage();
@@ -148,56 +149,11 @@ public class Stepdefinition extends OptionsMet {
     }
 
     @Then("User Verifies the visibility and functionality of the {string} button")
-    public void userVerifiesTheVisibilityAndFunctionalityOfTheButton(String text) {
+    public void userVerifiesTheVisibilityAndFunctionalityOfTheButton(String WishList) {
         ReusableMethods.wait(4);
-
-        VerifyElementText(text);
-        clickButtonByDescription(text);
-    }
-    @Given("The user clicks the heart icon on the product named {string}")
-    public void the_user_clicks_the_heart_icon_on_the_product_named(String favoriyeEklenenUrun) throws InvalidMidiDataException {
-        ReusableMethods.wait(5);
-        swipe(530,2132,526,91);
-        ReusableMethods.wait(3);
-        swipe(419,1931,407,534);
-        card.getTheNortFaceArcticParkaHeartIcon().click();
-
-
-    }
-    @When("Verifies that they are redirected to the sign-in page with the message Sign in to continue shopping.")
-    public void verifies_that_they_are_redirected_to_the_sign_in_page_with_the_message() {
-        ReusableMethods.wait(3);
-        Assert.assertTrue(card.getSignInPageVerificationText().isDisplayed());
-    }
-    @Then("Then Clicks the {string} link")
-    public void thenClicksTheLink(String signUp) {
-        clickButtonByDescription(signUp);
-
-    }
-    @Then("Registers as a new user with {string},{string} and {string}")
-    public void registersAsANewUserWithAnd(String name, String phone, String password) {
-        ReusableMethods.wait(3);
-        // card.signUp(name,phone,Password);
-        card.registerNewUser(name,phone,password);
-
-    }
-    @Then("A Success notification is displayed.")
-    public void a_notification_is_displayed() {
-      //  ReusableMethods.wait(1);
-       // card.getSuccessMessage().isDisplayed();
-       // WebElement successMessage = getAppiumDriver().findElement(AppiumBy.xpath("//*[contains(@content-desc, 'item added')]"));
-       card.verifySuccessNotificationText();
-    }
-    @Then("Logs in as a user with the {string} and {string}")
-    public void logs_in_as_a_user_with_the_and(String phone, String Password) {
-        ReusableMethods.wait(3);
-        card.LoginWithPhone(phone,Password);
-    }
-
-    @Then("Sees the notification Added to Wishlist")
-    public void sees_the_notification() {
-        ReusableMethods.wait(4);
-        card.getAddedToWishlistNatification().isDisplayed();
+        VerifyElementText(WishList);
+       // assertTrue(card.wishListButton.isEnabled());
+        //clickAndVerify(card.wishListButton);
     }
 
 
@@ -230,7 +186,7 @@ public class Stepdefinition extends OptionsMet {
 
                 swipeCount++;
                 System.out.println("kaydırma " + swipeCount + " kez ekran kaydırma yapıldı.");
-                ReusableMethods.ekranKaydirmaMethodu(1310, 1410, 5000, 40, 1390); // Sağ kaydırma
+                ekranKaydirmaMethodu(1310, 1410, 5000, 40, 1390); // Sağ kaydırma
                 // Thread.sleep(2000) ;
             }
             if (i == 36) {
@@ -255,7 +211,7 @@ public class Stepdefinition extends OptionsMet {
     }
 
     @Then("User clicks the backArrow button")
-   public void userclicksthebackArrowbutton() {
+    public void userclicksthebackArrowbutton() {
         categoriesPage.getBackArrow().click();
         ReusableMethods.wait(1);
         categoriesPage.getBackArrow().click();

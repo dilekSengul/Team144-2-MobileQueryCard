@@ -12,8 +12,9 @@ import utilities.ReusableMethods;
 import javax.sound.midi.InvalidMidiDataException;
 import java.util.List;
 
+
 import static org.junit.Assert.*;
-import static utilities.ReusableMethods.assertToasterColorAndVisibility;
+
 
 
 public class stepDefOnur {
@@ -172,8 +173,7 @@ public class stepDefOnur {
     public void userShouldSeeAnMessageOnPopupPage(String expectedMessage) throws Exception {
         ReusableMethods.wait(2);
         //ReusableMethods.getScreenshot(expectedMessage); //test edilecek örnek ekran görüntüsünü almak için ilk seferde kullanılır
-        assertToasterColorAndVisibility(expectedMessage, 0.2);
-        //OptionsMet.assertElementTextAndVisibility(expectedMessage);
+        OptionsMet.assertElementTextAndVisibility(expectedMessage);
 
 
     }

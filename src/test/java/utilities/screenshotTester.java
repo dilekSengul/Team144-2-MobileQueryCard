@@ -1,11 +1,12 @@
 package utilities;
 
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+
 import java.io.File;
 import java.nio.file.Files;
 
@@ -57,4 +58,3 @@ public class screenshotTester {
         new File(screenPath).delete();
     }
 }
-
