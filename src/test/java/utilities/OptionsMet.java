@@ -4,6 +4,7 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
@@ -14,6 +15,7 @@ import org.openqa.selenium.interactions.Sequence;
 import javax.sound.midi.InvalidMidiDataException;
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 import static utilities.Driver.getAppiumDriver;
@@ -136,4 +138,14 @@ public class OptionsMet {
         double threshold = 0.8; // %80 eşleşme oranı - template ve test esnasında yakalanan ss'lerin min eşleşme yüzdesi
         verifyElementVisibility("target/Screenshots/" + expectedMessage + ".png", threshold);
     }
+
+    public static void swipeRightWithJS(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getAppiumDriver();
+        String script = "arguments[0].scrollRight += 250"; // Kaydırma mesafesi ayarı (pixel)
+        js.executeScript(script, element);
+
+    }
+
+
+
 }

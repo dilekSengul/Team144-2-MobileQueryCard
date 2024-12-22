@@ -2,12 +2,21 @@ package stepdefinitions;
 
 import Page.QueryCardPage;
 import com.github.javafaker.Faker;
+import io.appium.java_client.MobileBy;
+import io.appium.java_client.pagefactory.AndroidBy;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import utilities.Driver;
 import utilities.OptionsMet;
 import utilities.ReusableMethods;
+
+import javax.sound.midi.InvalidMidiDataException;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -178,11 +187,44 @@ public class stepDefOnur extends OptionsMet {
     @Then("User should see an {string} message on {string} popup page.")
     public void userShouldSeeAnMessageOnPopupPage(String expectedMessage, String elementDescription) throws Exception {
         ReusableMethods.wait(2);
-        //ReusableMethods.getScreenshot(expectedMessage); //test edilecek örnek ekran görüntüsünü almak için ilk seferde kullanılır
+        ReusableMethods.getScreenshot(expectedMessage); //test edilecek örnek ekran görüntüsünü almak için ilk seferde kullanılır
 
-        assertElementTextAndVisibility(expectedMessage,elementDescription);
-
+        assertElementTextAndVisibility(expectedMessage, elementDescription);
 
 
     }
+
+    @Then("User should see the Juniors category and subcategories on the categories window in the body section")
+    public void userShouldSeeTheJuniorsCategoryAndSubcategoriesOnTheCategoriesWindowInTheBodySection(io.cucumber.datatable.DataTable dataTable) throws InvalidMidiDataException {
+        List<String> expectedCategories = dataTable.asList(String.class); // Gherkin'den gelen kategori listesi
+
+        for (String category : expectedCategories) {
+            boolean isVisible = false;
+
+            // Scroll ve öğeyi bulma işlemi
+            for (int i = 0; i < 15; i++) { // Maksimum 10 deneme
+                try {
+                    WebElement element = Driver.getAppiumDriver().findElement(By.xpath("//android.view.View[@content-desc=\""+category+"\"]"));
+                    if (element.isDisplayed()) {
+                        isVisible = true;
+                        System.out.println("Visible: " + category);
+                        break; // Öğeyi gördüysek kaydırmayı bırak
+                    }
+                } catch (Exception e) {
+                    System.out.println("Element not found, scrolling left...");
+                    //ReusableMethods.ekranKaydirmaMethodu(1150, 1150, 500, 250, 1150); // Touch action sola kaydırma (çalışmıyor)
+                    OptionsMet.swipe(1100,1150,200,1150);
+                }
+            }
+
+            // Eğer öğe 5 deneme sonunda hala bulunamazsa hata ver
+            assertTrue("Category not visible: " + category, isVisible);
+        }
+    }
+
+    @And("User opens the Juniors category page")
+    public void userOpensTheJuniorsCategoryPage() {
+        ReusableMethods.ekranKaydirmaMethodu(1150, 1150, 500, 250, 1150);
+    }
 }
+

@@ -1,6 +1,7 @@
 package Page;
 
 
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Getter;
@@ -8,15 +9,18 @@ import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.ConfigReader;
+import utilities.OptionsMet;
 import utilities.ReusableMethods;
 
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
@@ -45,7 +49,7 @@ public class QueryCardPage {
     private WebElement rememberMeCheckBox;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.view.View\").instance(4)")
     private WebElement addWishListToast;
-    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.view.View\").instance(9)")
+    @AndroidFindBy(xpath = "//android.widget.ScrollView/android.view.View[3]/android.view.View")
     private List<WebElement> categories;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\")")
     private WebElement forgotPssPhoneBox;
@@ -147,7 +151,8 @@ public class QueryCardPage {
     private WebElement passwordErrorSignUpPage;
     @AndroidFindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View[2]/android.view.View")
     private WebElement popupSignUpPage;
-    //@AndroidFindBy (successMessage = driver.findElement(AppiumBy.xpath("//*[contains(@content-desc, 'item added')]"));)
+
+
 
     //**WishList**
     @AndroidFindBy(accessibility = "Wishlist")
@@ -199,6 +204,33 @@ public class QueryCardPage {
         String actualText = successMessage.getAttribute("content-desc");
         Assert.assertEquals("Success Register Successfully.", actualText);
     }
+
+    ////Çağırma Metodu
+    //public List<String> getCategories() {
+    //    List<String> categoryElements = new ArrayList<>();
+    //    for (WebElement element : categories) {
+    //        categoryElements.add(element.getText().trim());
+    //    }
+    //    return categoryElements;
+    //}
+
+   //public void checkElementsInBar(WebElement barElement) {
+   //    // Barın içerisindeki elementleri bulun
+   //    List<WebElement> elements = barElement.findElements(MobileBy.xpath("//android.widget.ScrollView/android.view.View[3]/android.view.View/android.view.View"));
+   //    // Her bir elementi kontrol edin
+   //    for (WebElement element : elements) {
+   //        // Elemanın görünürlüğünü kontrol edin
+   //        if (!element.isDisplayed()) {
+   //            // Eğer eleman görünür değilse, barı kaydırın
+   //            OptionsMet.swipeRightWithJS(barElement); }
+   //        // Elemanı test edin (örneğin, text kontrolü)
+   //        System.out.println("Element Text: " + element.getText());
+   //    }
+   //}
+
+
+
+
 }
 
 
