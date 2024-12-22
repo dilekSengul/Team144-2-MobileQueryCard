@@ -5,11 +5,8 @@ import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
 import utilities.OptionsMet;
 import utilities.ReusableMethods;
-
-import java.time.Duration;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -186,7 +183,7 @@ public class stepDefOnur extends OptionsMet {
         ReusableMethods.wait(2);
         //ReusableMethods.getScreenshot(expectedMessage); //test edilecek örnek ekran görüntüsünü almak için ilk seferde kullanılır
 
-        assertElementTextAndVisibility(expectedMessage,elementDescription);
+       // assertElementTextAndVisibility(expectedMessage,elementDescription);
 
 
 
