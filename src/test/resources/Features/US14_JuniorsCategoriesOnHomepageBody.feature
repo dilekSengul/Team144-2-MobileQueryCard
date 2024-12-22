@@ -5,13 +5,13 @@ Feature: Juniors Kategori Sayfası
   Background: User opens the app
     * User makes driver adjustments
     * User confirms to be on the homepage
-    #* User clicks the button with description "Profile"
-    #* User clicks the button with description "Sign In"
-    #* User clicks the button "phoneTextBox" and sendKeys "6505551212"
-    #* User clicks the button "signInLoginButton"
+    * User clicks the button with description "Profile"
+    * User clicks the button with description "Sign In"
+    * User clicks the button "phoneTextBox" and sendKeys "6505551212"
+    * User clicks the button "signInLoginButton"
 
   Scenario: Viewing Juniors category and its subcategories on the homepage
-    * User should see the Juniors category and subcategories on the categories window in the body section
+    * User should see the following categories in the categories window in the body section
       | Juniors                 |
       | Juniors Clothing        |
       | Girl Clothes            |
@@ -23,16 +23,24 @@ Feature: Juniors Kategori Sayfası
       | Boy Shoes               |
       | Juniors Accessories     |
       | Juniors Bags            |
-      | Juniors Hats & Beres    |
+      | Juniors Hat & Beres     |
       | Toys                    |
 
 
   Scenario: Performing actions on products in the Juniors category
-    And User opens the Juniors category page
-    #When User views a product
-    #Then User should be able to add it to the cart
-    #And User should be able to add it to the wishlist
-    #And User should be able to view the product details
+    Given User opens the "Juniors" category page
+    When User views the first product
+    And User selects a feature of the product
+    Then User should be able to add it to the cart
+    And User should see an "Success" message on the popup page.
+    Then User should be able to add it to the favorites
+    And User should see an "Success" message on the popup page.
+    Then User navigates back to the homepage
+    And User opens the wishlist section
+    And User verifies that the product has been added to favorites
+    Then The user should be able to remove the product from favorites via the fav button
+    And User should see an "Removed" message on the popup page.
+    And User verifies that the product has been disappeared on the favorites list
 
   Scenario: Filtering products in the Juniors category
     And User am on the Juniors category page

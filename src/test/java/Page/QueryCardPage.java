@@ -134,23 +134,7 @@ public class QueryCardPage {
     }
 
 
-    // SIGN UP PAGE - ONUR
-    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Sign Up\").instance(1)")
-    private WebElement signUpButtonSignUpPage;
-    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(0)")
-    private WebElement nameFieldSignUpPage;
-    @AndroidFindBy(xpath = "//android.view.View[2]/android.widget.EditText[1]/android.view.View")
-    private WebElement nameErrorSignUpPage;
-    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
-    private WebElement phoneFieldSignUpPage;
-    @AndroidFindBy(xpath = "//android.view.View[2]/android.widget.EditText[2]/android.view.View")
-    private WebElement phoneErrorSignUpPage;
-    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(2)")
-    private WebElement passwordFieldSignUpPage;
-    @AndroidFindBy(xpath = "//android.view.View[2]/android.widget.EditText[3]/android.view.View")
-    private WebElement passwordErrorSignUpPage;
-    @AndroidFindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View[2]/android.view.View")
-    private WebElement popupSignUpPage;
+
 
 
 
@@ -205,28 +189,6 @@ public class QueryCardPage {
         Assert.assertEquals("Success Register Successfully.", actualText);
     }
 
-    ////Çağırma Metodu
-    //public List<String> getCategories() {
-    //    List<String> categoryElements = new ArrayList<>();
-    //    for (WebElement element : categories) {
-    //        categoryElements.add(element.getText().trim());
-    //    }
-    //    return categoryElements;
-    //}
-
-   //public void checkElementsInBar(WebElement barElement) {
-   //    // Barın içerisindeki elementleri bulun
-   //    List<WebElement> elements = barElement.findElements(MobileBy.xpath("//android.widget.ScrollView/android.view.View[3]/android.view.View/android.view.View"));
-   //    // Her bir elementi kontrol edin
-   //    for (WebElement element : elements) {
-   //        // Elemanın görünürlüğünü kontrol edin
-   //        if (!element.isDisplayed()) {
-   //            // Eğer eleman görünür değilse, barı kaydırın
-   //            OptionsMet.swipeRightWithJS(barElement); }
-   //        // Elemanı test edin (örneğin, text kontrolü)
-   //        System.out.println("Element Text: " + element.getText());
-   //    }
-   //}
 
 
 
