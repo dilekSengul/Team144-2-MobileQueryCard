@@ -72,6 +72,7 @@ public class ReusableMethods {
     }
 
     public static void scrollWithUiScrollableAndClick(String elementText) {
+
         AndroidDriver driver = (AndroidDriver) Driver.getAppiumDriver();
         //  driver.findElement(AppiumBy.ByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"" + elementText + "\"))");
         driver.findElement(By.xpath("//*[@text='" + elementText + "']")).click();

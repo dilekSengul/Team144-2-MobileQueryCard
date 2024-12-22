@@ -1,6 +1,7 @@
 package Page;
 
 
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Getter;
@@ -8,15 +9,18 @@ import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.ConfigReader;
+import utilities.OptionsMet;
 import utilities.ReusableMethods;
 
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
@@ -45,7 +49,7 @@ public class QueryCardPage {
     private WebElement rememberMeCheckBox;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.view.View\").instance(4)")
     private WebElement addWishListToast;
-    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.view.View\").instance(9)")
+    @AndroidFindBy(xpath = "//android.widget.ScrollView/android.view.View[3]/android.view.View")
     private List<WebElement> categories;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\")")
     private WebElement forgotPssPhoneBox;
@@ -130,24 +134,9 @@ public class QueryCardPage {
     }
 
 
-    // SIGN UP PAGE - ONUR
-    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Sign Up\").instance(1)")
-    private WebElement signUpButtonSignUpPage;
-    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(0)")
-    private WebElement nameFieldSignUpPage;
-    @AndroidFindBy(xpath = "//android.view.View[2]/android.widget.EditText[1]/android.view.View")
-    private WebElement nameErrorSignUpPage;
-    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
-    private WebElement phoneFieldSignUpPage;
-    @AndroidFindBy(xpath = "//android.view.View[2]/android.widget.EditText[2]/android.view.View")
-    private WebElement phoneErrorSignUpPage;
-    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(2)")
-    private WebElement passwordFieldSignUpPage;
-    @AndroidFindBy(xpath = "//android.view.View[2]/android.widget.EditText[3]/android.view.View")
-    private WebElement passwordErrorSignUpPage;
-    @AndroidFindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View[2]/android.view.View")
-    private WebElement popupSignUpPage;
-    //@AndroidFindBy (successMessage = driver.findElement(AppiumBy.xpath("//*[contains(@content-desc, 'item added')]"));)
+
+
+
 
     //**WishList**
     @AndroidFindBy(accessibility = "Wishlist")
@@ -199,4 +188,17 @@ public class QueryCardPage {
         String actualText = successMessage.getAttribute("content-desc");
         Assert.assertEquals("Success Register Successfully.", actualText);
     }
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
