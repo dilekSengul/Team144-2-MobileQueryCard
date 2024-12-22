@@ -13,6 +13,7 @@ import javax.sound.midi.InvalidMidiDataException;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static utilities.ReusableMethods.assertToasterColorAndVisibility;
 
 
 public class stepDefOnur {
@@ -171,8 +172,8 @@ public class stepDefOnur {
     public void userShouldSeeAnMessageOnPopupPage(String expectedMessage) throws Exception {
         ReusableMethods.wait(2);
         //ReusableMethods.getScreenshot(expectedMessage); //test edilecek örnek ekran görüntüsünü almak için ilk seferde kullanılır
-
-        OptionsMet.assertElementTextAndVisibility(expectedMessage);
+        assertToasterColorAndVisibility(expectedMessage, 0.2);
+        //OptionsMet.assertElementTextAndVisibility(expectedMessage);
 
 
     }
@@ -231,21 +232,23 @@ public class stepDefOnur {
 
     @And("User verifies that the product has been added to favorites")
     public void userVerifiesThatTheProductHasBeenAddedToFavorites() {
+        ReusableMethods.wait(1);
         assertTrue("element display testi başarısız",elementLocatorsOnur.getFavButtonWishlist().isDisplayed());
 
     }
 
     @Then("The user should be able to remove the product from favorites via the fav button")
     public void theUserShouldBeAbleToRemoveTheProductFromFavoritesViaTheFavButton() {
+        ReusableMethods.wait(1);
         elementLocatorsOnur.getFavButtonWishlist().click();
+        ReusableMethods.wait(1);
     }
 
     @And("User verifies that the product has been disappeared on the favorites list")
     public void userVerifiesThatTheProductHasBeenDisappearedOnTheFavoritesList() {
         card.getWishListButton().click();
-        ReusableMethods.wait(2);
+        ReusableMethods.wait(3);
         assertTrue(elementLocatorsOnur.getZeroProductFoundWishlist().isDisplayed());
-        ////android.view.View/android.view.View[4]
     }
 }
 

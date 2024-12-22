@@ -1,7 +1,7 @@
-@onur @US14
-Feature: Juniors Categories on Homepage Body
+@onur @US15
+Feature: Women Categories on Homepage Body
 
-  As a registered user, I would like to be able to see the categories and products of the Juniors menu on the home page.
+  As a registered user, I would like to be able to see the categories and products of the Women menu on the home page.
 
   Background: User opens the app
     * User makes driver adjustments
@@ -11,25 +11,27 @@ Feature: Juniors Categories on Homepage Body
     * User clicks the button "phoneTextBox" and sendKeys "6505551212"
     * User clicks the button "signInLoginButton"
 
-  Scenario: Viewing Juniors category and its subcategories on the homepage
+  Scenario: Viewing Women category and its subcategories on the homepage
     * User should see the following categories in the categories window in the body section
-      | Juniors                 |
-      | Juniors Clothing        |
-      | Girl Clothes            |
-      | Juniors Sleepwear       |
-      | Boy Clothes             |
-      | Baby Clothes            |
-      | Juniors Shoes           |
-      | Girl Shoes              |
-      | Boy Shoes               |
-      | Juniors Accessories     |
-      | Juniors Bags            |
-      | Juniors Hat & Beres     |
-      | Toys                    |
+      | Women                   |
+      | Women Clothing          |
+      | Woman Dresses - Skirts  |
+      | Woman T-Shirt           |
+      | Woman Trousers          |
+      | Woman Coat              |
+      | Women Shoes             |
+      | Women Casual Shoes      |
+      | Women Classic Shoes     |
+      | Women's Boots           |
+      | Women Sneakers          |
+      | Women Accessories       |
+      | Women Bags              |
+      | Women Watch             |
+      | Women Jewelry           |
 
 
-  Scenario: Performing actions on products in the Juniors category
-    Given User opens the "Juniors" category page
+  Scenario: Performing actions on products in the Women category
+    Given User opens the "Women" category page
     When User views the first product
     And User selects a feature of the product
     Then User should be able to add it to the cart
@@ -43,8 +45,8 @@ Feature: Juniors Categories on Homepage Body
     And User should see an "Error1" message on the popup page.
     And User verifies that the product has been disappeared on the favorites list
 
-  Scenario: Filtering products in the Juniors category
-    And User am on the Juniors category page
+  Scenario: Filtering products in the Women category
+    And User am on the Women category page
     When User view the filter icons
     Then the filter icons should be visible and active
     And User should be able to filter the products based on the available options

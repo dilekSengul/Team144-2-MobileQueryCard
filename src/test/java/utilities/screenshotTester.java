@@ -46,7 +46,7 @@ public class screenshotTester {
 
         //örtüşme sonucu üzerinden junit basit assertion
         try {
-            assertTrue("element görünür değil",isVisible);
+            assertTrue("element görünür değil/visibilityAssertion basarılı",isVisible);
             System.out.println("element görünür/visibilityAssertion basarılı");
         }
         catch (AssertionError e) {
