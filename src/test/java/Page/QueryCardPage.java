@@ -4,16 +4,19 @@ package Page;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Getter;
-import org.openqa.selenium.By;
+import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.ConfigReader;
 import utilities.ReusableMethods;
 
 
+import java.time.Duration;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
@@ -50,8 +53,7 @@ public class QueryCardPage {
     private WebElement newPasswordBox;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
     private WebElement confirmPasswordBox;
-    @AndroidFindBy(accessibility = "Wishlist")
-    public  WebElement wishListButton;
+
 
     public void LogoGorunurTest() {
 
@@ -133,25 +135,68 @@ public class QueryCardPage {
     private WebElement signUpButtonSignUpPage;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(0)")
     private WebElement nameFieldSignUpPage;
-    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"This field is required\").instance(0)")
+    @AndroidFindBy(xpath = "//android.view.View[2]/android.widget.EditText[1]/android.view.View")
     private WebElement nameErrorSignUpPage;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
     private WebElement phoneFieldSignUpPage;
-    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"This field is required\").instance(1)")
+    @AndroidFindBy(xpath = "//android.view.View[2]/android.widget.EditText[2]/android.view.View")
     private WebElement phoneErrorSignUpPage;
-    @AndroidFindBy(xpath = "new UiSelector().description(\"This field is required\").instance(1)")
-    private WebElement phoneErrorPopupSignUpPage;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(2)")
     private WebElement passwordFieldSignUpPage;
-    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Passord is required\")")
+    @AndroidFindBy(xpath = "//android.view.View[2]/android.widget.EditText[3]/android.view.View")
     private WebElement passwordErrorSignUpPage;
     @AndroidFindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View[2]/android.view.View")
-    private WebElement errorPopupSignUpPage;
+    private WebElement popupSignUpPage;
+    //@AndroidFindBy (successMessage = driver.findElement(AppiumBy.xpath("//*[contains(@content-desc, 'item added')]"));)
 
+    //**WishList**
+    @AndroidFindBy(accessibility = "Wishlist")
+    private   WebElement wishListButton;
+    @AndroidFindBy(xpath = "(//*[@class='android.widget.ImageView'])[15]")
+    private WebElement theNortFaceArcticParkaHeartIcon;
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Sign in to continue shopping\"]")
+    private WebElement signInPageVerificationText;
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Sign Up\"]")
+    private  WebElement signUpSıgnIn;
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc='Success Register Successfully.']")
+    private WebElement successMessage;
+    @AndroidFindBy(xpath = "(//*[@class='android.view.View'])[5]")
+    private WebElement addedToWishlistNatification;
+    @AndroidFindBy(xpath = "//android.widget.EditText[@index='3']")
+    private WebElement signUpNameBox ;
+    @AndroidFindBy(xpath = "(//*[@class='android.widget.EditText'])[2]")
+    private WebElement signUpPhoneBox ;
+    @AndroidFindBy(xpath = "(//*[@class='android.widget.EditText'])[3]")
+    private  WebElement signUpPasswordBox ;
+    @AndroidFindBy(xpath = "(//*[@content-desc='Sign Up'])[2]")
+    private WebElement signUpButton ;
+    @AndroidFindBy(xpath = "(//*[@class='android.widget.EditText'])[1]")
+    private  WebElement signInPhoneBox;
+    @AndroidFindBy(xpath = "(//*[@class='android.widget.EditText'])[2]")
+    private  WebElement signInPasswordBox;
+
+
+    public void registerNewUser(String name, String phone, String password) {
+        signUpNameBox.click();
+        signUpNameBox.sendKeys(name);
+        signUpPhoneBox.click();
+        signUpPhoneBox.sendKeys(phone);
+        signUpPasswordBox.click();
+        signUpPasswordBox.sendKeys(password);
+        signUpButton.click();
+    }
+
+    public void LoginWithPhone(String phone, String Password) {
+        signInPhoneBox.click();
+        signInPhoneBox.sendKeys(phone);
+        signInPasswordBox.click();
+        signInPasswordBox.sendKeys(Password);
+        signInLoginClick();
+    }
+    public void verifySuccessNotificationText() {
+
+        // Content-description değerini doğrulama
+        String actualText = successMessage.getAttribute("content-desc");
+        Assert.assertEquals("Success Register Successfully.", actualText);
+    }
 }
-
-
-
-
-
-

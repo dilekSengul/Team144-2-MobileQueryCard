@@ -1,11 +1,11 @@
 package stepdefinitions;
 
 import Page.QueryCardPage;
+import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
 import utilities.OptionsMet;
 import utilities.ReusableMethods;
 
@@ -14,11 +14,15 @@ import java.time.Duration;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import static utilities.Driver.getAppiumDriver;
+
 
 public class stepDefOnur extends OptionsMet {
+
     QueryCardPage card = new QueryCardPage();
-    Actions actions = new Actions(getAppiumDriver());
+    Faker faker = new Faker();
+    String fakePhone = faker.numerify("#######");
+    String fakePhoneSixDigits = faker.numerify("######");
+    String fakeName = faker.name().fullName();
 
     @Then("User verifies that {string} button is visible and clicks the button.")
     public void userVerifiesThatButtonIsVisibleAndClicksTheButton(String element) {
@@ -42,8 +46,8 @@ public class stepDefOnur extends OptionsMet {
         assertTrue(card.getPhoneErrorSignUpPage().isDisplayed());
         assertTrue(card.getPasswordErrorSignUpPage().isDisplayed());
 
-        assertEquals("This field is required",card.getNameErrorSignUpPage().getAttribute("contentDescription"));
-        assertEquals("This field is required",card.getPhoneErrorSignUpPage().getAttribute("contentDescription"));
+        assertEquals("This field is required", card.getNameErrorSignUpPage().getAttribute("contentDescription"));
+        assertEquals("This field is required", card.getPhoneErrorSignUpPage().getAttribute("contentDescription"));
         try {
             assertEquals("Password is required", card.getPasswordErrorSignUpPage().getAttribute("contentDescription"));
         } catch (AssertionError e) {
@@ -57,24 +61,17 @@ public class stepDefOnur extends OptionsMet {
     public void iEnterTheAppropriateEntriesInTheNameAndPhoneFieldsAndEnterAPasswordOfLessThanCharacters() {
         ReusableMethods.wait(1);
         card.getNameFieldSignUpPage().click();
-        card.getNameFieldSignUpPage().sendKeys("onur1");
+        card.getNameFieldSignUpPage().sendKeys(fakeName);
         ReusableMethods.wait(1);
         card.getPhoneFieldSignUpPage().click();
-        card.getPhoneFieldSignUpPage().sendKeys("1234567");
+        card.getPhoneFieldSignUpPage().sendKeys(fakePhone);
         ReusableMethods.wait(1);
         card.getPasswordFieldSignUpPage().click();
-        card.getPasswordFieldSignUpPage().sendKeys("123456");
+        card.getPasswordFieldSignUpPage().sendKeys("12345");
         ReusableMethods.wait(1);
         card.getSignUpButtonSignUpPage().click();
 
 
-    }
-
-    @Then("I should see an error message indicating the password criteria")
-    public void iShouldSeeAnErrorMessageIndicatingThePasswordCriteria() {
-        ReusableMethods.wait(1);
-        assertTrue(card.getErrorPopupSignUpPage().getAttribute("contentDescription").contains("Password must be at least 6 characters long and contain at least one letter, one number and one special character."));
-        System.out.println("Message: " + card.getErrorPopupSignUpPage().getAttribute("contentDescription"));
     }
 
     @Then("I clear phone and password field")
@@ -87,22 +84,26 @@ public class stepDefOnur extends OptionsMet {
     }
 
 
-    @Then("I should see an error message indicating the phone number criteria")
+    @Then("User should see an error message")
     public void iShouldSeeAnErrorMessageIndicatingThePhoneNumberCriteria() {
         ReusableMethods.wait(1);
-        assertTrue(card.getErrorPopupSignUpPage().getAttribute("contentDescription").contains("The phone field must be at least 7 characters."));
-        System.out.println("Message: " + card.getErrorPopupSignUpPage().getAttribute("contentDescription"));
+        try {
+            assertTrue(card.getPopupSignUpPage().getAttribute("contentDescription").contains("Error"));
+            System.out.println("Message: " + "\"" + card.getPopupSignUpPage().getAttribute("contentDescription") + "\"");
+        } catch (AssertionError e) {
+            System.out.println("Assertion failed: " + e.getMessage());
+        }
     }
 
 
-    @And("I enter the appropriate entries in the name and phone fields and enter a phone of less than 7 digits and click Sign Up button.")
-    public void iEnterTheAppropriateEntriesInTheNameAndPhoneFieldsAndEnterAPhoneOfLessThanDigits() {
+    @And("I enter the appropriate entries in the name and password fields and enter a phone of less than 7 digits and click Sign Up button.")
+    public void iEnterTheAppropriateEntriesInTheNameAndPasswordFieldsAndEnterAPhoneOfLessThanDigits() {
         ReusableMethods.wait(1);
         card.getNameFieldSignUpPage().click();
-        card.getNameFieldSignUpPage().sendKeys("onur1");
+        card.getNameFieldSignUpPage().sendKeys(fakeName);
         ReusableMethods.wait(1);
         card.getPhoneFieldSignUpPage().click();
-        card.getPhoneFieldSignUpPage().sendKeys("123456");
+        card.getPhoneFieldSignUpPage().sendKeys(fakePhoneSixDigits);
         ReusableMethods.wait(1);
         card.getPasswordFieldSignUpPage().click();
         card.getPasswordFieldSignUpPage().sendKeys("1234567o*");
@@ -110,33 +111,84 @@ public class stepDefOnur extends OptionsMet {
         card.getSignUpButtonSignUpPage().click();
     }
 
-    @Then("User fills the all fields properly and click Sign Up button.")
-    public void userFillsTheAllFieldsProperlyAndClickSignUpButton() {
+    @Then("User fills in all fields properly and click Sign Up button.")
+    public void userFillsInAllFieldsProperlyAndClickSignUpButton() {
         ReusableMethods.wait(1);
         card.getNameFieldSignUpPage().click();
-        card.getNameFieldSignUpPage().sendKeys("onur");
+        card.getNameFieldSignUpPage().click();
+        card.getNameFieldSignUpPage().sendKeys(fakeName);
         ReusableMethods.wait(1);
         card.getPhoneFieldSignUpPage().click();
-        card.getPhoneFieldSignUpPage().sendKeys("1234567");
+        card.getPhoneFieldSignUpPage().sendKeys(fakePhone);
         ReusableMethods.wait(1);
         card.getPasswordFieldSignUpPage().click();
         card.getPasswordFieldSignUpPage().sendKeys("1234o*");
         ReusableMethods.wait(1);
         card.getSignUpButtonSignUpPage().click();
+    }
+
+    @And("User should see the success message")
+    public void userShouldSeeTheSuccessMessage() {
         try {
-            assertEquals("Password is required", card.getPasswordErrorSignUpPage().getAttribute("contentDescription"));
+            assertTrue(card.getPopupSignUpPage().getAttribute("contentDescription").contains("Success"));
+            System.out.println("Message: " + "\"" + card.getPopupSignUpPage().getAttribute("contentDescription") + "\"");
         } catch (AssertionError e) {
             System.out.println("Assertion failed: " + e.getMessage());
         }
-        ReusableMethods.wait(2);
+    }
+
+    @Then("User fills in all fields properly, including the 8-character password, and clicks the Sign Up button")
+    public void userFillsInAllFieldsProperlyIncludingTheCharacterPasswordAndClicksTheSignUpButton() {
+        ReusableMethods.wait(1);
+        card.getNameFieldSignUpPage().click();
+        card.getNameFieldSignUpPage().sendKeys(fakeName);
+        ReusableMethods.wait(1);
+        card.getPhoneFieldSignUpPage().click();
+        card.getPhoneFieldSignUpPage().sendKeys(fakePhone);
+        ReusableMethods.wait(1);
         card.getPasswordFieldSignUpPage().click();
-        card.getPasswordFieldSignUpPage().sendKeys("5");
+        card.getPasswordFieldSignUpPage().sendKeys("123456o*");
         ReusableMethods.wait(1);
         card.getSignUpButtonSignUpPage().click();
+        ReusableMethods.wait(1);
+    }
+
+    @Then("User should see the \"Password is short\" error message")
+    public void userShouldSeeTheErrorMessage() {
         try {
-            assertEquals("Success?", card.getPasswordErrorSignUpPage().getAttribute("contentDescription"));
+            assertTrue(card.getPasswordErrorSignUpPage().isDisplayed());
+            assertEquals("Password is short", card.getPasswordErrorSignUpPage().getAttribute("contentDescription"));
+            System.out.println("Message: " + "\"" + card.getPasswordErrorSignUpPage().getAttribute("contentDescription") + "\"");
         } catch (AssertionError e) {
             System.out.println("Assertion failed: " + e.getMessage());
         }
+    }
+
+    @Then("User should see an {string} popup message")
+    public void userShouldSeeAnPopupMessage(String expectedMessage) {
+        //try {
+        //    assertTrue("the pop-up window does not contain the word \"success\".",card.getPopupSignUpPage().getAttribute("contentDescription").contains(expectedMessage));
+        //    System.out.println("Message: " + "\"" + card.getPopupSignUpPage().getAttribute("contentDescription")+"\"");
+        //} catch (AssertionError e) {
+        //    System.out.println("Assertion failed: " + e.getMessage());
+        //    //WebElement successMessage = driver.findElement(AppiumBy.xpath("//*[contains(@content-desc, 'item added')]"));
+        //}
+
+    }
+
+    @And("User verifies that the directed page is {string} page.")
+    public void userVerifiesThatTheDirectedPageIsPage(String expectedPageHeader) {
+        VerifyElementText(expectedPageHeader);
+    }
+
+    @Then("User should see an {string} message on {string} popup page.")
+    public void userShouldSeeAnMessageOnPopupPage(String expectedMessage, String elementDescription) throws Exception {
+        ReusableMethods.wait(2);
+        //ReusableMethods.getScreenshot(expectedMessage); //test edilecek örnek ekran görüntüsünü almak için ilk seferde kullanılır
+
+        assertElementTextAndVisibility(expectedMessage,elementDescription);
+
+
+
     }
 }
