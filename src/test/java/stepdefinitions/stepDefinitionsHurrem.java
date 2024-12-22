@@ -6,6 +6,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import utilities.ReusableMethods;
 
@@ -43,32 +44,16 @@ public class stepDefinitionsHurrem {
 
     @Then("the user should be redirected to the selected product page")
     public void the_user_should_be_redirected_to_the_selected_product_page() throws InterruptedException {
+
+        Assert.assertTrue(mostPopularProductsPage.mostPopularScroll.isDisplayed());
         MostPopularProductsPage.swipe(679, 2660, 694, 638, 1000);
         Thread.sleep(3000);
 
     }
-    @Then("the {string} title and product information should be displayed")
-    public void the_title_and_product_information_should_be_displayed(String description) throws InterruptedException {
-        MostPopularProductsPage.isDisplayed(description);
+    @Then("the {string} title should be displayed")
+    public void theTitleShouldBeDisplayed(String title) throws InterruptedException {
+        MostPopularProductsPage.isDisplayed(title);
     }
-
-    @Then("the {string} title and product videos should be displayed")
-    public void the_title_and_product_videos_should_be_displayed(String description) throws InterruptedException {
-        MostPopularProductsPage.isDisplayed(description);
-
-    }
-    @Then("the {string} title and product reviews should be displayed")
-    public void the_title_and_product_reviews_should_be_displayed(String description) throws InterruptedException {
-        MostPopularProductsPage.isDisplayed(description);
-
-    }
-    @Then("the {string} title and product shipping and return conditions should be displayed")
-    public void the_title_and_product_shipping_and_return_conditions_should_be_displayed(String description) throws InterruptedException {
-        MostPopularProductsPage.isDisplayed(description);
-
-    }
-
-
 }
 
 

@@ -4,6 +4,7 @@ Feature: Most Popular Products
 
   Background: User opens the app
     * User makes driver adjustments
+  @hurrem
 
   Scenario: Verify Most Popular section on the homepage
     Given the Most Popular menu title should be visible on the home page navBar
@@ -13,5 +14,4 @@ Feature: Most Popular Products
     When User clicks the button with description "See All"
     And current products should be listed under "See All" by swiping 10 times
     And User clicks on the 1 th item under list
-    #BURADA BUG VAR
     Then the user should return to the homepage

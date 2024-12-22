@@ -136,6 +136,7 @@ public class OptionsMet {
         verifyElementVisibility("target/Screenshots/" + expectedMessage + ".png", threshold);
     }
 
+
     public static void swipeOnur(int x, int y, int endX, int endY, int startSpeed, int endSpeed) throws InvalidMidiDataException {
         /******  PointerInput ve Sequence Kullanımı: PointerInput ile parmak hareketlerini
          *      ve Sequence ile bu hareketlerin sırasını tanımlıyoruz.
@@ -222,3 +223,4 @@ public class OptionsMet {
 
 
 }
+
