@@ -12,7 +12,9 @@ import utilities.ReusableMethods;
 import javax.sound.midi.InvalidMidiDataException;
 import java.util.List;
 
+
 import static org.junit.Assert.*;
+
 
 
 public class stepDefOnur {
@@ -172,7 +174,9 @@ public class stepDefOnur {
         ReusableMethods.wait(2);
         //ReusableMethods.getScreenshot(expectedMessage); //test edilecek örnek ekran görüntüsünü almak için ilk seferde kullanılır
 
+
         OptionsMet.assertElementTextAndVisibility(expectedMessage);
+
 
 
     }
