@@ -9,8 +9,12 @@ import io.cucumber.java.en.When;
 import utilities.OptionsMet;
 import utilities.ReusableMethods;
 
+import java.time.Duration;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
+
 
 public class stepDefOnur extends OptionsMet {
 
@@ -22,6 +26,8 @@ public class stepDefOnur extends OptionsMet {
 
     @Then("User verifies that {string} button is visible and clicks the button.")
     public void userVerifiesThatButtonIsVisibleAndClicksTheButton(String element) {
+
+        ReusableMethods.wait(5);
         VerifyElementText(element);
         clickButtonByDescription(element);
     }

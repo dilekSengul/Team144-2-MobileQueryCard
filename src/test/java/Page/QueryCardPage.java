@@ -187,10 +187,10 @@ public class QueryCardPage {
     }
 
     public void LoginWithPhone(String phone, String Password) {
-       signInPhoneBox.click();
-       signInPhoneBox.sendKeys(phone);
-       signInPasswordBox.click();
-       signInPasswordBox.sendKeys(Password);
+        signInPhoneBox.click();
+        signInPhoneBox.sendKeys(phone);
+        signInPasswordBox.click();
+        signInPasswordBox.sendKeys(Password);
         signInLoginClick();
     }
     public void verifySuccessNotificationText() {
@@ -200,9 +200,3 @@ public class QueryCardPage {
         Assert.assertEquals("Success Register Successfully.", actualText);
     }
 }
-
-
-
-
-
-
