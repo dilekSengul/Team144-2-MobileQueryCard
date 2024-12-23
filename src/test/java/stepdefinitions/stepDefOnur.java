@@ -263,24 +263,26 @@ public class stepDefOnur {
 
     @When("User clicks the filter")
     public void userClicksTheFilter() {
+        ReusableMethods.wait(1);
         firstProductCount = Driver.getAppiumDriver().findElement(MobileBy.xpath("(//android.view.View/android.view.View[3])[1]")).getAttribute("contentDescription");
         elementLocatorsOnur.getFilterIconCategories().click();
     }
 
     @Then("the filter icons should be displayed properly")
     public void theFilterIconsShouldBeDisplayedProperly() {
+        ReusableMethods.wait(1);
         OptionsMet.VerifyElementText("Sort By");
         OptionsMet.VerifyElementText("Brands");
         OptionsMet.VerifyElementText("color");
         OptionsMet.VerifyElementText("size");
     }
 
-    @And("User sets the {string} filter option to {string}")
-    public void userSetsTheFilterOptionTo(String type, String param) {
+    @And("User sets the {string} filter option to S")
+    public void userSetsTheFilterOptionTo(String type) {
         ReusableMethods.wait(1);
         OptionsMet.clickButtonByDescription(type);
-        ReusableMethods.wait(1);
-        OptionsMet.clickButtonByDescription(param);
+        ReusableMethods.wait(2);
+        Driver.getAppiumDriver().findElement(MobileBy.androidUIAutomator("new UiSelector().className(\"android.widget.ImageView\").instance(5)"));
 
     }
 
@@ -291,6 +293,7 @@ public class stepDefOnur {
 
     @And("User verifies that the filter works properly")
     public void userVerifiesThatTheFilterWorksProperly() {
+        ReusableMethods.wait(2);
         lastProductCount = Driver.getAppiumDriver().findElement(MobileBy.xpath("(//android.view.View/android.view.View[3])[1]")).getAttribute("contentDescription");
         System.out.println("Filtre sonrası ürün sayıları karşılaştırılıyor: " + firstProductCount + " ve " + lastProductCount);
         assertNotEquals("Değerler aynı, filtre çalışmıyor", firstProductCount, lastProductCount);
