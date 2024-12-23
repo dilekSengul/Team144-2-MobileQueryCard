@@ -18,7 +18,7 @@ public class stepDefDamla {
 
     @When("The “Men” heading must be visible and clickable")
     public void the_men_heading_must_be_visible_and_clickable() {
-    categoryPage.filterButton();
+    categoryPage.menCategory();
     }
 
     @Then("Click the filter icon on the “Men” page.")
@@ -28,7 +28,30 @@ public class stepDefDamla {
 
     @Then("The “Sort By” filter option is displayed.")
     public void the_sort_by_filter_option_is_displayed() {
+    categoryPage.filter();
+    }
+
+    @Then("The “Women” heading must be visible and clickable")
+    public void the_women_heading_must_be_visible_and_clickable() {
+        categoryPage.womenCategory();
 
     }
+
+    @Then("Women “Sort By” filter option is displayed.")
+    public void women_sort_by_filter_option_is_displayed() {
+    categoryPage.womenFilter();
+    }
+
+    @Then("The “Junior” heading must be visible and clickable")
+    public void the_junior_heading_must_be_visible_and_clickable() {
+    categoryPage.juniorCategory();
+    }
+
+
+    @Then("Junior “Sort By” filter option is displayed.")
+    public void junior_sort_by_filter_option_is_displayed() {
+    categoryPage.juniorFilter();
+    }
+
 
 }
