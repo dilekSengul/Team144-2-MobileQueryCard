@@ -15,7 +15,7 @@ Feature: Women Categories on Homepage Body
       | Women                   |
       | Women Clothing          |
       | Woman Dresses - Skirts  |
-      | Woman T-Shirt           |
+      | Woman T-shirt           |
       | Woman Trousers          |
       | Woman Coat              |
       | Women Shoes             |
@@ -59,3 +59,4 @@ Feature: Women Categories on Homepage Body
     And User sets the "size" filter option to S
     Then User navigates back to the product list via X button
     And User verifies that the filter works properly
+

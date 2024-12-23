@@ -32,7 +32,7 @@ public class CategoryPage {
     private WebElement categoriesWomenButton;
 
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Juniors\")")
-    private WebElement CategoriesJuniorsButton;
+    private WebElement categoriesJuniorsButton;
 
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(2)")
     private WebElement menFiltrelemeButton;
@@ -52,26 +52,86 @@ public class CategoryPage {
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Top Rated\")")
     private WebElement sortByTopRated;
 
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(0)")
+    private WebElement back;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(2)")
+    private WebElement womenFilterButton;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Sort By\")")
+    private WebElement womenSortBy;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Price Low To High\")")
+    private WebElement womenPriceLowToHigh;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(2)")
+    private WebElement juniorFilterButton;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Sort By\")")
+    private WebElement juniorSortBy;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Newest\")")
+    private WebElement juniorNewest;
+
+
+
 
     public void category(){
         ReusableMethods.wait(3);
         assertTrue(categoriesButton.isDisplayed());
         categoriesButton.click();
 
-        ReusableMethods.wait(3);
-        assertTrue(categoriesMenButton.isDisplayed());
-        categoriesMenButton.click();
-
 
     }
 
-    public void filterButton(){
+    public void menCategory(){
+        ReusableMethods.wait(3);
+        assertTrue(categoriesMenButton.isDisplayed());
+        categoriesMenButton.click();
+        ReusableMethods.wait(2);
         assertTrue(menFiltrelemeButton.isDisplayed());
         menFiltrelemeButton.click();
+
+    }
+    public void filter(){
+        ReusableMethods.wait(2);
         assertTrue(filrelemeSortBy.isDisplayed());
         filrelemeSortBy.click();
+        ReusableMethods.wait(2);
         sortByNewestButton.click();
+        ReusableMethods.wait(2);
+        back.click();
+    }
 
+    public void womenCategory(){
+        assertTrue(categoriesWomenButton.isDisplayed());
+        categoriesWomenButton.click();
+
+    }
+    public void womenFilter(){
+        ReusableMethods.wait(2);
+        assertTrue(womenFilterButton.isDisplayed());
+        womenFilterButton.click();
+        ReusableMethods.wait(1);
+        womenSortBy.click();
+        womenPriceLowToHigh.click();
+        ReusableMethods.wait(1);
+        back.click();
+
+    }
+
+    public void juniorCategory(){
+        assertTrue(categoriesJuniorsButton.isDisplayed());
+        categoriesJuniorsButton.click();
+    }
+
+    public void juniorFilter(){
+        ReusableMethods.wait(2);
+        assertTrue(juniorFilterButton.isDisplayed());
+        juniorFilterButton.click();
+        juniorSortBy.click();
+        ReusableMethods.wait(2);
+        juniorNewest.click();
     }
 
 }
