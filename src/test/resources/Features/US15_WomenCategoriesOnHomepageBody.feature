@@ -59,3 +59,4 @@ Feature: Women Categories on Homepage Body
     And User sets the "size" filter option to S
     Then User navigates back to the product list via X button
     And User verifies that the filter works properly
+
