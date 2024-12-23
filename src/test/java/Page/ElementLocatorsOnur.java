@@ -40,7 +40,16 @@ public class ElementLocatorsOnur {
     @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"(0  Products Found)\"]")
     private WebElement zeroProductFoundWishlist;
 
-
+    //Categories page
+    //Categories toaster button
+    @AndroidFindBy (xpath = "//android.widget.ImageView[@content-desc=\"Category\"]")
+    private WebElement categoriesToaster;
+    //Filter icon
+    @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(2)")
+    private WebElement filterIconCategories;
+    //Filter page X button
+    @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(0)")
+    private WebElement filterXButton;
 
 
 
