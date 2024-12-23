@@ -51,9 +51,9 @@ Feature: Juniors Categories on Homepage Body
 
   Scenario: Filtering products in the Juniors category
     Given User opens the Categories section
-    Then User clicks the button with description "Junior"
+    Then User clicks the button with description "Juniors"
     When User clicks the filter
     Then the filter icons should be displayed properly
-    And User sets the "size" filter option to "S"
+    And User sets the "size" filter option to S
     Then User navigates back to the product list via X button
     And User verifies that the filter works properly

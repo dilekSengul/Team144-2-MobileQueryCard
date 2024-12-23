@@ -56,6 +56,6 @@ Feature: Women Categories on Homepage Body
     Then User clicks the button with description "Women"
     When User clicks the filter
     Then the filter icons should be displayed properly
-    And User sets the "size" filter option to "S"
+    And User sets the "size" filter option to S
     Then User navigates back to the product list via X button
     And User verifies that the filter works properly
