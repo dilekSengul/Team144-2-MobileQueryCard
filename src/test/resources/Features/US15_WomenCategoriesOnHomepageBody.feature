@@ -15,7 +15,7 @@ Feature: Women Categories on Homepage Body
       | Women                   |
       | Women Clothing          |
       | Woman Dresses - Skirts  |
-      | Woman T-Shirt           |
+      | Woman T-shirt           |
       | Woman Trousers          |
       | Woman Coat              |
       | Women Shoes             |
