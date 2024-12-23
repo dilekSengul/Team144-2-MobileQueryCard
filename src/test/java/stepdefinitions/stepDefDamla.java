@@ -1,6 +1,7 @@
 package stepdefinitions;
 
 import Page.CategoryPage;
+import Page.MyAccountPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -8,6 +9,7 @@ import io.cucumber.java.en.When;
 public class stepDefDamla {
 
     CategoryPage categoryPage=new CategoryPage();
+    MyAccountPage myAccountPage=new MyAccountPage();
 
 
 
@@ -54,4 +56,46 @@ public class stepDefDamla {
     }
 
 
+    //US16
+
+    @Then("User clicks the button with itemName use email instead")
+    public void user_clicks_the_button_with_item_name_use_email_instead() {
+    myAccountPage.UseEmailInstead();
+    }
+
+
+    @Then("Click on the profile icon")
+    public void click_on_the_profile_icon() {
+    myAccountPage.profileIcon();
+    }
+    @Then("Verify that the Dashboard page has been opened")
+    public void verify_that_the_dashboard_page_has_been_opened() {
+    myAccountPage.dashboard();
+    }
+
+    @Then("My Account header should be visible and clickable")
+    public void my_account_header_should_be_visible_and_clickable() {
+    myAccountPage.myAccount();
+    }
+    @Then("Total orders should be visible")
+    public void total_orders_should_be_visible() {
+    myAccountPage.totalOrders();
+    }
+    @Then("Total completed should be visible")
+    public void total_completed_should_be_visible() {
+    myAccountPage.totalCompleted();
+    }
+    @Then("Total returnd should be visible")
+    public void total_returnd_should_be_visible() {
+    myAccountPage.totalReturnd();
+    }
+    @Then("Wallet Ballance should be visible")
+    public void wallet_ballance_should_be_visible() {
+    myAccountPage.walletBalance();
+    }
+
+    @Then("Order history is displayed")
+    public void orderHistoryIsDisplayed() {
+        myAccountPage.orderHistory();
+    }
 }
