@@ -3,10 +3,12 @@ package stepdefinitions;
 import Page.ElementLocatorsOnur;
 import Page.QueryCardPage;
 import com.github.javafaker.Faker;
+import io.appium.java_client.MobileBy;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import utilities.Driver;
 import utilities.OptionsMet;
 import utilities.ReusableMethods;
 import javax.sound.midi.InvalidMidiDataException;
@@ -19,6 +21,9 @@ import static org.junit.Assert.*;
 
 public class stepDefOnur {
 
+
+    private String firstProductCount;
+    private String lastProductCount;
     QueryCardPage card = new QueryCardPage();
     ElementLocatorsOnur elementLocatorsOnur = new ElementLocatorsOnur();
     Faker faker = new Faker();
@@ -185,7 +190,7 @@ public class stepDefOnur {
         OptionsMet.scrollLeftAndVerifyElements(expectedElements);
     }
 
-    @Given("User opens the {string} category page")
+    @Given("User finds and opens the {string} category page in the Categories Bar in the Homepage body")
     public void userOpensTheCategoryPage(String element) throws InvalidMidiDataException {
         //OptionsMet.swipeOnur(1200,1150,400,1150,100,100); //istenen kategorilere hızlı yaklaşmak için - hata verebilir
         OptionsMet.scrollLeftAndClickElement(element);
@@ -249,6 +254,47 @@ public class stepDefOnur {
         card.getWishListButton().click();
         ReusableMethods.wait(3);
         assertTrue(elementLocatorsOnur.getZeroProductFoundWishlist().isDisplayed());
+    }
+
+    @And("User opens the Categories section")
+    public void userOpensTheCategoriesSection() {
+        elementLocatorsOnur.getCategoriesToaster().click();
+    }
+
+    @When("User clicks the filter")
+    public void userClicksTheFilter() {
+        firstProductCount = Driver.getAppiumDriver().findElement(MobileBy.xpath("(//android.view.View/android.view.View[3])[1]")).getAttribute("contentDescription");
+        elementLocatorsOnur.getFilterIconCategories().click();
+    }
+
+    @Then("the filter icons should be displayed properly")
+    public void theFilterIconsShouldBeDisplayedProperly() {
+        OptionsMet.VerifyElementText("Sort By");
+        OptionsMet.VerifyElementText("Brands");
+        OptionsMet.VerifyElementText("color");
+        OptionsMet.VerifyElementText("size");
+    }
+
+    @And("User sets the {string} filter option to {string}")
+    public void userSetsTheFilterOptionTo(String type, String param) {
+        ReusableMethods.wait(1);
+        OptionsMet.clickButtonByDescription(type);
+        ReusableMethods.wait(1);
+        OptionsMet.clickButtonByDescription(param);
+
+    }
+
+    @And("User navigates back to the product list via X button")
+    public void userNavigatesBackToTheProductListViaXButton() {
+        elementLocatorsOnur.getFilterXButton().click();
+    }
+
+    @And("User verifies that the filter works properly")
+    public void userVerifiesThatTheFilterWorksProperly() {
+        lastProductCount = Driver.getAppiumDriver().findElement(MobileBy.xpath("(//android.view.View/android.view.View[3])[1]")).getAttribute("contentDescription");
+        System.out.println("Filtre sonrası ürün sayıları karşılaştırılıyor: " + firstProductCount + " ve " + lastProductCount);
+        assertNotEquals("Değerler aynı, filtre çalışmıyor", firstProductCount, lastProductCount);
+
     }
 }
 
