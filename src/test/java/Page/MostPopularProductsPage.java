@@ -82,8 +82,8 @@ public class MostPopularProductsPage {
         // 'See All' altındaki ürünlerin bulunduğu listeyi al
         if (productList.size() > 0) {
             // İlk ürüne tıklama
-            WebElement firstProduct = productList.get(productIndex); // 0, ilk ürünü ifade eder
-            firstProduct.click();
+            WebElement product = productList.get(productIndex); // 0, ilk ürünü ifade eder
+            product.click();
             Thread.sleep(3000);
         } else {
             System.out.println("No products found ");
