@@ -1,7 +1,9 @@
 package stepdefinitions;
 
 import Page.CategoriesPage;
+import Page.MostPopularProductsPage;
 import Page.QueryCardPage;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.touch.WaitOptions;
@@ -33,6 +35,7 @@ public class Stepdefinition extends OptionsMet {
     QueryCardPage card = new QueryCardPage();
     CategoriesPage categoriesPage = new CategoriesPage();
     Actions actions = new Actions(getAppiumDriver());
+
 
     @Given("User makes driver adjustments")
     public void user_makes_driver_adjustments() {
@@ -87,6 +90,7 @@ public class Stepdefinition extends OptionsMet {
 
     @Given("User clicks the button with itemName {string} and {string} and {string} added WishList")
     public void user_clicks_the_button_with_item_name_and_and_added_wish_list(String itemName, String reviews, String price) {
+        ReusableMethods.wait(3);
         xPathElementClick(itemName, reviews, price);
     }
 
@@ -192,7 +196,8 @@ public class Stepdefinition extends OptionsMet {
         ReusableMethods.wait(1);
         categoriesPage.getBackArrow().click();
     }
-    //****us11***
+
+    //****us11-23-26***
 
     @Then("User clicks the button with itemName {string}")
     public void user_clicks_the_button_with_item_name(String itemName) {
@@ -218,7 +223,7 @@ public class Stepdefinition extends OptionsMet {
     @When("The user clicks the heart icon on the product named {string}")
     public void the_user_clicks_the_heart_icon_on_the_product_named(String favoriyeEklenenUrun) throws InvalidMidiDataException {
         ReusableMethods.wait(5);
-        //  card.getMensAnalogWatch100MeterWater().click();
+       //  card.getMensAnalogWatch100MeterWater().click();
         card.getTheNorthfaceArcticParka().click();
 
 
@@ -236,7 +241,7 @@ public class Stepdefinition extends OptionsMet {
     @Then("Registers as a new user with {string},{string} and {string}")
     public void registersAsANewUserWithAnd(String name, String phone, String password) {
         ReusableMethods.wait(6);
-        // card.signUp(name,phone,Password);
+
         card.registerNewUser(name,phone,password);
 
     }
@@ -259,32 +264,40 @@ public class Stepdefinition extends OptionsMet {
         card.getAddedToWishlistNatification().isDisplayed();
     }
 
-
     @Given("The user swipe with coordinates startX {int}, startY {int}, endX {int}, endY {int}, duration {int} for {int} times.")
     public void theUserSwipeWithCoordinatesStartXStartYEndXEndYDurationForTimes( int startX, int startY, int endX, int endY, int duration,int swipeCount) {
-        // card. mostPopularProductWithSwipe("MostPopularList", card.productList,  startX, startY, endX, endY, duration,swipeCount);
+
         card.swipeMethotWithDuration(startX, startY, endX, endY, duration,swipeCount);
     }
 
     @Then("The user verifies favorite icons before and after scrolling.")
     public void theUserVerifiesFavoriteIconsBeforeAndAfterScrolling() {
         card.verifyWishlistButtonAfterScroll();
-    }/*
-    @Then("clicks the button with itemName {string} and {string} and {string} added WishList")
-    public void clicksTheButtonWithItemNameAndAndAddedWishList(String productName, String productReviews, String productPrice) {
-        ReusableMethods.wait(3);
-        card.xPathElementClickDynamic(productName,productReviews,productPrice);
-    }*/
-
-    @Then("Verifies that the products added to the Wishlist page are displayed correctly.")
-    public void verifies_that_the_products_added_to_the_wishlist_page_are_displayed_correctly(io.cucumber.datatable.DataTable dataTable) {
-        List<List<String>> productData = dataTable.asLists(String.class);
-
-        // Verilen ürünler için sırayla xPathElementClick çağrılır
-        card.verifyWishlistItems(productData);
     }
 
+    @Then("Verifies that the products added to the Wishlist page are displayed correctly.")
+    public void verifies_that_the_products_added_to_the_wishlist_page_are_displayed_correctly() {
 
+       card.verifyWishlistProducts("wishlist");
+
+    }
+
+    @Then("User clicks the button with itemName {string} and {string} and {string} added WishList.")
+    public void userClicksTheButtonWithItemNameAndAndAddedWishList(String itemName, String reviews, String price) {
+        ReusableMethods.wait(3);
+        card.xPathElementClicknormalizeSpace(itemName,reviews,price);
+    }
+
+    @Then("User clicks the button with itemName {string} and {string} and {string} removed WishList")
+    public void userClicksTheButtonWithItemNameAndAndRemovedWishList(String itemName, String reviews, String price) {
+        ReusableMethods.wait(6);
+       // card.xPathElementClicknormalizeSpace(itemName,reviews,price);
+        xPathElementClick(itemName,reviews,price);
+    }
+    @Then("Remove toaster is displayed")
+    public void removeToasterIsDisplayed() {
+        card.getRemovedToaster().isDisplayed();
+    }
 
 
 
@@ -302,4 +315,5 @@ public class Stepdefinition extends OptionsMet {
     public void the_user_uses_email_instead_enters_and(String string, String string2) {
         card.loginMethodu("loginEmail" ,"Passwordg");
     }
+    
 }
