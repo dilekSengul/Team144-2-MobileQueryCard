@@ -3,6 +3,7 @@ Feature: As a registered user, I want to have a cart on the site and I want to b
   Background: User opens the app
     * User makes driver adjustments
 
+  @Allure
   Scenario: TC06: QueryCart customer should see the basket icon and verify that the ‘Shopping Cart’ menu opens when clicked
     Given QueryCart customer shopping basket must be visible and active
     When QueryCart customer clicks on the shopping basket button
