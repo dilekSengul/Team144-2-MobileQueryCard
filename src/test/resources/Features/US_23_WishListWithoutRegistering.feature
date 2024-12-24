@@ -7,7 +7,7 @@ Feature: As a user, I want to create a favorite list with the products I like wi
 
   Scenario:
 
-    Given The user swipe with coordinates startX 364, startY 1946, endX 360, endY 311, duration 200 for 1 times.
+    Given The user swipe with coordinates startX 364, startY 1946, endX 360, endY 311, duration 200 for 2 times.
     When The user clicks the heart icon on the product named "The North Face Arctic Parka"
     Then Verifies that they are redirected to the sign-in page with the message Sign in to continue shopping.
     Then Then Clicks the "Sign Up" link

@@ -170,10 +170,16 @@ public class QueryCardPage {
     private  WebElement signUpPasswordBox ;
     @AndroidFindBy(xpath = "(//*[@content-desc='Sign Up'])[2]")
     private WebElement signUpButton ;
-    @AndroidFindBy(xpath = "(//*[@class='android.widget.EditText'])[1]")
-    private  WebElement signInPhoneBox;
-    @AndroidFindBy(xpath = "(//*[@class='android.widget.EditText'])[2]")
-    private  WebElement signInPasswordBox;
+
+
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Most Popular\")")
+    private WebElement mostPopular;
+    @AndroidFindBy(xpath = "//android.view.View[contains(@content-desc, 'Reviews')]")
+    public List<WebElement> productList;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.view.View\").instance(4)")
+    private WebElement removedToaster;
+
 
 
     public void registerNewUser(String name, String phone, String password) {
@@ -199,6 +205,112 @@ public class QueryCardPage {
         String actualText = successMessage.getAttribute("content-desc");
         Assert.assertEquals("Success Register Successfully.", actualText);
     }
+
+    public void swipeMethotWithDuration(int startX, int startY, int endX, int endY, int duration, int swipeCount) {
+        // 'Most Popular' bölümünün görünür olduğunu kontrol et
+        if (mostPopular.isDisplayed()) {
+            // Ekran kaydırma işlemi yaparak ürünleri kaydır
+            for (int i = 0; i < swipeCount; i++) {
+                // Ekranı kaydırmak için parametre olarak alınan koordinatları kullan
+                swipe(startX, startY, endX, endY, duration);
+            }
+        } else {
+            System.out.println("'Most Popular' section is not visible");
+        }
+    }
+
+    private void swipe(int startX, int startY, int endX, int endY, int duration) {
+        // Swipe işlemini gerçekleştiren yardımcı method
+        MostPopularProductsPage.swipe(startX, startY, endX, endY, duration);
+
+    }
+
+    public void verifyWishlistButtonAfterScroll() {
+        // XPath or locator for the wishlist button
+        By wishlistButtonLocator = By.xpath("//android.widget.ImageView[@content-desc=\"Wishlist\"]");
+        // Wait for the wishlist button to be visible before scrolling
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement wishlistButtonBefore = wait.until(ExpectedConditions.visibilityOfElementLocated(wishlistButtonLocator));
+
+        if (wishlistButtonBefore.isDisplayed()) {
+            System.out.println("Wishlist button is visible before scrolling.");
+        } else {
+            System.out.println("Wishlist button is NOT visible before scrolling.");
+        }
+
+        // Perform swipe action (scrolling) using PointerInput
+        int startX = 364;
+        int startY = 1946;
+        int endX = 360;
+        int endY = 311;
+        int duration = 200;
+
+        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+        Sequence swipe = new Sequence(finger, 0);
+        swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, startY));
+        swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+        swipe.addAction(finger.createPointerMove(Duration.ofMillis(duration), PointerInput.Origin.viewport(), endX, endY));
+        swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+
+        driver.perform(Arrays.asList(swipe));
+
+        // Wait for the wishlist button to be visible after scrolling
+        WebElement wishlistButtonAfter = wait.until(ExpectedConditions.visibilityOfElementLocated(wishlistButtonLocator));
+
+        if (wishlistButtonAfter.isDisplayed()) {
+            System.out.println("Wishlist button is visible after scrolling.");
+        } else {
+            System.out.println("Wishlist button is NOT visible after scrolling.");
+        }
+    }
+
+    public void xPathElementClicknormalizeSpace(String itemName, String reviews, String price) {
+        String xpathExpression = String.format(
+                "//android.view.View[contains(normalize-space(@content-desc), '%s') and contains(normalize-space(@content-desc), '%s') and contains(normalize-space(@content-desc), '%s')]/android.widget.ImageView",
+                itemName, reviews, price
+        );
+
+        WebElement element = getAppiumDriver().findElement(MobileBy.xpath(xpathExpression));
+
+        Assert.assertTrue(element.isDisplayed()); // Öğenin görünür olduğundan emin olun
+        element.click();
+    }
+
+
+    public void verifyWishlistProducts(String listName) {
+        if (productList.isEmpty()) {
+            System.out.println("The wishlist '" + listName + "' is empty.");
+        } else {
+            System.out.println("Verifying products under the wishlist: '" + listName + "'");
+            for (WebElement product : productList) {
+                String productText = product.getAttribute("content-desc");
+                String[] productDetails = productText.split("\n");
+                String productName = productDetails[0];
+
+                if (productName != null && !productName.isEmpty()) {
+                    System.out.println("Verified product: " + productName);
+                } else {
+                    System.out.println("Product name could not be retrieved.");
+                }
+            }
+        }
+    }
+/*
+    public void removeWishlistProducts(String listName,String itemName, String reviews, String price) {
+        String xpathExpression = String.format("//android.view.View[contains(@content-desc, '%s') and contains(@content-desc, '%s') and contains(@content-desc, '%s')]/android.widget.ImageView", itemName, reviews, price);
+
+        // Öğeyi bulma
+        WebElement element = getAppiumDriver().findElement(MobileBy.xpath(xpathExpression));
+
+        if (!productList.isEmpty()) {
+            System.out.println("The wishlist '" + listName + "' is empty.");
+            element.click();
+            removedToaster.isDisplayed();
+        } else {
+            System.out.println("Product not found: " + itemName);Denemeeee
+        }
+    }*/
+
 }
 
 
