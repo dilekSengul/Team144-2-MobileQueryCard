@@ -8,7 +8,6 @@ import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -200,55 +199,8 @@ public class QueryCardPage {
         String actualText = successMessage.getAttribute("content-desc");
         Assert.assertEquals("Success Register Successfully.", actualText);
     }
-
-/// Gulnar editPRofile
-
-    @AndroidFindBy(xpath = "//*[@content-desc='Profile']\n")
-    private WebElement Profile;
-
-    @AndroidFindBy (xpath = "//*[@content-desc='Sign In']")
-    private WebElement signİn;
-
-    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"*Use Email Instead\")\n")
-    private  WebElement emailInstead;
-
-    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(0)\n")
-    private WebElement emailenter;
-
-    @AndroidFindBy (uiAutomator= "new UiSelector().className(\"android.widget.EditText\").instance(1)\n")
-    private WebElement passwordenter;
-
-    @AndroidFindBy (xpath = "//*[@content-desc='Edit Profile']")
-    private WebElement Editprofil;
-
-    @AndroidFindBy(xpath = "(//*[@class='android.widget.EditText'][1])")
-    private WebElement FullnameEdit;
-
-    @AndroidFindBy(xpath = "(//*[@class='android.widget.EditText'][2])")
-    private WebElement EmailEdit;
-
-    @AndroidFindBy(xpath = "(//*[@class='android.widget.EditText'][3])")
-    private WebElement PhoneEdit;
-
-    @AndroidFindBy(xpath = "(//*[@class='android.view.View'])[11]")
-    private WebElement  SaveChanges;
-
-    @AndroidFindBy(xpath = "//*[@content-desc='Logout']")
-    private WebElement  Logout;
-
-
- public void loginMethodu(String loginEmail ,String Passwordg) {
-
-     getEmailInstead().click();
-     getEmailenter().click();
-     getEmailenter().sendKeys(ConfigReader.getProperty("loginEmail"));
-     getPasswordTextBox().click();
-     getEmailenter().sendKeys(ConfigReader.getProperty("Passwordg"));
-     ReusableMethods.scrollWithUiScrollableAndClick("Sign In");
-
-
- }
 }
+
 
 
 
