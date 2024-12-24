@@ -1,22 +1,40 @@
-@us23
-Feature: As a user, I want to create a favorite list with the products I like without registering.
+
+@Us26
+Feature: As a registered user, I want to have a favorite products page on the site and I want to be able to manage this page.
   Background: User opens the app
     * User makes driver adjustments
 
-  Scenario:
+    Scenario: Wishlist button should be visible and active on the homepage navbar after scrolling.
 
-    Given The user swipe with coordinates startX 364, startY 1946, endX 360, endY 311, duration 200 for 1 times.
-    When The user clicks the heart icon on the product named "The North Face Arctic Parka"
-    Then Verifies that they are redirected to the sign-in page with the message Sign in to continue shopping.
-    Then Then Clicks the "Sign Up" link
-    Then Registers as a new user with "Ceren","5392898964" and "Selam.1234"
-    #Then A Success notification is displayed.
-    # And User should see an "Success" popup message
-    Then Logs in as a user with the "5392898964" and "Selam.1234"
-    Then The user swipe with coordinates startX 364, startY 1946, endX 360, endY 311, duration 200 for 1 times.
-    Then The user clicks the heart icon on the product named "The North Face Arctic Parka"
-    Then Sees the notification Added to Wishlist
-    And Driver turns off
+      Given User clicks the button with description "Profile"
+      When User clicks the button with description "Sign In"
+      Then User clicks the button with itemName " *Use Email Instead"
+      Then As a user must be "registeredEmail" email and "registeredPassword" password Login
+      Then The user verifies favorite icons before and after scrolling.
+      And Driver turns off
 
 
-    #ONURThen User should see an "Success" message on "Success" popup page.
+     Scenario Outline: Test to select   favorite products and add to wishlist and visible
+        Given User clicks the button with description "Profile"
+        When User clicks the button with description "Sign In"
+        Then User clicks the button with itemName " *Use Email Instead"
+        Then As a user must be "registeredEmail" email and "registeredPassword" password Login
+      # Then  clicks the button with itemName "<productName>" and "<productReviews>" and "<productPrice>" added WishList
+       # Then User clicks the button with itemName "<productName>" and "<productReviews>" and "<productPrice>" added WishList
+        Then User clicks the button with itemName "Flower Print Foil T-shirt" and "0 (0  Reviews)" and "$65.00" added WishList
+       Then Toaster is displayed
+       Then  User clicks the button with itemName "Floral Print Midi Dress" and "0 (0 Reviews)" and "$100.00" added WishList
+       Then Toaster is displayed
+       Then User clicks the button with description "Wishlist"
+       Then Verifies that the products added to the Wishlist page are displayed correctly.
+         | productName               | productReviews  | productPrice |
+         | Flower Print Foil T-shirt | 0 (0 Reviews)  | $65.00      |
+         | Floral Print Midi Dress   | 0 (0 Reviews) | $100.00     |
+       And Driver turns off
+
+      Examples:
+        | productName               | productReviews  | productPrice |
+        | Flower Print Foil T-shirt | 0 (0 Reviews)  | $65.00      |
+        | Floral Print Midi Dress   | 0 (0 Reviews) | $100.00     |
+
+

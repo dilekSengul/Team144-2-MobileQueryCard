@@ -3,8 +3,11 @@ package Page;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import lombok.Getter;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -30,6 +33,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
+
 import static utilities.Driver.getAppiumDriver;
 
 @Getter
@@ -130,6 +134,7 @@ public class QueryCardPage {
         confirmPasswordBox.sendKeys(newPassword);
 
     }
+
     public void LoginWithEmail(String registeredEmail, String registeredPassword) {
         Actions actions = new Actions(getAppiumDriver());
         phoneTextBoxClickAndSendKeys(ConfigReader.getProperty(registeredEmail));
@@ -139,6 +144,7 @@ public class QueryCardPage {
         actions.sendKeys(Keys.TAB).perform();
         signInLoginClick();
     }
+
     //**WishList**
     @AndroidFindBy(accessibility = "Wishlist")
     private WebElement wishListButton;
@@ -322,8 +328,6 @@ public class QueryCardPage {
             System.out.println("Hata oluştu: " + itemName + " için element bulunamadı.");
         }
     }
-
-
 
 }
 

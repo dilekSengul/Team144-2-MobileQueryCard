@@ -2,6 +2,7 @@ package stepdefinitions;
 
 import Page.CategoriesPage;
 import Page.QueryCardPage;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.touch.WaitOptions;
@@ -192,6 +193,7 @@ public class Stepdefinition extends OptionsMet {
         ReusableMethods.wait(1);
         categoriesPage.getBackArrow().click();
     }
+
     //****us11***
 
     @Then("User clicks the button with itemName {string}")
@@ -218,7 +220,7 @@ public class Stepdefinition extends OptionsMet {
     @When("The user clicks the heart icon on the product named {string}")
     public void the_user_clicks_the_heart_icon_on_the_product_named(String favoriyeEklenenUrun) throws InvalidMidiDataException {
         ReusableMethods.wait(5);
-        //  card.getMensAnalogWatch100MeterWater().click();
+       //  card.getMensAnalogWatch100MeterWater().click();
         card.getTheNorthfaceArcticParka().click();
 
 
@@ -262,7 +264,7 @@ public class Stepdefinition extends OptionsMet {
 
     @Given("The user swipe with coordinates startX {int}, startY {int}, endX {int}, endY {int}, duration {int} for {int} times.")
     public void theUserSwipeWithCoordinatesStartXStartYEndXEndYDurationForTimes( int startX, int startY, int endX, int endY, int duration,int swipeCount) {
-        // card. mostPopularProductWithSwipe("MostPopularList", card.productList,  startX, startY, endX, endY, duration,swipeCount);
+      // card. mostPopularProductWithSwipe("MostPopularList", card.productList,  startX, startY, endX, endY, duration,swipeCount);
         card.swipeMethotWithDuration(startX, startY, endX, endY, duration,swipeCount);
     }
 
@@ -283,6 +285,7 @@ public class Stepdefinition extends OptionsMet {
         // Verilen ürünler için sırayla xPathElementClick çağrılır
         card.verifyWishlistItems(productData);
     }
+
 
 
 
