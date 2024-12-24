@@ -4,6 +4,7 @@ package Page;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.touch.WaitOptions;
@@ -91,6 +92,7 @@ public class QueryCardPage {
         ReusableMethods.wait(1);
         // Şifre alanından sonra Tab ile "remember me" checkbox'ına geç
         actions.sendKeys(Keys.TAB).perform();
+        ReusableMethods.wait(1);
         signInLoginClick();
     }
 
@@ -313,22 +315,18 @@ public class QueryCardPage {
     }*/
 
 
-
-
-
-
     /// Gulnar editProfile
     @AndroidFindBy(xpath = "//*[@content-desc='Profile']\n")
     private WebElement Profile;
-    @AndroidFindBy (xpath = "//*[@content-desc='Sign In']")
+    @AndroidFindBy(xpath = "//*[@content-desc='Sign In']")
     private WebElement signİn;
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"*Use Email Instead\")\n")
-    private  WebElement emailInstead;
+    private WebElement emailInstead;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(0)\n")
     private WebElement emailenter;
-    @AndroidFindBy (uiAutomator= "new UiSelector().className(\"android.widget.EditText\").instance(1)\n")
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)\n")
     private WebElement passwordenter;
-    @AndroidFindBy (xpath = "//*[@content-desc='Edit Profile']")
+    @AndroidFindBy(xpath = "//*[@content-desc='Edit Profile']")
     private WebElement Editprofil;
     @AndroidFindBy(xpath = "(//*[@class='android.widget.EditText'][1])")
     private WebElement FullnameEdit;
@@ -337,21 +335,18 @@ public class QueryCardPage {
     @AndroidFindBy(xpath = "(//*[@class='android.widget.EditText'][3])")
     private WebElement PhoneEdit;
     @AndroidFindBy(xpath = "(//*[@class='android.view.View'])[11]")
-    private WebElement  SaveChanges;
+    private WebElement SaveChanges;
     @AndroidFindBy(xpath = "//*[@content-desc='Logout']")
-    private WebElement  Logout;
-    public void loginMethodu(String loginEmail ,String Passwordg) {
-        getEmailInstead().click();
-        getEmailenter().click();
-        getEmailenter().sendKeys(ConfigReader.getProperty("loginEmail"));
-        getPasswordTextBox().click();
-        getEmailenter().sendKeys(ConfigReader.getProperty("Passwordg"));
-        ReusableMethods.scrollWithUiScrollableAndClick("Sign In");
+    private WebElement Logout;
+
+    public void phoneTextBoxClickAndSendKeyss(String phonenumber) {
+        assertTrue(phoneTextBox.isDisplayed());
+        phoneTextBox.click();
+        phoneTextBox.sendKeys(phonenumber);
     }
+
+
 }
-
-
-
 
 
 
