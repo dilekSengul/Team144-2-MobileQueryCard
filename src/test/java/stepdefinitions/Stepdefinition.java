@@ -2,26 +2,18 @@ package stepdefinitions;
 
 import Page.CategoriesPage;
 import Page.QueryCardPage;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.touch.WaitOptions;
-import io.appium.java_client.touch.offset.PointOption;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import utilities.OptionsMet;
 import utilities.ReusableMethods;
 
-
 import javax.sound.midi.InvalidMidiDataException;
-
-import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
@@ -169,29 +161,45 @@ public class Stepdefinition extends OptionsMet {
     @Then("User verifies all categories are displayed")
     public void user_verifies_all_categories_are_displayed() throws InterruptedException {
         List<WebElement> allCategories = categoriesPage.getAllCategories();
+        int swipeCount = 0; // Kaydırma sayısını takip etmek için
+        int kaydirmaSayisi = 4; // Bir swipe'da kaydırılan element sayısı
 
-        int swipeCount = 0; // Kaydırma sayacını takip etmek için
-        int kaydirmaSayisi = 4; //Bir swipe'da kaydırılan element sayısı
+        List<String> invisibleCategories = new ArrayList<>(); // Görünmeyen kategorileri kaydetmek için
+
         for (int i = 0; i < allCategories.size(); i++) {
             WebElement category = allCategories.get(i);
-            System.out.println("Category " + category.getAttribute("content-desc"));
-            // Elementin görünür olduğunu doğrula
-            Assert.assertTrue(
-                    "Category " + category.getAttribute("content-desc") + " is not displayed",
-                    category.isDisplayed()
-            );
+
+            if (!category.isDisplayed()) {
+                // Görünmeyen kategoriyi listeye ekle
+                invisibleCategories.add(category.getAttribute("content-desc"));
+            } else {
+                // Görünür kategoriyi doğrula
+                System.out.println("Category " + category.getAttribute("content-desc") + " is visible.");
+            }
 
             // Her 4 kategoride bir swipe yap
             if ((i + 1) % kaydirmaSayisi == 0 && i != allCategories.size() - 1) {
-
                 swipeCount++;
-                System.out.println("kaydırma " + swipeCount + " kez ekran kaydırma yapıldı.");
+                System.out.println("Swipe " + swipeCount + " kez ekran kaydırma yapıldı.");
                 ekranKaydirmaMethodu(1310, 1410, 5000, 40, 1390); // Sağ kaydırma
-                // Thread.sleep(2000) ;
             }
+
+            // Son kaydırma işlemi için özel durum
             if (i == 36) {
-                kaydirmaSayisi = 3; //Son swipe'daki sayı
+                kaydirmaSayisi = 3; // Son swipe'daki sayı
             }
+        }
+            // Görünmeyen kategorileri raporla ve testi başarısız yap
+        if (!invisibleCategories.isEmpty()) {
+            System.out.println("Invisible Categories:");
+            for (String category : invisibleCategories) {
+                System.out.println("- " + category);
+            }
+            Assert.fail("Bazı kategoriler görünmüyor!");
+        } else {
+            // Tüm kategoriler görünürse bilgilendirme mesajı yazdır
+            System.out.println("***************");
+            System.out.println("Tüm kategoriler görünür durumda");
         }
 
         System.out.println("Toplam " + swipeCount + " kez ekran kaydırma yapıldı.");
@@ -205,16 +213,19 @@ public class Stepdefinition extends OptionsMet {
     }
 
     @Then("User clicks the element {string}")
-    public void userClicksTheButton(String element) {
-        ReusableMethods.koordinatTiklamaMethodu(303, 1873, 1000);
+    public void userClicksTheButton(String element) throws InterruptedException {
+        assertTrue(categoriesPage.getFirstProductMen().isDisplayed());
+        categoriesPage.getFirstProductMen().click();
 
     }
 
     @Then("User clicks the backArrow button")
-    public void userclicksthebackArrowbutton() {
+    public void userclicksthebackArrowbutton() throws InterruptedException {
         categoriesPage.getBackArrow().click();
         ReusableMethods.wait(1);
         categoriesPage.getBackArrow().click();
+        assertTrue(card.getQueryCardLogoElement().isDisplayed());
+        Thread.sleep(1000);
     }
 
 
