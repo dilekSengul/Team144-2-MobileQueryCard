@@ -294,9 +294,26 @@ public class Stepdefinition extends OptionsMet {
        // card.xPathElementClicknormalizeSpace(itemName,reviews,price);
         xPathElementClick(itemName,reviews,price);
     }
-
     @Then("Remove toaster is displayed")
     public void removeToasterIsDisplayed() {
         card.getRemovedToaster().isDisplayed();
     }
+
+
+
+    /// /gulnar
+    @Given("The user opens the application and click on the profile link")
+    public void the_user_opens_the_application_and_click_on_the_profile_link() throws InterruptedException {
+        Thread.sleep(500);
+        card.getProfile().click();
+    }
+    @Given("User clicks the sign in button")
+    public void User_clicks_the_sign_in_button() {
+        card.getSignİn().click();
+    }
+    @Given("The user uses Email instead, enters {string}  and {string}")
+    public void the_user_uses_email_instead_enters_and(String string, String string2) {
+        card.loginMethodu("loginEmail" ,"Passwordg");
+    }
+    
 }
