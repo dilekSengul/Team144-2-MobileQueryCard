@@ -10,4 +10,7 @@ Feature: Edit Profile As a registered user
 
     * The user opens the application and click on the profile link
     * User clicks the sign in button
-    * The user uses Email instead, enters "loginEmail"  and "Passwordg"
+    * As a user muss be "phonenumber" phone and "Password" password Login
+    * The user  click on the profile link
+    * click on "Edit Profile" and edit profile
+    * Edit fullName and email address button
