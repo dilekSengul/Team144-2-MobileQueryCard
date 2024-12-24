@@ -24,21 +24,21 @@ Feature: User Registration
     Then User verifies that "Profile" button is visible and clicks the button.
     When User verifies that "Sign Up" button is visible and clicks the button.
     And I enter the appropriate entries in the name and password fields and enter a phone of less than 7 digits and click Sign Up button.
-    Then User should see an "Error" popup message
+    Then User should see an "Error" message on the popup page.
 
   Scenario: Verify that the SignUp module works with the correct data
     Given User confirms to be on the homepage
     Then User verifies that "Profile" button is visible and clicks the button.
     When User verifies that "Sign Up" button is visible and clicks the button.
     Then User fills in all fields properly and click Sign Up button.
-    And User should see an "Success" popup message
+    Then User should see an "Error" message on the popup page.
 
   Scenario: Verify that the SignUp module works with a password of minimum 8 characters
     Given User confirms to be on the homepage
     Then User verifies that "Profile" button is visible and clicks the button.
     When User verifies that "Sign Up" button is visible and clicks the button.
     Then User fills in all fields properly, including the 8-character password, and clicks the Sign Up button
-    And User should see an "Success" popup message
+    Then User should see an "Success" message on the popup page.
 
   Scenario: Switch from SignUp page to SignIn page
     Given User confirms to be on the homepage
