@@ -44,7 +44,6 @@ public class QueryCardPage {
         PageFactory.initElements(new AppiumFieldDecorator(getAppiumDriver()), this);
         this.driver = Driver.getAppiumDriver();
     }
-
     @AndroidFindBy(xpath = "(//android.widget.ImageView[1])[1]")
     private WebElement queryCardLogoElement;
     @AndroidFindBy(xpath = "(//android.widget.ImageView[1])[2]")
@@ -329,6 +328,7 @@ public class QueryCardPage {
             System.out.println("Hata oluştu: " + itemName + " için element bulunamadı.");
         }
     }
+
 }
 
 

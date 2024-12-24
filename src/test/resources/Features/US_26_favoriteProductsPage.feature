@@ -1,3 +1,4 @@
+
 @Us26
 Feature: As a registered user, I want to have a favorite products page on the site and I want to be able to manage this page.
   Background: User opens the app
@@ -35,3 +36,5 @@ Feature: As a registered user, I want to have a favorite products page on the si
         | productName               | productReviews  | productPrice |
         | Flower Print Foil T-shirt | 0 (0 Reviews)  | $65.00      |
         | Floral Print Midi Dress   | 0 (0 Reviews) | $100.00     |
+
+

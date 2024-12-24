@@ -1,7 +1,9 @@
-  @us23
-  Feature: As a user, I want to create a favorite list with the products I like without registering.
-    Background: User opens the app
-      * User makes driver adjustments
+
+@us23
+Feature: As a user, I want to create a favorite list with the products I like without registering.
+  Background: User opens the app
+    * User makes driver adjustments
+
 
   Scenario:
 
