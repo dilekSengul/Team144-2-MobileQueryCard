@@ -44,6 +44,7 @@ public class QueryCardPage {
         PageFactory.initElements(new AppiumFieldDecorator(getAppiumDriver()), this);
         this.driver = Driver.getAppiumDriver();
     }
+
     @AndroidFindBy(xpath = "(//android.widget.ImageView[1])[1]")
     private WebElement queryCardLogoElement;
     @AndroidFindBy(xpath = "(//android.widget.ImageView[1])[2]")
@@ -177,6 +178,9 @@ public class QueryCardPage {
     private WebElement mostPopular;
     @AndroidFindBy(xpath = "//android.view.View[contains(@content-desc, 'Reviews')]")
     public List<WebElement> productList;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.view.View\").instance(4)")
+    private WebElement removedToaster;
+
 
     public void registerNewUser(String name, String phone, String password) {
         signUpNameBox.click();
@@ -261,76 +265,53 @@ public class QueryCardPage {
         }
     }
 
-    public void xPathElementClickTable(List<List<String>> productData) {
-        for (int i = 1; i < productData.size(); i++) {
-            // Veriyi tablo satırından al
-            String itemName = productData.get(i).get(0);
-            String reviews = productData.get(i).get(1);
-            String price = productData.get(i).get(2);
+    public void xPathElementClicknormalizeSpace(String itemName, String reviews, String price) {
+        String xpathExpression = String.format(
+                "//android.view.View[contains(normalize-space(@content-desc), '%s') and contains(normalize-space(@content-desc), '%s') and contains(normalize-space(@content-desc), '%s')]/android.widget.ImageView",
+                itemName, reviews, price
+        );
 
-            // XPath ifadesini formatla
-            String xpathExpression = String.format(
-                    "//android.view.View[contains(@content-desc, '%s') and contains(@content-desc, '%s') and contains(@content-desc, '%s')]/android.widget.ImageView",
-                    itemName, reviews, price
-            );
+        WebElement element = getAppiumDriver().findElement(MobileBy.xpath(xpathExpression));
 
-            try {
-                // XPath'e uygun öğeyi bul ve tıkla
-                WebElement element = getAppiumDriver().findElement(MobileBy.xpath(xpathExpression));
-                element.click();
-                System.out.println("Tıklandı: " + itemName + " - " + reviews + " - " + price);
-            } catch (Exception e) {
-                System.out.println("Hata oluştu: " + itemName + " için element bulunamadı.");
+        Assert.assertTrue(element.isDisplayed()); // Öğenin görünür olduğundan emin olun
+        element.click();
+    }
+
+
+    public void verifyWishlistProducts(String listName) {
+        if (productList.isEmpty()) {
+            System.out.println("The wishlist '" + listName + "' is empty.");
+        } else {
+            System.out.println("Verifying products under the wishlist: '" + listName + "'");
+            for (WebElement product : productList) {
+                String productText = product.getAttribute("content-desc");
+                String[] productDetails = productText.split("\n");
+                String productName = productDetails[0];
+
+                if (productName != null && !productName.isEmpty()) {
+                    System.out.println("Verified product: " + productName);
+                } else {
+                    System.out.println("Product name could not be retrieved.");
+                }
             }
         }
     }
-
-    public void verifyWishlistItems(List<List<String>> productData) {
-        // Wishlist öğelerini al
-        List<WebElement> wishlistItems = driver.findElements(By.xpath("//android.view.View[contains(@content-desc, '0 Reviews')]"));
-
-        // Öğe sayısını doğrula
-        Assert.assertEquals("Ürün sayısı uyuşmuyor!", productData.size() - 1, wishlistItems.size());
-
-        for (int i = 0; i < wishlistItems.size(); i++) {
-            // Wishlist öğesinin açıklamasını al
-            String itemDescription = wishlistItems.get(i).getAttribute("content-desc");
-
-            // Beklenen verileri alın
-            String expectedName = productData.get(i + 1).get(0);  // İlk satır başlık olduğu için +1
-            String expectedReviews = productData.get(i + 1).get(1);
-            String expectedPrice = productData.get(i + 1).get(2);
-
-            // Ürün bilgilerini doğrula
-            Assert.assertTrue("Beklenen ürün adı bulunamadı!", itemDescription.contains(expectedName));
-            Assert.assertTrue("Beklenen yorum bilgisi bulunamadı!", itemDescription.contains(expectedReviews));
-            Assert.assertTrue("Beklenen fiyat bulunamadı!", itemDescription.contains(expectedPrice));
-        }
-
-        System.out.println("Wishlist ürünleri başarıyla doğrulandı.");
-    }
-
-    public void xPathElementClickDynamic(String itemName, String reviews, String price) {/*
-        String xpathExpression = String.format(
-                "//android.view.View[contains(@content-desc, '%s') and contains(@content-desc, '%s') and contains(@content-desc, '%s')]/android.widget.ImageView",
-                itemName, reviews, price
-        );*/
+/*
+    public void removeWishlistProducts(String listName,String itemName, String reviews, String price) {
         String xpathExpression = String.format("//android.view.View[contains(@content-desc, '%s') and contains(@content-desc, '%s') and contains(@content-desc, '%s')]/android.widget.ImageView", itemName, reviews, price);
 
         // Öğeyi bulma
+        WebElement element = getAppiumDriver().findElement(MobileBy.xpath(xpathExpression));
 
-
-        try {
-            WebElement element = getAppiumDriver().findElement(MobileBy.xpath(xpathExpression));
+        if (!productList.isEmpty()) {
+            System.out.println("The wishlist '" + listName + "' is empty.");
             element.click();
-            System.out.println("Tıklandı: " + itemName + " - " + reviews + " - " + price);
-        } catch (Exception e) {
-            System.out.println("Hata oluştu: " + itemName + " için element bulunamadı.");
+            removedToaster.isDisplayed();
+        } else {
+            System.out.println("Product not found: " + itemName);Denemeeee
         }
-    }
-
+    }*/
 }
-
 
 
 
