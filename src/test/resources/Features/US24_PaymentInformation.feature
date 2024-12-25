@@ -59,7 +59,7 @@ Feature: As a registered user, I want to have a payment page where I can pay for
       | 4920951557715771 | 328   | 332 |
 
 
-  Scenario: TC05: QueryCart customer makes the payment with ‘Cash On Delivery’ and should be able to access the ‘Order history’ menu by pressing the ‘Go to order details’ button
+  Scenario: TC05: QueryCart customer makes the payment with ‘Cash On Delivery’ and should be able to access
     And User clicks the button with description "Cash On Delivery"
     And User clicks the button with description "Confirm Order"
     And QueryCart customer clicks on the Go to shopping button
