@@ -70,6 +70,10 @@ public class QueryCardPage {
     private WebElement newPasswordBox;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
     private WebElement confirmPasswordBox;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(1)")
+    private WebElement aramaButonu;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\")")
+    private WebElement searchTextBox;
 
 
     public void LogoGorunurTest() {
