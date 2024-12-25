@@ -326,5 +326,9 @@ public class stepDefOnur {
         Driver.getAppiumDriver().navigate().back();
         ReusableMethods.wait(2);
     }
+
+    @Given("the user click on the {string} button")
+    public void theUserClickOnTheButton(String arg0) {
+    }
 }
 
