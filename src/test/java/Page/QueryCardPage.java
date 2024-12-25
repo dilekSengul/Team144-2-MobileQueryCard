@@ -4,11 +4,13 @@ package Page;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import io.cucumber.java.pt.E;
 import lombok.Getter;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -43,7 +45,7 @@ public class QueryCardPage {
 
     public QueryCardPage() {
         PageFactory.initElements(new AppiumFieldDecorator(getAppiumDriver()), this);
-        this.driver = Driver.getAppiumDriver();
+        this.driver = getAppiumDriver();
     }
 
     @AndroidFindBy(xpath = "(//android.widget.ImageView[1])[1]")
@@ -279,7 +281,7 @@ public class QueryCardPage {
 
         WebElement element = getAppiumDriver().findElement(MobileBy.xpath(xpathExpression));
 
-        Assert.assertTrue(element.isDisplayed()); // Öğenin görünür olduğundan emin olun
+        assertTrue(element.isDisplayed()); // Öğenin görünür olduğundan emin olun
         element.click();
     }
 
@@ -332,11 +334,11 @@ public class QueryCardPage {
     private WebElement passwordenter;
     @AndroidFindBy(xpath = "//*[@content-desc='Edit Profile']")
     private WebElement Editprofil;
-    @AndroidFindBy(xpath = "(//*[@class='android.widget.EditText'][1])")
+    @AndroidFindBy(xpath = "new UiSelector().text(\"gulnar\")")
     private WebElement FullnameEdit;
     @AndroidFindBy(xpath = "(//*[@class='android.widget.EditText'][2])")
     private WebElement EmailEdit;
-    @AndroidFindBy(xpath = "(//*[@class='android.widget.EditText'][3])")
+    @AndroidFindBy(xpath = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
     private WebElement PhoneEdit;
     @AndroidFindBy(xpath = "(//*[@class='android.view.View'])[11]")
     private WebElement SaveChanges;
@@ -347,10 +349,36 @@ public class QueryCardPage {
         assertTrue(phoneTextBox.isDisplayed());
         phoneTextBox.click();
         phoneTextBox.sendKeys(phonenumber);
+
+
+    }
+    public void hesabimKutuTemizleme() {
+        FullnameEdit.clear();
+        EmailEdit.clear();
+    }
+    public void hesabimYeniBilgiDogrulama(String fullname, String Email) {
+        //hesabimKutuTemizleme();
+
+
+        ReusableMethods.wait(100);
+         FullnameEdit.clear();
+         EmailEdit.clear();
+        FullnameEdit.sendKeys(ConfigReader.getProperty(fullname));
+        EmailEdit.sendKeys(ConfigReader.getProperty(Email));
+        ReusableMethods.scrollWithUiScrollableAndClick("Save Changes");
+        Assert.assertEquals(FullnameEdit.getText(),ConfigReader.getProperty(fullname));
+        Assert.assertEquals(EmailEdit.getText(),ConfigReader.getProperty(Email));
+
+
+
     }
 
 
-}
+
+
+    }
+
+
 
 
 
