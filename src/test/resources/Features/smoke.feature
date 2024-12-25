@@ -17,12 +17,15 @@ Feature: Smoke Test, temel işlevlerin doğru çalışıp çalışmadığını h
     And User presses the magnifying glass button to make a search
     # Ardından kullanıcı arama yapabilmek için home page'deki üst bar'da bulunan büyteç butonuna basar.
     And User types "Flower Print" in searchTextBox
-    And  User waits 3 seconds
     # Kullanıcı searchTextBox'a ürün adını girerek hem textbox'ın çalıştığını kontrol eder hemde aradığı ürünün bulunmasında yardımcı olur.
+    And  User waits 3 seconds
+    # Kullanıcı aradığı ürünün gelmesi için 3 saniye bekler (internet problemi)
     And User clicks the button with itemName "Flower Print Foil T-shirt" and "0 (0  Reviews)" and "$65.00" added WishList
-    And User clicks the backArrow button
-    And User clicks the backArrow button
     # Kullanıcı arama sonucunda çıkan ürünü wiss list (favori) ekler bu şekilde sitede normal bir kullanıcı bile sevdiği ürünü kaydede bilir.
+    And User clicks the backArrow button
+    # Kullanıcı ürünü favorilere ekledikten sonra geri tuşuna basarak arama sayfasına yeniden yönlendirilir
+    And User clicks the backArrow button
+    # Kullanıcı tekrardan geri tuşuna basarak ana sayfaya yönlendirilir
     And User clicks the button with description "Wishlist"
     # Kullanıcı ürünü wish liste eklemesinden sonra querycart uygulamasının alt bar'ında bulunan "Wishlist" butona tıklar
     And User clicks the button with description "Flower Print Foil T-shirt 0 (0  Reviews) $65.00"
