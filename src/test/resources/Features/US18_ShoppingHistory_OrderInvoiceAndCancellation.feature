@@ -9,8 +9,7 @@ Feature: View and manage shopping history in the Dashboard
     * User confirms to be on the homepage
     * User clicks the button with description "Profile"
     * User clicks the button with description "Sign In"
-    * User clicks the button "phoneTextBox" and sendKeys "6505551212"
-    * User clicks the button "signInLoginButton"
+    * As a user muss be "wrongPhoneNumber" phone and "wrongPassword" password Login
 
   Scenario: Access and interact with the Order History page
 
