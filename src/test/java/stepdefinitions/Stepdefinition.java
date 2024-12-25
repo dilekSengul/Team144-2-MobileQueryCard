@@ -17,6 +17,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import utilities.ConfigReader;
 import utilities.OptionsMet;
 import utilities.ReusableMethods;
 
@@ -344,12 +345,24 @@ public class Stepdefinition extends OptionsMet {
         VerifyElementText(text);
         clickButtonByDescription(text);
 
+    }
+
+    @Given("Edit fullName {string} email address button {string}")
+    public void edit_full_name_fullname_email_address_button(String fullName, String Email){
+        card.hesabimKutuTemizleme();
+        ReusableMethods.wait(200);
+        card.hesabimYeniBilgiDogrulama(fullName,Email);
+
+
 
 
     }
 
-    @Given("Edit fullName and email address button")
-    public void edit_full_name_and_email_address_button() {
+    @Given("Click on the Save button to register")
+    public void click_on_the_save_button_to_register() {
+        ReusableMethods.wait(100);
+        ReusableMethods.scrollWithUiScrollableAndClick("Save Changes");
+        //card.getSaveChanges().click();
 
     }
     }
