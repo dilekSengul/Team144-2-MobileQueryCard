@@ -9,30 +9,33 @@ Feature: Home page
     * User confirms to be on the homepage
     * User clicks the button with description "Profile"
     * User clicks the button with description "Sign In"
-    * As a user muss be "phoneNumber" phone and "password" password Login
+    * User enters "phoneNumber" and "password" and clicks on the “Sign In” button.
+    * User should see an "Success" message on the popup page.
     * Driver turns off
 
   Scenario: Verify that the user cannot login with wrong phone number and wrong password
     * User confirms to be on the homepage
     * User clicks the button with description "Profile"
     * User clicks the button with description "Sign In"
-    * As a user muss be "wrongPhoneNumber" phone and "wrongPassword" password Login
+    * User enters "wrongPhoneNumber" and "wrongPassword" and clicks on the “Sign In” button.
+    * User should see an "Error" message on the popup page.
     * Driver turns off
 
   Scenario: Verify that the user cannot login with correct phone number and wrong password
     * User confirms to be on the homepage
     * User clicks the button with description "Profile"
     * User clicks the button with description "Sign In"
-    * As a user muss be "phoneNumber" phone and "wrongPassword" password Login
+    * User enters "phoneNumber" and "wrongPassword" and clicks on the “Sign In” button.
+    * User should see an "Error" message on the popup page.
     * Driver turns off
 
   Scenario: Verify that the user cannot login with correct password and wrong phone number
     * User confirms to be on the homepage
     * User clicks the button with description "Profile"
     * User clicks the button with description "Sign In"
-    * As a user muss be "wrongPhoneNumber" phone and "wrongPassword" password Login
+    * User enters "wrongPhoneNumber" and "password" and clicks on the “Sign In” button.
+    * User should see an "Error" message on the popup page.
     * Driver turns off
-
 
 
 
