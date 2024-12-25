@@ -176,7 +176,7 @@ public class stepDefOnur {
 
     @Then("User should see an {string} message on the popup page.")
     public void userShouldSeeAnMessageOnPopupPage(String expectedMessage) throws Exception {
-        ReusableMethods.wait(2);
+        ReusableMethods.wait(1);
         //ReusableMethods.getScreenshot(expectedMessage); //test edilecek örnek ekran görüntüsünü almak için ilk seferde kullanılır
         OptionsMet.assertElementTextAndVisibility(expectedMessage);
 
@@ -279,10 +279,10 @@ public class stepDefOnur {
 
     @And("User sets the {string} filter option to S")
     public void userSetsTheFilterOptionTo(String type) {
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
         OptionsMet.clickButtonByDescription(type);
         ReusableMethods.wait(2);
-        Driver.getAppiumDriver().findElement(MobileBy.androidUIAutomator("new UiSelector().className(\"android.widget.ImageView\").instance(5)"));
+        Driver.getAppiumDriver().findElement(MobileBy.androidUIAutomator("new UiSelector().className(\"android.widget.ImageView\").instance(4)")).click();
 
     }
 
@@ -298,6 +298,33 @@ public class stepDefOnur {
         System.out.println("Filtre sonrası ürün sayıları karşılaştırılıyor: " + firstProductCount + " ve " + lastProductCount);
         assertNotEquals("Değerler aynı, filtre çalışmıyor", firstProductCount, lastProductCount);
 
+    }
+
+    @Then("The {string} title should be displayed")
+    public void theTitleShouldBeDisplayed(String title) {
+        ReusableMethods.wait(2);
+        OptionsMet.assertElementText(title);
+    }
+
+
+    @And("User clicks on the first order in the list")
+    public void userClicksOnTheFirstOrderInTheList() {
+        ReusableMethods.wait(2);
+        elementLocatorsOnur.getFirstOrderDetailsButton().click();
+    }
+
+    @And("User scroll down the screen")
+    public void userScrollDownTheScreen() throws InvalidMidiDataException {
+        ReusableMethods.wait(1);
+        OptionsMet.swipeOnur(700,2300,700,1300,0,100);
+        ReusableMethods.wait(1);
+    }
+
+    @Then("User returns to previous page")
+    public void userReturnsToPreviousPage() {
+        ReusableMethods.wait(2);
+        Driver.getAppiumDriver().navigate().back();
+        ReusableMethods.wait(2);
     }
 }
 

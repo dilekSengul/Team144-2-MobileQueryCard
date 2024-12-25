@@ -1,6 +1,7 @@
 package stepdefinitions;
 
 import Page.CategoriesPage;
+import Page.MostPopularProductsPage;
 import Page.QueryCardPage;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
@@ -25,6 +26,7 @@ import javax.sound.midi.InvalidMidiDataException;
 import java.time.Duration;
 import java.util.List;
 
+import static java.awt.SystemColor.text;
 import static org.junit.Assert.assertTrue;
 import static utilities.Driver.getAppiumDriver;
 import static utilities.Driver.quitAppiumDriver;
@@ -34,6 +36,7 @@ public class Stepdefinition extends OptionsMet {
     QueryCardPage card = new QueryCardPage();
     CategoriesPage categoriesPage = new CategoriesPage();
     Actions actions = new Actions(getAppiumDriver());
+
 
     @Given("User makes driver adjustments")
     public void user_makes_driver_adjustments() {
@@ -88,6 +91,7 @@ public class Stepdefinition extends OptionsMet {
 
     @Given("User clicks the button with itemName {string} and {string} and {string} added WishList")
     public void user_clicks_the_button_with_item_name_and_and_added_wish_list(String itemName, String reviews, String price) {
+        ReusableMethods.wait(3);
         xPathElementClick(itemName, reviews, price);
     }
 
@@ -194,20 +198,21 @@ public class Stepdefinition extends OptionsMet {
         categoriesPage.getBackArrow().click();
     }
 
-    //****us11***
+    //****us11-23-26***
 
     @Then("User clicks the button with itemName {string}")
     public void user_clicks_the_button_with_item_name(String itemName) {
         //  clickButtonByDescription(itemName);
         ReusableMethods.wait(3);
-        touchDown(874,667);
+        touchDown(874, 667);
 
 
     }
+
     @Then("As a user must be {string} email and {string} password Login")
     public void asAUserMustBeEmailAndPasswordLogin(String registeredEmail, String registeredPassword) {
         ReusableMethods.wait(7);
-        card.LoginWithEmail(registeredEmail,registeredPassword);
+        card.LoginWithEmail(registeredEmail, registeredPassword);
     }
 
     @Then("User Verifies the visibility and functionality of the {string} button")
@@ -217,31 +222,36 @@ public class Stepdefinition extends OptionsMet {
         VerifyElementText(text);
         clickButtonByDescription(text);
     }
+
     @When("The user clicks the heart icon on the product named {string}")
     public void the_user_clicks_the_heart_icon_on_the_product_named(String favoriyeEklenenUrun) throws InvalidMidiDataException {
         ReusableMethods.wait(5);
-       //  card.getMensAnalogWatch100MeterWater().click();
+        //  card.getMensAnalogWatch100MeterWater().click();
         card.getTheNorthfaceArcticParka().click();
 
 
     }
+
     @Then("Verifies that they are redirected to the sign-in page with the message Sign in to continue shopping.")
     public void verifies_that_they_are_redirected_to_the_sign_in_page_with_the_message() {
         ReusableMethods.wait(3);
         Assert.assertTrue(card.getSignInPageVerificationText().isDisplayed());
     }
+
     @Then("Then Clicks the {string} link")
     public void thenClicksTheLink(String signUp) {
         clickButtonByDescription(signUp);
 
     }
+
     @Then("Registers as a new user with {string},{string} and {string}")
     public void registersAsANewUserWithAnd(String name, String phone, String password) {
         ReusableMethods.wait(6);
-        // card.signUp(name,phone,Password);
-        card.registerNewUser(name,phone,password);
+
+        card.registerNewUser(name, phone, password);
 
     }
+
     @Then("A Success notification is displayed.")
     public void a_notification_is_displayed() {
         //  ReusableMethods.wait(1);
@@ -249,10 +259,11 @@ public class Stepdefinition extends OptionsMet {
         // WebElement successMessage = getAppiumDriver().findElement(AppiumBy.xpath("//*[contains(@content-desc, 'item added')]"));
         card.verifySuccessNotificationText();
     }
+
     @Then("Logs in as a user with the {string} and {string}")
     public void logs_in_as_a_user_with_the_and(String phone, String Password) {
         ReusableMethods.wait(3);
-        card.LoginWithPhone(phone,Password);
+        card.LoginWithPhone(phone, Password);
     }
 
     @Then("Sees the notification Added to Wishlist")
@@ -261,32 +272,85 @@ public class Stepdefinition extends OptionsMet {
         card.getAddedToWishlistNatification().isDisplayed();
     }
 
-
     @Given("The user swipe with coordinates startX {int}, startY {int}, endX {int}, endY {int}, duration {int} for {int} times.")
-    public void theUserSwipeWithCoordinatesStartXStartYEndXEndYDurationForTimes( int startX, int startY, int endX, int endY, int duration,int swipeCount) {
-      // card. mostPopularProductWithSwipe("MostPopularList", card.productList,  startX, startY, endX, endY, duration,swipeCount);
-        card.swipeMethotWithDuration(startX, startY, endX, endY, duration,swipeCount);
+    public void theUserSwipeWithCoordinatesStartXStartYEndXEndYDurationForTimes(int startX, int startY, int endX, int endY, int duration, int swipeCount) {
+
+        card.swipeMethotWithDuration(startX, startY, endX, endY, duration, swipeCount);
     }
 
     @Then("The user verifies favorite icons before and after scrolling.")
     public void theUserVerifiesFavoriteIconsBeforeAndAfterScrolling() {
         card.verifyWishlistButtonAfterScroll();
-    }/*
-    @Then("clicks the button with itemName {string} and {string} and {string} added WishList")
-    public void clicksTheButtonWithItemNameAndAndAddedWishList(String productName, String productReviews, String productPrice) {
-        ReusableMethods.wait(3);
-        card.xPathElementClickDynamic(productName,productReviews,productPrice);
-    }*/
+    }
 
     @Then("Verifies that the products added to the Wishlist page are displayed correctly.")
-    public void verifies_that_the_products_added_to_the_wishlist_page_are_displayed_correctly(io.cucumber.datatable.DataTable dataTable) {
-        List<List<String>> productData = dataTable.asLists(String.class);
+    public void verifies_that_the_products_added_to_the_wishlist_page_are_displayed_correctly() {
 
-        // Verilen ürünler için sırayla xPathElementClick çağrılır
-        card.verifyWishlistItems(productData);
+        card.verifyWishlistProducts("wishlist");
+
+    }
+
+    @Then("User clicks the button with itemName {string} and {string} and {string} added WishList.")
+    public void userClicksTheButtonWithItemNameAndAndAddedWishList(String itemName, String reviews, String price) {
+        ReusableMethods.wait(3);
+        card.xPathElementClicknormalizeSpace(itemName, reviews, price);
+    }
+
+    @Then("User clicks the button with itemName {string} and {string} and {string} removed WishList")
+    public void userClicksTheButtonWithItemNameAndAndRemovedWishList(String itemName, String reviews, String price) {
+        ReusableMethods.wait(6);
+        // card.xPathElementClicknormalizeSpace(itemName,reviews,price);
+        xPathElementClick(itemName, reviews, price);
+    }
+
+    @Then("Remove toaster is displayed")
+    public void removeToasterIsDisplayed() {
+        card.getRemovedToaster().isDisplayed();
     }
 
 
+    /// /gulnar
+    @Given("The user opens the application and click on the profile link")
+    public void the_user_opens_the_application_and_click_on_the_profile_link() throws InterruptedException {
+        Thread.sleep(500);
+        card.getProfile().click();
+    }
+
+    @Given("User clicks the sign in button")
+    public void User_clicks_the_sign_in_button() {
+        card.getSignİn().click();
+    }
+
+    @Given("The user uses PHONE instead, enters {string}  and {string}")
+    public void the_user_uses_phone_instead_enters_and(String string, String string2){
+        card.phoneTextBoxClickAndSendKeys(string2);
+        // Telefon numarası alanından sonra Tab ile şifre alanına geç
+        actions.sendKeys(Keys.TAB).perform();
+        actions.sendKeys("Query.151224").perform();
+        ReusableMethods.wait(1);
+        // Şifre alanından sonra Tab ile "remember me" checkbox'ına geç
+        actions.sendKeys(Keys.TAB).perform();
+        actions.sendKeys(Keys.SPACE).perform();
+      //  actions.sendKeys(Keys.ENTER).perform();
+
+    }
+    @Given("The user  click on the profile link")
+    public void the_user_click_on_the_profile_link() {
+        card.getProfile().click();
+    }
+
+    @Given("click on {string} and edit profile")
+    public void click_on_and_edit_profile(String text) {
+        VerifyElementText(text);
+        clickButtonByDescription(text);
 
 
-}
+
+    }
+
+    @Given("Edit fullName and email address button")
+    public void edit_full_name_and_email_address_button() {
+
+    }
+    }
+
