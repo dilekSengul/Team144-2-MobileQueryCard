@@ -349,8 +349,7 @@ public class Stepdefinition extends OptionsMet {
 
     @Given("Edit fullName {string} email address button {string}")
     public void edit_full_name_fullname_email_address_button(String fullName, String Email){
-        card.hesabimKutuTemizleme();
-        ReusableMethods.wait(200);
+
         card.hesabimYeniBilgiDogrulama(fullName,Email);
 
 

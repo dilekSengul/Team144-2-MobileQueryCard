@@ -4,6 +4,7 @@ package Page;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -329,11 +330,11 @@ public class QueryCardPage {
     private WebElement passwordenter;
     @AndroidFindBy(xpath = "//*[@content-desc='Edit Profile']")
     private WebElement Editprofil;
-    @AndroidFindBy(xpath = "(//*[@class='android.widget.EditText'][1])")
+    @AndroidFindBy(xpath = "new UiSelector().text(\"gulnar\")")
     private WebElement FullnameEdit;
     @AndroidFindBy(xpath = "(//*[@class='android.widget.EditText'][2])")
     private WebElement EmailEdit;
-    @AndroidFindBy(xpath = "(//*[@class='android.widget.EditText'][3])")
+    @AndroidFindBy(xpath = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
     private WebElement PhoneEdit;
     @AndroidFindBy(xpath = "(//*[@class='android.view.View'])[11]")
     private WebElement SaveChanges;
@@ -352,6 +353,12 @@ public class QueryCardPage {
         EmailEdit.clear();
     }
     public void hesabimYeniBilgiDogrulama(String fullname, String Email) {
+        //hesabimKutuTemizleme();
+
+
+        ReusableMethods.wait(100);
+         FullnameEdit.clear();
+         EmailEdit.clear();
         FullnameEdit.sendKeys(ConfigReader.getProperty(fullname));
         EmailEdit.sendKeys(ConfigReader.getProperty(Email));
         ReusableMethods.scrollWithUiScrollableAndClick("Save Changes");
