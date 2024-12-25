@@ -33,7 +33,7 @@ Feature: Women Categories on Homepage Body
     #Login steps
     * User clicks the button with description "Profile"
     * User clicks the button with description "Sign In"
-    * As a user muss be "wrongPhoneNumber" phone and "wrongPassword" password Login
+    * User enters "phoneNumber" and "password" and clicks on the “Sign In” button.
     #Scenario
     Given User finds and opens the "Women" category page in the Categories Bar in the Homepage body
     When User views the first product
@@ -48,7 +48,7 @@ Feature: Women Categories on Homepage Body
     Then The user should be able to remove the product from favorites via the fav button
     And User should see an "Removed" message on the popup page.
     And User verifies that the product has been disappeared on the favorites list
-
+    And Driver turns off
 
   Scenario: Filtering products in the Women category
     Given User opens the Categories section
@@ -58,4 +58,4 @@ Feature: Women Categories on Homepage Body
     And User sets the "size" filter option to S
     Then User navigates back to the product list via X button
     And User verifies that the filter works properly
-
+    And Driver turns off

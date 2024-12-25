@@ -9,7 +9,7 @@ Feature: View and manage shopping history in the Dashboard
     * User confirms to be on the homepage
     * User clicks the button with description "Profile"
     * User clicks the button with description "Sign In"
-    * As a user muss be "wrongPhoneNumber" phone and "wrongPassword" password Login
+    * User enters "phoneNumber" and "password" and clicks on the “Sign In” button.
 
   Scenario: Access and interact with the Order History page
 
@@ -23,3 +23,4 @@ Feature: View and manage shopping history in the Dashboard
     Then User returns to previous page
     Then User clicks the button with description "Cancel Order"
     Then User should see an "Order Canceled Successfully!" message on the popup page.
+    And Driver turns off
