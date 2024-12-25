@@ -177,7 +177,7 @@ public class stepDefOnur {
     @Then("User should see an {string} message on the popup page.")
     public void userShouldSeeAnMessageOnPopupPage(String expectedMessage) throws Exception {
         ReusableMethods.wait(1);
-        //ReusableMethods.getScreenshot(expectedMessage); //test edilecek örnek ekran görüntüsünü almak için ilk seferde kullanılır
+       // ReusableMethods.getScreenshot(expectedMessage); //test edilecek örnek ekran görüntüsünü almak için ilk seferde kullanılır
         OptionsMet.assertElementTextAndVisibility(expectedMessage);
 
 
