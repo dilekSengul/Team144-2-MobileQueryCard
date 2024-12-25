@@ -3,20 +3,26 @@ package stepdefinitions;
 import Page.CategoriesPage;
 import Page.MostPopularProductsPage;
 import Page.QueryCardPage;
+import Page.ShoppingBasketPage;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import utilities.ConfigReader;
 import utilities.OptionsMet;
 import utilities.ReusableMethods;
 
@@ -26,6 +32,7 @@ import javax.sound.midi.InvalidMidiDataException;
 import java.time.Duration;
 import java.util.List;
 
+import static java.awt.SystemColor.text;
 import static org.junit.Assert.assertTrue;
 import static utilities.Driver.getAppiumDriver;
 import static utilities.Driver.quitAppiumDriver;
@@ -35,6 +42,9 @@ public class Stepdefinition extends OptionsMet {
     QueryCardPage card = new QueryCardPage();
     CategoriesPage categoriesPage = new CategoriesPage();
     Actions actions = new Actions(getAppiumDriver());
+    WebDriverWait wait = new WebDriverWait(getAppiumDriver(),Duration.ofSeconds(15));
+    ShoppingBasketPage basketPage = new ShoppingBasketPage();
+    private static final Logger logger = LogManager.getLogger(stepdefinitions.Stepdefinition.class);
 
 
     @Given("User makes driver adjustments")
@@ -203,14 +213,15 @@ public class Stepdefinition extends OptionsMet {
     public void user_clicks_the_button_with_item_name(String itemName) {
         //  clickButtonByDescription(itemName);
         ReusableMethods.wait(3);
-        touchDown(874,667);
+        touchDown(874, 667);
 
 
     }
+
     @Then("As a user must be {string} email and {string} password Login")
     public void asAUserMustBeEmailAndPasswordLogin(String registeredEmail, String registeredPassword) {
         ReusableMethods.wait(7);
-        card.LoginWithEmail(registeredEmail,registeredPassword);
+        card.LoginWithEmail(registeredEmail, registeredPassword);
     }
 
     @Then("User Verifies the visibility and functionality of the {string} button")
@@ -220,42 +231,45 @@ public class Stepdefinition extends OptionsMet {
         VerifyElementText(text);
         clickButtonByDescription(text);
     }
+
     @When("The user clicks the heart icon on the product named {string}")
     public void the_user_clicks_the_heart_icon_on_the_product_named(String favoriyeEklenenUrun) throws InvalidMidiDataException {
         ReusableMethods.wait(5);
-       //  card.getMensAnalogWatch100MeterWater().click();
+        //  card.getMensAnalogWatch100MeterWater().click();
         card.getTheNorthfaceArcticParka().click();
 
 
     }
+
     @Then("Verifies that they are redirected to the sign-in page with the message Sign in to continue shopping.")
     public void verifies_that_they_are_redirected_to_the_sign_in_page_with_the_message() {
         ReusableMethods.wait(3);
         Assert.assertTrue(card.getSignInPageVerificationText().isDisplayed());
     }
+
     @Then("Then Clicks the {string} link")
     public void thenClicksTheLink(String signUp) {
         clickButtonByDescription(signUp);
 
     }
+
     @Then("Registers as a new user with {string},{string} and {string}")
     public void registersAsANewUserWithAnd(String name, String phone, String password) {
         ReusableMethods.wait(6);
 
-        card.registerNewUser(name,phone,password);
+        card.registerNewUser(name, phone, password);
 
     }
-    @Then("A Success notification is displayed.")
-    public void a_notification_is_displayed() {
-        //  ReusableMethods.wait(1);
-        // card.getSuccessMessage().isDisplayed();
-        // WebElement successMessage = getAppiumDriver().findElement(AppiumBy.xpath("//*[contains(@content-desc, 'item added')]"));
+
+    @Then("User should see an Success message on the popup page.")
+    public void userShouldSeeAnSuccessMessageOnThePopupPage() {
         card.verifySuccessNotificationText();
     }
+
     @Then("Logs in as a user with the {string} and {string}")
     public void logs_in_as_a_user_with_the_and(String phone, String Password) {
         ReusableMethods.wait(3);
-        card.LoginWithPhone(phone,Password);
+        card.LoginWithPhone(phone, Password);
     }
 
     @Then("Sees the notification Added to Wishlist")
@@ -263,13 +277,13 @@ public class Stepdefinition extends OptionsMet {
         ReusableMethods.wait(4);
         card.getAddedToWishlistNatification().isDisplayed();
     }
-
+/*
     @Given("The user swipe with coordinates startX {int}, startY {int}, endX {int}, endY {int}, duration {int} for {int} times.")
-    public void theUserSwipeWithCoordinatesStartXStartYEndXEndYDurationForTimes( int startX, int startY, int endX, int endY, int duration,int swipeCount) {
+    public void theUserSwipeWithCoordinatesStartXStartYEndXEndYDurationForTimes(int startX, int startY, int endX, int endY, int duration, int swipeCount) {
 
-        card.swipeMethotWithDuration(startX, startY, endX, endY, duration,swipeCount);
+        card.swipeMethotWithDuration(startX, startY, endX, endY, duration, swipeCount);
     }
-
+*/
     @Then("The user verifies favorite icons before and after scrolling.")
     public void theUserVerifiesFavoriteIconsBeforeAndAfterScrolling() {
         card.verifyWishlistButtonAfterScroll();
@@ -278,27 +292,27 @@ public class Stepdefinition extends OptionsMet {
     @Then("Verifies that the products added to the Wishlist page are displayed correctly.")
     public void verifies_that_the_products_added_to_the_wishlist_page_are_displayed_correctly() {
 
-       card.verifyWishlistProducts("wishlist");
+        card.verifyWishlistProducts("wishlist");
 
     }
 
     @Then("User clicks the button with itemName {string} and {string} and {string} added WishList.")
     public void userClicksTheButtonWithItemNameAndAndAddedWishList(String itemName, String reviews, String price) {
         ReusableMethods.wait(3);
-        card.xPathElementClicknormalizeSpace(itemName,reviews,price);
+        card.xPathElementClicknormalizeSpace(itemName, reviews, price);
     }
 
     @Then("User clicks the button with itemName {string} and {string} and {string} removed WishList")
     public void userClicksTheButtonWithItemNameAndAndRemovedWishList(String itemName, String reviews, String price) {
         ReusableMethods.wait(6);
-       // card.xPathElementClicknormalizeSpace(itemName,reviews,price);
-        xPathElementClick(itemName,reviews,price);
+        // card.xPathElementClicknormalizeSpace(itemName,reviews,price);
+        xPathElementClick(itemName, reviews, price);
     }
+
     @Then("Remove toaster is displayed")
     public void removeToasterIsDisplayed() {
         card.getRemovedToaster().isDisplayed();
     }
-
 
 
     /// /gulnar
@@ -307,13 +321,133 @@ public class Stepdefinition extends OptionsMet {
         Thread.sleep(500);
         card.getProfile().click();
     }
+
     @Given("User clicks the sign in button")
     public void User_clicks_the_sign_in_button() {
         card.getSignİn().click();
     }
-    @Given("The user uses Email instead, enters {string}  and {string}")
-    public void the_user_uses_email_instead_enters_and(String string, String string2) {
-        card.loginMethodu("loginEmail" ,"Passwordg");
+
+    @Given("The user uses PHONE instead, enters {string}  and {string}")
+    public void the_user_uses_phone_instead_enters_and(String string, String string2) {
+        card.phoneTextBoxClickAndSendKeys(string2);
+        // Telefon numarası alanından sonra Tab ile şifre alanına geç
+        actions.sendKeys(Keys.TAB).perform();
+        actions.sendKeys("Query.151224").perform();
+        ReusableMethods.wait(1);
+        // Şifre alanından sonra Tab ile "remember me" checkbox'ına geç
+        actions.sendKeys(Keys.TAB).perform();
+        actions.sendKeys(Keys.SPACE).perform();
+        //  actions.sendKeys(Keys.ENTER).perform();
+
     }
-    
+
+    @Given("The user  click on the profile link")
+    public void the_user_click_on_the_profile_link() {
+        card.getProfile().click();
+    }
+
+    @Given("click on {string} and edit profile")
+    public void click_on_and_edit_profile(String text) {
+        VerifyElementText(text);
+        clickButtonByDescription(text);
+
+    }
+
+    @Given("Edit fullName {string} email address button {string}")
+    public void edit_full_name_fullname_email_address_button(String fullName, String Email) {
+
+        card.hesabimYeniBilgiDogrulama(fullName, Email);
+
+
+    }
+
+
+    @Given("Click on the Save button to register")
+    public void click_on_the_save_button_to_register() {
+        ReusableMethods.wait(100);
+        ReusableMethods.scrollWithUiScrollableAndClick("Save Changes");
+        //card.getSaveChanges().click();
+
+    }
+
+    //US_22
+
+
+
 }
+
+
+
+
+
+
+    @And("User presses the magnifying glass button to make a search")
+    public void userPressesTheMagnifyingGlassButtonToMakeASearch() {
+        wait.until(ExpectedConditions.visibilityOf(card.getAramaButonu()));
+        card.getAramaButonu().click();
+    }
+
+    @And("User types {string} in searchTextBox")
+    public void userTypesInSearchTextBox(String productName) {
+        card.getSearchTextBox().sendKeys(productName);
+        actions.sendKeys(Keys.ENTER).perform();
+    }
+
+    @And("User selects the Flower Print Foil Tshirt product on the Home page")
+    public void userSelectsTheFlowerPrintFoilTshirtProductOnTheHomePage() {
+        basketPage.FirstProductClick();
+    }
+
+    @And("User selects {string} as size")
+    public void userSelectsAsSize(String size) {
+        switch (size) {
+            case "L":
+                wait.until(ExpectedConditions.visibilityOf(basketPage.getLSize()));
+                basketPage.getLSize().click();
+                logger.info("Beden olarak " + size + " seçildi");
+                break;
+            case "S":
+                wait.until(ExpectedConditions.visibilityOf(basketPage.getLSize()));
+                basketPage.getLSize().click();
+                logger.info("Beden olarak " + size + " seçildi");
+                break;
+            case "M":
+                wait.until(ExpectedConditions.visibilityOf(basketPage.getMSize()));
+                basketPage.getMSize().click();
+                logger.info("Beden olarak " + size + " seçildi");
+                break;
+            default:
+                logger.error("Beden BULUNMAMAKTADIR!");
+        }
+    }
+
+    @And("User presses the Add To Cart button")
+    public void userPressesTheAddToCartButton() {
+        try {
+            OptionsMet.swipe(651, 2394, 641, 1098);
+            logger.info("Kullanıcı sepete ürün eklemesi için kaydırma işlemini yapar");
+            wait.until(ExpectedConditions.visibilityOf(basketPage.getAddToCart()));
+            basketPage.getAddToCart().click();
+            logger.info("Kullanıcı Add To Cart butonuna basar");
+        } catch (InvalidMidiDataException e) {
+            logger.error("Add To Cart butonu görünür değil!");
+        }
+        logger.info("Kullanıcı Sepet butonuna basar");
+    }
+
+
+
+
+    //us23
+    @Given("The user swipes the screen twice to view the Most Popular section")
+    public void theUserSwipesTheScreenTwiceToViewTheMostPopularSection() {
+        int startX= 364;
+        int  startY= 1946;
+        int endX= 360;
+        int endY =311;
+        int duration= 500;
+        int swipeCount= 2;
+        card.swipeMethotWithDuration(startX, startY, endX, endY, duration, swipeCount);
+    }
+}
+

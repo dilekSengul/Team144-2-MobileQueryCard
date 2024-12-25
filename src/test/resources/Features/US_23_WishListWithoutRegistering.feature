@@ -5,20 +5,18 @@ Feature: As a user, I want to create a favorite list with the products I like wi
     * User makes driver adjustments
 
 
-  Scenario:
+  Scenario:Test to adding a product to the wishlist without being a registered user
 
-    Given The user swipe with coordinates startX 364, startY 1946, endX 360, endY 311, duration 200 for 2 times.
-    When The user clicks the heart icon on the product named "The North Face Arctic Parka"
+    Given The user swipes the screen twice to view the Most Popular section
+    When The user clicks the heart icon on the product named "Classic Cotton T-Shirt"
     Then Verifies that they are redirected to the sign-in page with the message Sign in to continue shopping.
     Then Then Clicks the "Sign Up" link
-    Then Registers as a new user with "Ceren","5392898965" and "Selam.1234"
-    #Then A Success notification is displayed.
-    # And User should see an "Success" popup message
-    Then Logs in as a user with the "5392898965" and "Selam.1234"
-    Then The user swipe with coordinates startX 364, startY 1946, endX 360, endY 311, duration 200 for 1 times.
-    Then The user clicks the heart icon on the product named "The North Face Arctic Parka"
+    Then Registers as a new user with "Ceren","5392898699" and "Selam.1234"
+    Then User should see an Success message on the popup page.
+    Then Logs in as a user with the "5392898699" and "Selam.1234"
+    Then The user swipes the screen twice to view the Most Popular section
+    Then The user clicks the heart icon on the product named "Classic Cotton T-Shirt"
     Then Sees the notification Added to Wishlist
     And Driver turns off
 
 
-    #ONURThen User should see an "Success" message on "Success" popup page.
