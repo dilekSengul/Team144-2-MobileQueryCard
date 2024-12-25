@@ -22,3 +22,5 @@ Scenario Outline: :As a registered user, I would like to be able to edit my prof
     | fullname1|Email1|
     | fullname2|Email2|
 
+
+

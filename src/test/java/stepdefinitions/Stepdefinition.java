@@ -3,20 +3,25 @@ package stepdefinitions;
 import Page.CategoriesPage;
 import Page.MostPopularProductsPage;
 import Page.QueryCardPage;
+import Page.ShoppingBasketPage;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.ConfigReader;
 import utilities.OptionsMet;
 import utilities.ReusableMethods;
@@ -37,6 +42,9 @@ public class Stepdefinition extends OptionsMet {
     QueryCardPage card = new QueryCardPage();
     CategoriesPage categoriesPage = new CategoriesPage();
     Actions actions = new Actions(getAppiumDriver());
+    WebDriverWait wait = new WebDriverWait(getAppiumDriver(),Duration.ofSeconds(15));
+    ShoppingBasketPage basketPage = new ShoppingBasketPage();
+    private static final Logger logger = LogManager.getLogger(stepdefinitions.Stepdefinition.class);
 
 
     @Given("User makes driver adjustments")
@@ -346,8 +354,7 @@ public class Stepdefinition extends OptionsMet {
 
     @Given("Edit fullName {string} email address button {string}")
     public void edit_full_name_fullname_email_address_button(String fullName, String Email){
-        card.hesabimKutuTemizleme();
-        ReusableMethods.wait(200);
+
         card.hesabimYeniBilgiDogrulama(fullName,Email);
 
 
@@ -362,7 +369,61 @@ public class Stepdefinition extends OptionsMet {
         //card.getSaveChanges().click();
 
     }
-//kubra
+
+    @And("User presses the magnifying glass button to make a search")
+    public void userPressesTheMagnifyingGlassButtonToMakeASearch() {
+        wait.until(ExpectedConditions.visibilityOf(card.getAramaButonu()));
+        card.getAramaButonu().click();
+    }
+
+    @And("User types {string} in searchTextBox")
+    public void userTypesInSearchTextBox(String productName) {
+        card.getSearchTextBox().sendKeys(productName);
+        actions.sendKeys(Keys.ENTER).perform();
+    }
+
+    @And("User selects the Flower Print Foil Tshirt product on the Home page")
+    public void userSelectsTheFlowerPrintFoilTshirtProductOnTheHomePage() {
+
+    }
+
+    @And("User selects {string} as size")
+    public void userSelectsAsSize(String size) {
+        switch (size) {
+            case "L":
+                wait.until(ExpectedConditions.visibilityOf(basketPage.getLSize()));
+                basketPage.getLSize().click();
+                logger.info("Beden olarak " + size + " seçildi");
+                break;
+            case "S":
+                wait.until(ExpectedConditions.visibilityOf(basketPage.getLSize()));
+                basketPage.getLSize().click();
+                logger.info("Beden olarak " + size + " seçildi");
+                break;
+            case "M":
+                wait.until(ExpectedConditions.visibilityOf(basketPage.getMSize()));
+                basketPage.getMSize().click();
+                logger.info("Beden olarak " + size + " seçildi");
+                break;
+            default:
+                logger.error("Beden BULUNMAMAKTADIR!");
+        }
+    }
+
+    @And("User presses the Add To Cart button")
+    public void userPressesTheAddToCartButton() {
+        try {
+            OptionsMet.swipe(651, 2394, 641, 1098);
+            logger.info("Kullanıcı sepete ürün eklemesi için kaydırma işlemini yapar");
+            wait.until(ExpectedConditions.visibilityOf(basketPage.getAddToCart()));
+            basketPage.getAddToCart().click();
+            logger.info("Kullanıcı Add To Cart butonuna basar");
+        } catch (InvalidMidiDataException e) {
+            logger.error("Add To Cart butonu görünür değil!");
+        }
+        logger.info("Kullanıcı Sepet butonuna basar");
+    }
+    //us23
     @Given("The user swipes the screen twice to view the Most Popular section")
     public void theUserSwipesTheScreenTwiceToViewTheMostPopularSection() {
         int startX= 364;
@@ -373,7 +434,5 @@ public class Stepdefinition extends OptionsMet {
         int swipeCount= 2;
         card.swipeMethotWithDuration(startX, startY, endX, endY, duration, swipeCount);
     }
-
-
 }
 
