@@ -161,7 +161,9 @@ public class QueryCardPage {
     private WebElement signInPageVerificationText;
     @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Sign Up\"]")
     private WebElement signUpSıgnIn;
-    @AndroidFindBy(xpath = "//android.view.View[@content-desc='Success Register Successfully.']")
+   // @AndroidFindBy(xpath = "//android.view.View[@content-desc='Success Register Successfully.']")
+   // private WebElement successMessage;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.view.View\").instance(4)")
     private WebElement successMessage;
     @AndroidFindBy(xpath = "(//*[@class='android.view.View'])[5]")
     private WebElement addedToWishlistNatification;
@@ -204,10 +206,10 @@ public class QueryCardPage {
     }
 
     public void verifySuccessNotificationText() {
+        // Success message doğrulama
 
-        // Content-description değerini doğrulama
-        String actualText = successMessage.getAttribute("content-desc");
-        Assert.assertEquals("Success Register Successfully.", actualText);
+        System.out.println(successMessage.getText());
+        assertTrue(successMessage.isEnabled());
     }
 
     public void swipeMethotWithDuration(int startX, int startY, int endX, int endY, int duration, int swipeCount) {

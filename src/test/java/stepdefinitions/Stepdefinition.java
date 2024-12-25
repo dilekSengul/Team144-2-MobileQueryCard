@@ -253,11 +253,8 @@ public class Stepdefinition extends OptionsMet {
 
     }
 
-    @Then("A Success notification is displayed.")
-    public void a_notification_is_displayed() {
-        //  ReusableMethods.wait(1);
-        // card.getSuccessMessage().isDisplayed();
-        // WebElement successMessage = getAppiumDriver().findElement(AppiumBy.xpath("//*[contains(@content-desc, 'item added')]"));
+    @Then("User should see an Success message on the popup page.")
+    public void userShouldSeeAnSuccessMessageOnThePopupPage() {
         card.verifySuccessNotificationText();
     }
 
@@ -272,13 +269,13 @@ public class Stepdefinition extends OptionsMet {
         ReusableMethods.wait(4);
         card.getAddedToWishlistNatification().isDisplayed();
     }
-
+/*
     @Given("The user swipe with coordinates startX {int}, startY {int}, endX {int}, endY {int}, duration {int} for {int} times.")
     public void theUserSwipeWithCoordinatesStartXStartYEndXEndYDurationForTimes(int startX, int startY, int endX, int endY, int duration, int swipeCount) {
 
         card.swipeMethotWithDuration(startX, startY, endX, endY, duration, swipeCount);
     }
-
+*/
     @Then("The user verifies favorite icons before and after scrolling.")
     public void theUserVerifiesFavoriteIconsBeforeAndAfterScrolling() {
         card.verifyWishlistButtonAfterScroll();
@@ -365,5 +362,18 @@ public class Stepdefinition extends OptionsMet {
         //card.getSaveChanges().click();
 
     }
+//kubra
+    @Given("The user swipes the screen twice to view the Most Popular section")
+    public void theUserSwipesTheScreenTwiceToViewTheMostPopularSection() {
+        int startX= 364;
+        int  startY= 1946;
+        int endX= 360;
+        int endY =311;
+        int duration= 500;
+        int swipeCount= 2;
+        card.swipeMethotWithDuration(startX, startY, endX, endY, duration, swipeCount);
     }
+
+
+}
 
