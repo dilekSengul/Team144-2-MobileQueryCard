@@ -387,7 +387,7 @@ public class Stepdefinition extends OptionsMet {
 
     @And("User selects the Flower Print Foil Tshirt product on the Home page")
     public void userSelectsTheFlowerPrintFoilTshirtProductOnTheHomePage() {
-
+        basketPage.FirstProductClick();
     }
 
     @And("User selects {string} as size")
