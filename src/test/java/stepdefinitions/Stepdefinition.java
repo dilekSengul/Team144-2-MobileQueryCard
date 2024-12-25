@@ -328,7 +328,7 @@ public class Stepdefinition extends OptionsMet {
     }
 
     @Given("The user uses PHONE instead, enters {string}  and {string}")
-    public void the_user_uses_phone_instead_enters_and(String string, String string2){
+    public void the_user_uses_phone_instead_enters_and(String string, String string2) {
         card.phoneTextBoxClickAndSendKeys(string2);
         // Telefon numarası alanından sonra Tab ile şifre alanına geç
         actions.sendKeys(Keys.TAB).perform();
@@ -337,9 +337,10 @@ public class Stepdefinition extends OptionsMet {
         // Şifre alanından sonra Tab ile "remember me" checkbox'ına geç
         actions.sendKeys(Keys.TAB).perform();
         actions.sendKeys(Keys.SPACE).perform();
-      //  actions.sendKeys(Keys.ENTER).perform();
+        //  actions.sendKeys(Keys.ENTER).perform();
 
     }
+
     @Given("The user  click on the profile link")
     public void the_user_click_on_the_profile_link() {
         card.getProfile().click();
@@ -353,14 +354,13 @@ public class Stepdefinition extends OptionsMet {
     }
 
     @Given("Edit fullName {string} email address button {string}")
-    public void edit_full_name_fullname_email_address_button(String fullName, String Email){
+    public void edit_full_name_fullname_email_address_button(String fullName, String Email) {
 
-        card.hesabimYeniBilgiDogrulama(fullName,Email);
-
-
+        card.hesabimYeniBilgiDogrulama(fullName, Email);
 
 
     }
+
 
     @Given("Click on the Save button to register")
     public void click_on_the_save_button_to_register() {
@@ -369,6 +369,17 @@ public class Stepdefinition extends OptionsMet {
         //card.getSaveChanges().click();
 
     }
+
+    //US_22
+
+
+
+}
+
+
+
+
+
 
     @And("User presses the magnifying glass button to make a search")
     public void userPressesTheMagnifyingGlassButtonToMakeASearch() {
@@ -423,6 +434,10 @@ public class Stepdefinition extends OptionsMet {
         }
         logger.info("Kullanıcı Sepet butonuna basar");
     }
+
+
+
+
     //us23
     @Given("The user swipes the screen twice to view the Most Popular section")
     public void theUserSwipesTheScreenTwiceToViewTheMostPopularSection() {
