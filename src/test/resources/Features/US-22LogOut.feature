@@ -7,5 +7,5 @@ Feature: Edit Profile As a registered user
       * User clicks the sign in button
       * As a user muss be "phonenumber" phone and "Password" password Login
       * The user  click on the profile link
-      * the user click on the "Logoute"button
+      * the user click on the "Logout" button
       * Driver turns off

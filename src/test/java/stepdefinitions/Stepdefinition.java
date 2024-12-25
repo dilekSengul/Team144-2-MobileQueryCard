@@ -42,7 +42,7 @@ public class Stepdefinition extends OptionsMet {
     QueryCardPage card = new QueryCardPage();
     CategoriesPage categoriesPage = new CategoriesPage();
     Actions actions = new Actions(getAppiumDriver());
-    WebDriverWait wait = new WebDriverWait(getAppiumDriver(),Duration.ofSeconds(15));
+    WebDriverWait wait = new WebDriverWait(getAppiumDriver(), Duration.ofSeconds(15));
     ShoppingBasketPage basketPage = new ShoppingBasketPage();
     private static final Logger logger = LogManager.getLogger(stepdefinitions.Stepdefinition.class);
 
@@ -277,13 +277,14 @@ public class Stepdefinition extends OptionsMet {
         ReusableMethods.wait(4);
         card.getAddedToWishlistNatification().isDisplayed();
     }
-/*
-    @Given("The user swipe with coordinates startX {int}, startY {int}, endX {int}, endY {int}, duration {int} for {int} times.")
-    public void theUserSwipeWithCoordinatesStartXStartYEndXEndYDurationForTimes(int startX, int startY, int endX, int endY, int duration, int swipeCount) {
 
-        card.swipeMethotWithDuration(startX, startY, endX, endY, duration, swipeCount);
-    }
-*/
+    /*
+        @Given("The user swipe with coordinates startX {int}, startY {int}, endX {int}, endY {int}, duration {int} for {int} times.")
+        public void theUserSwipeWithCoordinatesStartXStartYEndXEndYDurationForTimes(int startX, int startY, int endX, int endY, int duration, int swipeCount) {
+
+            card.swipeMethotWithDuration(startX, startY, endX, endY, duration, swipeCount);
+        }
+    */
     @Then("The user verifies favorite icons before and after scrolling.")
     public void theUserVerifiesFavoriteIconsBeforeAndAfterScrolling() {
         card.verifyWishlistButtonAfterScroll();
@@ -373,14 +374,6 @@ public class Stepdefinition extends OptionsMet {
     //US_22
 
 
-
-}
-
-
-
-
-
-
     @And("User presses the magnifying glass button to make a search")
     public void userPressesTheMagnifyingGlassButtonToMakeASearch() {
         wait.until(ExpectedConditions.visibilityOf(card.getAramaButonu()));
@@ -436,18 +429,15 @@ public class Stepdefinition extends OptionsMet {
     }
 
 
-
-
     //us23
     @Given("The user swipes the screen twice to view the Most Popular section")
     public void theUserSwipesTheScreenTwiceToViewTheMostPopularSection() {
-        int startX= 364;
-        int  startY= 1946;
-        int endX= 360;
-        int endY =311;
-        int duration= 500;
-        int swipeCount= 2;
+        int startX = 364;
+        int startY = 1946;
+        int endX = 360;
+        int endY = 311;
+        int duration = 500;
+        int swipeCount = 2;
         card.swipeMethotWithDuration(startX, startY, endX, endY, duration, swipeCount);
     }
 }
-
