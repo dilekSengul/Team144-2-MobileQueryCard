@@ -1,7 +1,6 @@
 package Page;
 
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
 import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
@@ -17,46 +16,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static utilities.Driver.getAppiumDriver;
 
-public class PaymentPage {
-
-
-import lombok.Getter;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.junit.Assert;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import utilities.ReusableMethods;
-
-import java.time.Duration;
-import java.util.HashMap;
-import java.util.Map;
-
-import static assertEquals;
-import static assertTrue;
-import static utilities.Driver.getAppiumDriver;
-
 @Getter
 public class PaymentPage {
 
     private static final Logger logger = LogManager.getLogger(Page.PaymentPage.class);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     WebDriverWait wait = new WebDriverWait(getAppiumDriver(), Duration.ofSeconds(15));
 
