@@ -33,8 +33,7 @@ Feature: Women Categories on Homepage Body
     #Login steps
     * User clicks the button with description "Profile"
     * User clicks the button with description "Sign In"
-    * User clicks the button "phoneTextBox" and sendKeys "6505551212"
-    * User clicks the button "signInLoginButton"
+    * As a user muss be "wrongPhoneNumber" phone and "wrongPassword" password Login
     #Scenario
     Given User finds and opens the "Women" category page in the Categories Bar in the Homepage body
     When User views the first product

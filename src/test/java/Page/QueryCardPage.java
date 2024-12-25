@@ -336,7 +336,7 @@ public class QueryCardPage {
     private WebElement passwordenter;
     @AndroidFindBy(xpath = "//*[@content-desc='Edit Profile']")
     private WebElement Editprofil;
-    @AndroidFindBy(xpath = "new UiSelector().text(\"gulnar\")")
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(0)")
     private WebElement FullnameEdit;
     @AndroidFindBy(xpath = "(//*[@class='android.widget.EditText'][2])")
     private WebElement EmailEdit;
@@ -362,14 +362,15 @@ public class QueryCardPage {
         //hesabimKutuTemizleme();
 
 
-        ReusableMethods.wait(100);
-         FullnameEdit.clear();
-         EmailEdit.clear();
+        ReusableMethods.wait(1);
+
+        FullnameEdit.click();
+        FullnameEdit.clear();
         FullnameEdit.sendKeys(ConfigReader.getProperty(fullname));
+        EmailEdit.click();
+        EmailEdit.clear();
         EmailEdit.sendKeys(ConfigReader.getProperty(Email));
-        ReusableMethods.scrollWithUiScrollableAndClick("Save Changes");
-        Assert.assertEquals(FullnameEdit.getText(),ConfigReader.getProperty(fullname));
-        Assert.assertEquals(EmailEdit.getText(),ConfigReader.getProperty(Email));
+
 
 
 

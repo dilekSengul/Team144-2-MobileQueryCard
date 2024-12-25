@@ -10,7 +10,6 @@ Feature: Home page
     * User clicks the button with description "Profile"
     * User clicks the button with description "Sign In"
     * As a user muss be "phoneNumber" phone and "password" password Login
-    * User clicks the button "signInLoginButton"
     * Driver turns off
 
   Scenario: Verify that the user cannot login with wrong phone number and wrong password
@@ -18,7 +17,6 @@ Feature: Home page
     * User clicks the button with description "Profile"
     * User clicks the button with description "Sign In"
     * As a user muss be "wrongPhoneNumber" phone and "wrongPassword" password Login
-    * User clicks the button "signInLoginButton"
     * Driver turns off
 
   Scenario: Verify that the user cannot login with correct phone number and wrong password
@@ -26,7 +24,6 @@ Feature: Home page
     * User clicks the button with description "Profile"
     * User clicks the button with description "Sign In"
     * As a user muss be "phoneNumber" phone and "wrongPassword" password Login
-    * User clicks the button "signInLoginButton"
     * Driver turns off
 
   Scenario: Verify that the user cannot login with correct password and wrong phone number
@@ -34,7 +31,6 @@ Feature: Home page
     * User clicks the button with description "Profile"
     * User clicks the button with description "Sign In"
     * As a user muss be "wrongPhoneNumber" phone and "wrongPassword" password Login
-    * User clicks the button "signInLoginButton"
     * Driver turns off
 
 

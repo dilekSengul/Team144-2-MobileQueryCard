@@ -15,12 +15,13 @@ Scenario Outline: :As a registered user, I would like to be able to edit my prof
     * click on "Edit Profile" and edit profile
     * Edit fullName "<fullname>" email address button "<Email>"
     * Click on the Save button to register
+    * Verifies username "<fullname>" in dashboard
     * Driver turns off
 
   Examples:
-    |fullname| Email|
-    | fullname1|Email1|
-    | fullname2|Email2|
+    | fullname  | Email  |
+    | fullname1 | Email1 |
+    | fullname2 | Email2 |
 
 
 

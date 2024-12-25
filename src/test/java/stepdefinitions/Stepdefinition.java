@@ -349,6 +349,7 @@ public class Stepdefinition extends OptionsMet {
 
     @Given("click on {string} and edit profile")
     public void click_on_and_edit_profile(String text) {
+        ReusableMethods.wait(1);
         VerifyElementText(text);
         clickButtonByDescription(text);
 
@@ -365,9 +366,9 @@ public class Stepdefinition extends OptionsMet {
 
     @Given("Click on the Save button to register")
     public void click_on_the_save_button_to_register() {
-        ReusableMethods.wait(100);
-        ReusableMethods.scrollWithUiScrollableAndClick("Save Changes");
-        //card.getSaveChanges().click();
+        ReusableMethods.wait(1);
+        //ReusableMethods.scrollWithUiScrollableAndClick("Save Changes");
+        card.getSaveChanges().click();
 
     }
 
