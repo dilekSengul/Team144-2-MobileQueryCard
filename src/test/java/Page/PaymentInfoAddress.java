@@ -13,6 +13,22 @@ public class PaymentInfoAddress {
         PageFactory.initElements(new AppiumFieldDecorator(getAppiumDriver()), this);
     }
 
+    //The registered user infos
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Profile\")")
+    public WebElement ProfileMenu;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Sign In\")")
+    public WebElement SignIn;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"*Use Email Instead\")")
+    public WebElement EmailPage;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(0)")
+    public WebElement EmailAddressEnter;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
+    public WebElement PasswordEnter;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(1)")
+    public WebElement RememberME;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Sign In\").instance(1)")
+    public WebElement SignInfinish;
+
 
     // Shopping cart
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Proceed to Checkout\")")
@@ -29,6 +45,12 @@ public class PaymentInfoAddress {
     public WebElement EditShippingAddress;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(1)")
     public WebElement AddressEditIn;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Ashgabat\")")
+    public WebElement StateAshgabat;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Update Address\").instance(1)")
+    public WebElement UpdateAddress;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(0)")
+    public WebElement AddressBAckToShipping;
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Add\")")
     public WebElement AddShippingAddress;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(3)")
