@@ -81,7 +81,7 @@ public class PaymentPage {
 
     public void StripeCardIntroduction(String cartNumber, String MM_YY, String CVC, String ZipCode){
 
-        wait.until(ExpectedConditions.visibilityOf(confirmButonu));
+        ReusableMethods.wait(5);
 
         try {
             cardNumber.sendKeys(cartNumber);
