@@ -1,5 +1,6 @@
 Feature: E2E
 
+  @e2e
   Scenario: E2E
 
     # Özge hoca team 2 ekibinin çok çalıştığını ve aylardır büyük emek harcadığını görür
@@ -44,7 +45,7 @@ Feature: E2E
     # Kullanıcı Cash On Delivery ödeme yöntemini seçerek ödemeyi kapıda yapacağını belirtir
     And User clicks the button with description "Confirm Order"
     # Kullanıcı Confirm Order butonuna basarak ödemeyi sonlandırır
-    And User waits 10 seconds
+    And User waits 15 seconds
     # Kullanıcı ödemenin gerçekleşmesi için bekler (Onay işlemi için gereken miktar 10 saniye yeterli)
     When User clicks the button with description "Go to order details"
     # Kullanıcı daha önceki siparişlerini görmek için Go to order details butonuna basar

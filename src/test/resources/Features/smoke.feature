@@ -1,6 +1,6 @@
 Feature: Smoke Test, temel işlevlerin doğru çalışıp çalışmadığını hızlıca kontrol etmek için yapılan bir testtir.
 
-  @Allure
+  @smoke
   Scenario: Kritik sorunları erken tespit etmek için kullanılır.
 
     Given User makes driver adjustments

@@ -6,6 +6,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.qameta.allure.Allure;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import utilities.ReusableMethods;
@@ -25,7 +26,7 @@ public class stepDefinitionsHurrem {
     @And("current products should be listed under {string} by swiping {int} times")
     public void currentProductsShouldBeListedUnderBySwipingTimes(String productListName, int swipeCount) {
         mostPopularProductsPage.verifyProductsUnderMostPopularWithSwipe(productListName,mostPopularProductsPage.productList,swipeCount);
-
+        Allure.step("current products should be listed under "+productListName+" by swiping "+swipeCount+" times");
     }
     @Then("the user should return to the homepage")
     public void the_user_should_return_to_the_homepage() throws InterruptedException {

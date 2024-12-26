@@ -114,6 +114,7 @@ public class Stepdefinition extends OptionsMet {
     }
 
 
+    @Step("Driver turns off")
     @Given("Driver turns off")
     public void driver_turns_off() {
         quitAppiumDriver();
@@ -153,6 +154,7 @@ public class Stepdefinition extends OptionsMet {
     public void user_swipe_to_screen_coordinates(Integer x, Integer y, Integer endX, Integer endY) throws InvalidMidiDataException {
         OptionsMet.swipe(x, y, endX, endY);
         ReusableMethods.wait(2);
+        Allure.step("User swipe to screen coordinates "+x+" "+y+" "+endX+" "+endY+".");
     }
 
 
@@ -462,6 +464,7 @@ public class Stepdefinition extends OptionsMet {
         card.swipeMethotWithDuration(startX, startY, endX, endY, duration, swipeCount);
     }
 
+    @Step("User presses the plus button")
     @And("User presses the plus button")
     public void userPressesThePlusButton() {
         for (int i = 0; i < 1; i++) {
@@ -470,6 +473,7 @@ public class Stepdefinition extends OptionsMet {
         }
     }
 
+    @Step("User clicks on the watch product")
     @And("User clicks on the watch product")
     public void userClicksOnTheWatchProduct() {
         card.getWatchButton().click();
