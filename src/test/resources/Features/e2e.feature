@@ -7,7 +7,6 @@ Feature: E2E
       # ve bu sprint sonunda kendilerine birer hediye almak ister querycard sitesine girer kullanıcı girişi yapar
         # ve 11 öğrenciye 11 adet saat seçer sepete ekler. (Herkese aynı saati seçer ki kimsenin gönlü kalmasın) kart bilgilerini girer
           # alışverişi tamamlar. Biraz düşününce bunun kendisine biraz pahalıya patladığını düşünür ve tüm siparişi iptal eder.
-            # Anasayfada popular brandstan us Polo markayı seçip oradan 11 adet beyaz çorap sepete ekler alışveriş bilgilerini girer ve alışverişi tamamlar.
 
     Given User makes driver adjustments
     # Kullanıcı emulatör için gerekli ayarlamaları yapıp kullanıma hazır hale getirir.

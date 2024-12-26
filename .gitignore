@@ -13,7 +13,7 @@ target/test-classes/hooks/
 *.swp
 *.swo
 .~lock.
-screen.png
+target/Screenshots/Order Canceled Successfully!.png
 
 ### IntelliJ IDEA ###
 .idea/

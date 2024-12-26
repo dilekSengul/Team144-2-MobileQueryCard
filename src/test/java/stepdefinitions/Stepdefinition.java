@@ -614,8 +614,8 @@ public class Stepdefinition extends OptionsMet {
     @Step("User presses the plus button")
     @And("User presses the plus button")
     public void userPressesThePlusButton() {
-        for (int i = 0; i < 1; i++) {
-            ReusableMethods.wait(2);
+        for (int i = 0; i < 10; i++) {
+            ReusableMethods.wait(1);
             card.getPlusButton().click();
         }
     }
