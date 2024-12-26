@@ -8,6 +8,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.qameta.allure.Step;
 import utilities.Driver;
 import utilities.OptionsMet;
 import utilities.ReusableMethods;
@@ -307,12 +308,14 @@ public class stepDefOnur {
     }
 
 
+    @Step("User clicks on the first order in the list")
     @And("User clicks on the first order in the list")
     public void userClicksOnTheFirstOrderInTheList() {
         ReusableMethods.wait(2);
         elementLocatorsOnur.getFirstOrderDetailsButton().click();
     }
 
+    @Step("User scroll down the screen")
     @And("User scroll down the screen")
     public void userScrollDownTheScreen() throws InvalidMidiDataException {
         ReusableMethods.wait(1);
