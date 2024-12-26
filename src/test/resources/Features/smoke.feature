@@ -21,7 +21,7 @@ Feature: Smoke Test, temel işlevlerin doğru çalışıp çalışmadığını h
     # Kullanıcı searchTextBox'a ürün adını girerek hem textbox'ın çalıştığını kontrol eder hemde aradığı ürünün bulunmasında yardımcı olur.
     And User waits 3 seconds
     # Kullanıcı aradığı ürünün gelmesi için 3 saniye bekler (internet problemi)
-    And User clicks the button with itemName "Flower Print Foil T-shirt" and "0 (0  Reviews)" and "$65.00" added WishList
+    And User clicks the fav button of the product for adding it to the wishlist
     # Kullanıcı arama sonucunda çıkan ürünü wiss list (favori) ekler bu şekilde sitede normal bir kullanıcı bile sevdiği ürünü kaydede bilir.
     And User clicks the backArrow button
     # Kullanıcı ürünü favorilere ekledikten sonra geri tuşuna basarak arama sayfasına yeniden yönlendirilir

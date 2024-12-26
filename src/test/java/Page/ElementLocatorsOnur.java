@@ -39,6 +39,11 @@ public class ElementLocatorsOnur {
     //0 product found text on wishlist page
     @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"(0  Products Found)\"]")
     private WebElement zeroProductFoundWishlist;
+    //fav button search
+    @AndroidFindBy (xpath = "//android.view.View[@content-desc=\"Flower Print Foil T-shirt\n" +
+            "0 (0  Reviews)\n" +
+            "$65.00\"]/android.widget.ImageView")
+    private WebElement favButtonSearchSmoke;
 
     //Categories page
     //Categories toaster button

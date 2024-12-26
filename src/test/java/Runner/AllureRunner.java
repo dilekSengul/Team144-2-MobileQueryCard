@@ -15,7 +15,7 @@ import org.junit.runner.RunWith;
                 "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm" // Allure raporları için plugin
         },
         monochrome = true,                       // Konsol çıktısını okunabilir hale getirir
-        tags = "@e2e",                        // Sadece belirtilen etiketle çalışır
+        tags = "@smoke",                        // Sadece belirtilen etiketle çalışır
         dryRun = false                           // Adım tanımlamalarının eksik olup olmadığını kontrol eder
 )
 public class AllureRunner {
