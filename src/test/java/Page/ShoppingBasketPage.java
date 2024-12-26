@@ -62,7 +62,10 @@ public class ShoppingBasketPage {
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Remove\")")
     private WebElement RemoveButton;
 
-    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Flower Print Foil T-shirt L $65.00 1\")")
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Flower Print Foil T-shirt\n" +
+            "L\n" +
+            "$65.00\n" +
+            "1\")")
     private WebElement ProductPrice;
 
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"$65.00\")")
