@@ -379,7 +379,7 @@ public class Stepdefinition extends OptionsMet {
 
     @Then("User clicks the button with itemName {string}")
     public void user_clicks_the_button_with_item_name(String itemName) {
-        //  clickButtonByDescription(itemName);
+
         ReusableMethods.wait(3);
         touchDown(874, 667);
 
@@ -402,7 +402,7 @@ public class Stepdefinition extends OptionsMet {
     @When("The user clicks the heart icon on the product named {string}")
     public void the_user_clicks_the_heart_icon_on_the_product_named(String favoriyeEklenenUrun) throws InvalidMidiDataException {
         ReusableMethods.wait(5);
-        //  card.getMensAnalogWatch100MeterWater().click();
+
         card.getTheNorthfaceArcticParka().click();
 
 
@@ -445,13 +445,6 @@ public class Stepdefinition extends OptionsMet {
         card.getAddedToWishlistNatification().isDisplayed();
     }
 
-    /*
-        @Given("The user swipe with coordinates startX {int}, startY {int}, endX {int}, endY {int}, duration {int} for {int} times.")
-        public void theUserSwipeWithCoordinatesStartXStartYEndXEndYDurationForTimes(int startX, int startY, int endX, int endY, int duration, int swipeCount) {
-
-            card.swipeMethotWithDuration(startX, startY, endX, endY, duration, swipeCount);
-        }
-    */
     @Then("The user verifies favorite icons before and after scrolling.")
     public void theUserVerifiesFavoriteIconsBeforeAndAfterScrolling() {
         card.verifyWishlistButtonAfterScroll();
@@ -473,7 +466,7 @@ public class Stepdefinition extends OptionsMet {
     @Then("User clicks the button with itemName {string} and {string} and {string} removed WishList")
     public void userClicksTheButtonWithItemNameAndAndRemovedWishList(String itemName, String reviews, String price) {
         ReusableMethods.wait(6);
-        // card.xPathElementClicknormalizeSpace(itemName,reviews,price);
+
         xPathElementClick(itemName, reviews, price);
     }
 
