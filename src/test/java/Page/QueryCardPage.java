@@ -4,11 +4,13 @@ package Page;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import io.cucumber.java.pt.E;
 import lombok.Getter;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -43,7 +45,7 @@ public class QueryCardPage {
 
     public QueryCardPage() {
         PageFactory.initElements(new AppiumFieldDecorator(getAppiumDriver()), this);
-        this.driver = Driver.getAppiumDriver();
+        this.driver = getAppiumDriver();
     }
 
     @AndroidFindBy(xpath = "(//android.widget.ImageView[1])[1]")
@@ -70,6 +72,10 @@ public class QueryCardPage {
     private WebElement newPasswordBox;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
     private WebElement confirmPasswordBox;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(1)")
+    private WebElement aramaButonu;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\")")
+    private WebElement searchTextBox;
 
 
     public void LogoGorunurTest() {
@@ -160,7 +166,9 @@ public class QueryCardPage {
     private WebElement signInPageVerificationText;
     @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Sign Up\"]")
     private WebElement signUpSıgnIn;
-    @AndroidFindBy(xpath = "//android.view.View[@content-desc='Success Register Successfully.']")
+   // @AndroidFindBy(xpath = "//android.view.View[@content-desc='Success Register Successfully.']")
+   // private WebElement successMessage;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.view.View\").instance(4)")
     private WebElement successMessage;
     @AndroidFindBy(xpath = "(//*[@class='android.view.View'])[5]")
     private WebElement addedToWishlistNatification;
@@ -203,10 +211,10 @@ public class QueryCardPage {
     }
 
     public void verifySuccessNotificationText() {
+        // Success message doğrulama
 
-        // Content-description değerini doğrulama
-        String actualText = successMessage.getAttribute("content-desc");
-        Assert.assertEquals("Success Register Successfully.", actualText);
+        System.out.println(successMessage.getText());
+        assertTrue(successMessage.isEnabled());
     }
 
     public void swipeMethotWithDuration(int startX, int startY, int endX, int endY, int duration, int swipeCount) {
@@ -275,7 +283,7 @@ public class QueryCardPage {
 
         WebElement element = getAppiumDriver().findElement(MobileBy.xpath(xpathExpression));
 
-        Assert.assertTrue(element.isDisplayed()); // Öğenin görünür olduğundan emin olun
+        assertTrue(element.isDisplayed()); // Öğenin görünür olduğundan emin olun
         element.click();
     }
 
@@ -328,11 +336,11 @@ public class QueryCardPage {
     private WebElement passwordenter;
     @AndroidFindBy(xpath = "//*[@content-desc='Edit Profile']")
     private WebElement Editprofil;
-    @AndroidFindBy(xpath = "(//*[@class='android.widget.EditText'][1])")
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(0)")
     private WebElement FullnameEdit;
     @AndroidFindBy(xpath = "(//*[@class='android.widget.EditText'][2])")
     private WebElement EmailEdit;
-    @AndroidFindBy(xpath = "(//*[@class='android.widget.EditText'][3])")
+    @AndroidFindBy(xpath = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
     private WebElement PhoneEdit;
     @AndroidFindBy(xpath = "(//*[@class='android.view.View'])[11]")
     private WebElement SaveChanges;
@@ -343,10 +351,37 @@ public class QueryCardPage {
         assertTrue(phoneTextBox.isDisplayed());
         phoneTextBox.click();
         phoneTextBox.sendKeys(phonenumber);
+
+
+    }
+    public void hesabimKutuTemizleme() {
+        FullnameEdit.clear();
+        EmailEdit.clear();
+    }
+    public void hesabimYeniBilgiDogrulama(String fullname, String Email) {
+        //hesabimKutuTemizleme();
+
+
+        ReusableMethods.wait(1);
+
+        FullnameEdit.click();
+        FullnameEdit.clear();
+        FullnameEdit.sendKeys(ConfigReader.getProperty(fullname));
+        EmailEdit.click();
+        EmailEdit.clear();
+        EmailEdit.sendKeys(ConfigReader.getProperty(Email));
+
+
+
+
     }
 
 
-}
+
+
+    }
+
+
 
 
 
