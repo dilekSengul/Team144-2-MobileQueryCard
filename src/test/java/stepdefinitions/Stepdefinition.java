@@ -13,6 +13,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
@@ -50,17 +52,20 @@ public class Stepdefinition extends OptionsMet {
     @Given("User makes driver adjustments")
     public void user_makes_driver_adjustments() {
         getAppiumDriver();
+        logger.info("Kullanıcı gerekli emülatör ayarlarını yapar");
     }
 
     @Given("User confirms to be on the homepage")
     public void user_confirms_to_be_on_the_homepage() {
         card.LogoGorunurTest();
+        logger.info("Kullanıcı home page olduğunu doğrulamak için QueryCart logosunun görünürlüğünü doğrular");
     }
 
     @Given("User clicks the button with description {string}")
     public void user_clicks_the_button_with_description(String description) {
         ReusableMethods.wait(2);
         clickButtonByDescription(description);
+        Allure.step("User clicks the button with description "+ description);
     }
 
     @Given("User clicks the button {string} and sendKeys {string}")
@@ -96,12 +101,16 @@ public class Stepdefinition extends OptionsMet {
     @Given("As a user muss be {string} phone and {string} password Login")
     public void as_a_user_muss_be_phone_and_password_login(String phoneNumber, String password) {
         card.Login(phoneNumber, password);
+        logger.info("Kullanıcı phoneNumber olarak " + phoneNumber + " password olarakta " + password + " kullanarak giriş yapar.");
+        Allure.step("Kullanıcı phoneNumber olarak " + phoneNumber + " password olarakta " + password + " kullanarak giriş yapar.");
     }
 
     @Given("User clicks the button with itemName {string} and {string} and {string} added WishList")
     public void user_clicks_the_button_with_item_name_and_and_added_wish_list(String itemName, String reviews, String price) {
         ReusableMethods.wait(3);
         xPathElementClick(itemName, reviews, price);
+        Allure.step("User clicks the button with itemName  "+itemName+" and "+reviews+" and "+price+" added WishList");
+        logger.info("User clicks the button with itemName  "+itemName+" and "+reviews+" and "+price+" added WishList");
     }
 
 
@@ -200,11 +209,13 @@ public class Stepdefinition extends OptionsMet {
 
     }
 
+    @Step("User clicks the backArrow button")
     @Then("User clicks the backArrow button")
     public void userclicksthebackArrowbutton() {
         categoriesPage.getBackArrow().click();
         ReusableMethods.wait(1);
         categoriesPage.getBackArrow().click();
+        logger.info("Kullanıcı geri tuşuna basar");
     }
 
     //****us11-23-26***
@@ -373,18 +384,23 @@ public class Stepdefinition extends OptionsMet {
 
     }
 
+    @Step("User presses the magnifying glass button to make a search")
     @And("User presses the magnifying glass button to make a search")
     public void userPressesTheMagnifyingGlassButtonToMakeASearch() {
         wait.until(ExpectedConditions.visibilityOf(card.getAramaButonu()));
         card.getAramaButonu().click();
+        logger.info("Kullanıcı search butonuna tıklar.");
     }
 
     @And("User types {string} in searchTextBox")
     public void userTypesInSearchTextBox(String productName) {
         card.getSearchTextBox().sendKeys(productName);
         actions.sendKeys(Keys.ENTER).perform();
+        logger.info("Kullanıcı arama kutusa belirlenmiş ürün adını yazar");
+        Allure.step("User types "+ productName +" in searchTextBox");
     }
 
+    @Step("User selects the Flower Print Foil Tshirt product on the Home page")
     @And("User selects the Flower Print Foil Tshirt product on the Home page")
     public void userSelectsTheFlowerPrintFoilTshirtProductOnTheHomePage() {
         basketPage.FirstProductClick();
@@ -411,8 +427,10 @@ public class Stepdefinition extends OptionsMet {
             default:
                 logger.error("Beden BULUNMAMAKTADIR!");
         }
+        Allure.step("User selects "+ size +" as size");
     }
 
+    @Step("User presses the Add To Cart button")
     @And("User presses the Add To Cart button")
     public void userPressesTheAddToCartButton() {
         try {
@@ -426,5 +444,11 @@ public class Stepdefinition extends OptionsMet {
         }
         logger.info("Kullanıcı Sepet butonuna basar");
     }
-}
 
+    @Step("The user verifies that there are items in the shopping basket")
+    @And("The user verifies that there are items in the shopping basket")
+    public void theUserVerifiesThatThereAreItemsInTheShoppingBasket() {
+        wait.until(ExpectedConditions.visibilityOf(basketPage.getProductPrice()));
+        assertTrue(basketPage.getProductPrice().isDisplayed());
+    }
+}
