@@ -59,7 +59,6 @@ build/
 ### Test Report and Temp Files ###
 /reports/
 /allure-results/
-/allure-report/
 *.tmp
 *.bak
 *.old

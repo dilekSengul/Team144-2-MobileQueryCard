@@ -1,0 +1,2 @@
+"DESCRİPTİON","DURATİON İN MS","NAME","PARENT SUİTE","START TİME","STATUS","STOP TİME","SUB SUİTE","SUİTE","TEST CLASS","TEST METHOD"
+"","15600","TC06: QueryCart customer should see the basket icon and verify that the ‘Shopping Cart’ menu opens when clicked","","Tue Dec 24 12:22:24 TRT 2024","passed","Tue Dec 24 12:22:40 TRT 2024","","As a registered user, I want to have a cart on the site and I want to be able to manage these cart operations","TC06: QueryCart customer should see the basket icon and verify that the ‘Shopping Cart’ menu opens when clicked",""
