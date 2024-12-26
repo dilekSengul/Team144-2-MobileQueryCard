@@ -131,12 +131,8 @@ public class CategoriesPage {
     }
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(0)")
     private WebElement backArrow;
-
-
     @AndroidFindBy(xpath = "//android.view.View[4]/android.view.View/android.view.View[1]")
     private WebElement firstProductMen;
-
-
 }
 
 
