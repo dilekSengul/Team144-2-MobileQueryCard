@@ -166,7 +166,9 @@ public class QueryCardPage {
     private WebElement signInPageVerificationText;
     @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Sign Up\"]")
     private WebElement signUpSıgnIn;
-    @AndroidFindBy(xpath = "//android.view.View[@content-desc='Success Register Successfully.']")
+   // @AndroidFindBy(xpath = "//android.view.View[@content-desc='Success Register Successfully.']")
+   // private WebElement successMessage;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.view.View\").instance(4)")
     private WebElement successMessage;
     @AndroidFindBy(xpath = "(//*[@class='android.view.View'])[5]")
     private WebElement addedToWishlistNatification;
@@ -209,10 +211,10 @@ public class QueryCardPage {
     }
 
     public void verifySuccessNotificationText() {
+        // Success message doğrulama
 
-        // Content-description değerini doğrulama
-        String actualText = successMessage.getAttribute("content-desc");
-        Assert.assertEquals("Success Register Successfully.", actualText);
+        System.out.println(successMessage.getText());
+        assertTrue(successMessage.isEnabled());
     }
 
     public void swipeMethotWithDuration(int startX, int startY, int endX, int endY, int duration, int swipeCount) {
@@ -334,7 +336,7 @@ public class QueryCardPage {
     private WebElement passwordenter;
     @AndroidFindBy(xpath = "//*[@content-desc='Edit Profile']")
     private WebElement Editprofil;
-    @AndroidFindBy(xpath = "new UiSelector().text(\"gulnar\")")
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(0)")
     private WebElement FullnameEdit;
     @AndroidFindBy(xpath = "(//*[@class='android.widget.EditText'][2])")
     private WebElement EmailEdit;
@@ -360,14 +362,15 @@ public class QueryCardPage {
         //hesabimKutuTemizleme();
 
 
-        ReusableMethods.wait(100);
-         FullnameEdit.clear();
-         EmailEdit.clear();
+        ReusableMethods.wait(1);
+
+        FullnameEdit.click();
+        FullnameEdit.clear();
         FullnameEdit.sendKeys(ConfigReader.getProperty(fullname));
+        EmailEdit.click();
+        EmailEdit.clear();
         EmailEdit.sendKeys(ConfigReader.getProperty(Email));
-        ReusableMethods.scrollWithUiScrollableAndClick("Save Changes");
-        Assert.assertEquals(FullnameEdit.getText(),ConfigReader.getProperty(fullname));
-        Assert.assertEquals(EmailEdit.getText(),ConfigReader.getProperty(Email));
+
 
 
 

@@ -44,8 +44,8 @@ public class stepDefOnur {
 
     }
 
-    @Then("I should see an error message indicating that mandatory fields cannot be left blank")
-    public void iShouldSeeAnErrorMessageIndicatingThatMandatoryFieldsCannotBeLeftBlank() {
+    @Then("User should see an error message indicating that mandatory fields cannot be left blank")
+    public void userShouldSeeAnErrorMessageIndicatingThatMandatoryFieldsCannotBeLeftBlank() {
 
         assertTrue(elementLocatorsOnur.getNameErrorSignUpPage().isDisplayed());
         assertTrue(elementLocatorsOnur.getPhoneErrorSignUpPage().isDisplayed());
@@ -176,8 +176,8 @@ public class stepDefOnur {
 
     @Then("User should see an {string} message on the popup page.")
     public void userShouldSeeAnMessageOnPopupPage(String expectedMessage) throws Exception {
-        ReusableMethods.wait(1);
-        //ReusableMethods.getScreenshot(expectedMessage); //test edilecek örnek ekran görüntüsünü almak için ilk seferde kullanılır
+       // ReusableMethods.wait(2);
+       // ReusableMethods.getScreenshot(expectedMessage); //test edilecek örnek ekran görüntüsünü almak için ilk seferde kullanılır
         OptionsMet.assertElementTextAndVisibility(expectedMessage);
 
 
@@ -325,6 +325,15 @@ public class stepDefOnur {
         ReusableMethods.wait(2);
         Driver.getAppiumDriver().navigate().back();
         ReusableMethods.wait(2);
+    }
+
+    @Given("the user click on the {string} button")
+    public void theUserClickOnTheButton(String arg0) {
+    }
+
+    @And("User enters {string} and {string} and clicks on the “Sign In” button.")
+    public void userEntersAndAndClicksOnTheSignInButton(String phoneNumber, String password) {
+        card.Login(phoneNumber, password);
     }
 }
 
