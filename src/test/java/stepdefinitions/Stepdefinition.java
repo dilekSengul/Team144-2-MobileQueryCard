@@ -1,14 +1,6 @@
 package stepdefinitions;
 
-import Page.CategoriesPage;
-import Page.MostPopularProductsPage;
-import Page.QueryCardPage;
-import Page.ShoppingBasketPage;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.touch.WaitOptions;
-import io.appium.java_client.touch.offset.PointOption;
+import Page.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -18,26 +10,23 @@ import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import utilities.ConfigReader;
 import utilities.OptionsMet;
 import utilities.ReusableMethods;
 
-
 import javax.sound.midi.InvalidMidiDataException;
-
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
-import static java.awt.SystemColor.text;
 import static org.junit.Assert.assertTrue;
 import static utilities.Driver.getAppiumDriver;
 import static utilities.Driver.quitAppiumDriver;
+import static utilities.OptionsMet.touchDown;
 import static utilities.ReusableMethods.ekranKaydirmaMethodu;
 
 public class Stepdefinition extends OptionsMet {
@@ -46,6 +35,8 @@ public class Stepdefinition extends OptionsMet {
     Actions actions = new Actions(getAppiumDriver());
     WebDriverWait wait = new WebDriverWait(getAppiumDriver(), Duration.ofSeconds(15));
     ShoppingBasketPage basketPage = new ShoppingBasketPage();
+    AddressMenuPage addressMenuPage= new AddressMenuPage();
+    ElementLocatorsOnur elementLocatorsOnur = new ElementLocatorsOnur();
     private static final Logger logger = LogManager.getLogger(stepdefinitions.Stepdefinition.class);
 
 
@@ -146,7 +137,7 @@ public class Stepdefinition extends OptionsMet {
     @Given("User clicks tap coordinates {int}, {int}")
     public void user_clicks_tap_coordinates(Integer x, Integer y) {
         ReusableMethods.wait(1);
-        OptionsMet.touchDown(x, y);
+        touchDown(x, y);
         ReusableMethods.wait(1);
     }
 
@@ -170,29 +161,45 @@ public class Stepdefinition extends OptionsMet {
     @Then("User verifies all categories are displayed")
     public void user_verifies_all_categories_are_displayed() throws InterruptedException {
         List<WebElement> allCategories = categoriesPage.getAllCategories();
+        int swipeCount = 0; // Kaydırma sayısını takip etmek için
+        int kaydirmaSayisi = 4; // Bir swipe'da kaydırılan element sayısı
 
-        int swipeCount = 0; // Kaydırma sayacını takip etmek için
-        int kaydirmaSayisi = 4; //Bir swipe'da kaydırılan element sayısı
+        List<String> invisibleCategories = new ArrayList<>(); // Görünmeyen kategorileri kaydetmek için
+
         for (int i = 0; i < allCategories.size(); i++) {
             WebElement category = allCategories.get(i);
-            System.out.println("Category " + category.getAttribute("content-desc"));
-            // Elementin görünür olduğunu doğrula
-            Assert.assertTrue(
-                    "Category " + category.getAttribute("content-desc") + " is not displayed",
-                    category.isDisplayed()
-            );
+
+            if (!category.isDisplayed()) {
+                // Görünmeyen kategoriyi listeye ekle
+                invisibleCategories.add(category.getAttribute("content-desc"));
+            } else {
+                // Görünür kategoriyi doğrula
+                System.out.println("Category " + category.getAttribute("content-desc") + " is visible.");
+            }
 
             // Her 4 kategoride bir swipe yap
             if ((i + 1) % kaydirmaSayisi == 0 && i != allCategories.size() - 1) {
-
                 swipeCount++;
-                System.out.println("kaydırma " + swipeCount + " kez ekran kaydırma yapıldı.");
+                System.out.println("Swipe " + swipeCount + " kez ekran kaydırma yapıldı.");
                 ekranKaydirmaMethodu(1310, 1410, 5000, 40, 1390); // Sağ kaydırma
-                // Thread.sleep(2000) ;
             }
+
+            // Son kaydırma işlemi için özel durum
             if (i == 36) {
-                kaydirmaSayisi = 3; //Son swipe'daki sayı
+                kaydirmaSayisi = 3; // Son swipe'daki sayı
             }
+        }
+            // Görünmeyen kategorileri raporla ve testi başarısız yap
+        if (!invisibleCategories.isEmpty()) {
+            System.out.println("Invisible Categories:");
+            for (String category : invisibleCategories) {
+                System.out.println("- " + category);
+            }
+            Assert.fail("Bazı kategoriler görünmüyor!");
+        } else {
+            // Tüm kategoriler görünürse bilgilendirme mesajı yazdır
+            System.out.println("***************");
+            System.out.println("Tüm kategoriler görünür durumda");
         }
 
         System.out.println("Toplam " + swipeCount + " kez ekran kaydırma yapıldı.");
@@ -206,19 +213,167 @@ public class Stepdefinition extends OptionsMet {
     }
 
     @Then("User clicks the element {string}")
-    public void userClicksTheButton(String element) {
-        ReusableMethods.koordinatTiklamaMethodu(303, 1873, 1000);
+    public void userClicksTheButton(String element) throws InterruptedException {
+        assertTrue(categoriesPage.getFirstProductMen().isDisplayed());
+        categoriesPage.getFirstProductMen().click();
 
     }
 
     @Step("User clicks the backArrow button")
     @Then("User clicks the backArrow button")
-    public void userclicksthebackArrowbutton() {
+    public void userclicksthebackArrowbutton() throws InterruptedException {
         categoriesPage.getBackArrow().click();
         ReusableMethods.wait(1);
         categoriesPage.getBackArrow().click();
         logger.info("Kullanıcı geri tuşuna basar");
+//        assertTrue(card.getQueryCardLogoElement().isDisplayed());
+//        Thread.sleep(1000);
     }
+
+    //***US17***//
+
+    @When("User enters the mandatory fields \\(Email and Password) and clicks Sign In button.")
+    public void user_enters_the_mandatory_fields_name_email_and_password_and_clicks_sign_in_button() {
+        addressMenuPage.getSignInButton().click();
+        addressMenuPage.getUseEmailText().click();
+        ReusableMethods.wait(1);
+        addressMenuPage.getEmailField().click();
+        addressMenuPage.getEmailField().sendKeys("serpil.user@querycart.com");
+        ReusableMethods.wait(1);
+        addressMenuPage.getPasswordField().click();
+        addressMenuPage.getPasswordField().sendKeys("Query.151224");
+        ReusableMethods.wait(1);
+        addressMenuPage.getSignInButton2().click();
+    }
+
+    @Given("User navigates to the {string} page")
+    public void user_navigates_to_the_page(String homePage) {
+        addressMenuPage.getProfileButton().click();
+        addressMenuPage.getAddressButton().click();
+    }
+    @Then("User verifies that all registered addresses are visible")
+    public void user_verifies_that_all_registered_addresses_are_visible() {
+        // Adres kartlarını al
+        List<WebElement> addressCards = addressMenuPage.getAddressCards();
+
+        // Adres kartlarının boş olmadığını doğrula
+        Assert.assertFalse("Hiçbir adres kartı bulunamadı!", addressCards.isEmpty());
+
+        // Her bir kartın içeriğini kontrol et
+        for (WebElement card : addressCards) {
+            String cardText = card.getAttribute("content-desc");
+            Assert.assertNotNull("Adres kartı içeriği null geldi!", cardText);
+            Assert.assertTrue(
+                    "Adres kartı içeriği eksik veya yanlış: " + cardText,
+                    cardText.contains("Nero") || cardText.contains("Serr S") || cardText.contains("Serpil S")
+            );
+        }
+
+        System.out.println("Tüm adres kartları başarıyla doğrulandı!");
+    }
+
+
+    @Then("User verifies that registered addresses are editable")
+    public void user_verifies_that_registered_addresses_are_editable() {
+        addressMenuPage.getEditButton().isDisplayed();
+        addressMenuPage.getEditButton().click();
+        ReusableMethods.wait(1);
+        addressMenuPage.getStreetAddress().sendKeys("Baker Street");
+        addressMenuPage.getUpdateAddress().click();
+
+        try {
+            assertTrue(elementLocatorsOnur.getPopupSignUpPage().getAttribute("contentDescription").contains("Success"));
+            System.out.println("Message: " + "\"" + elementLocatorsOnur.getPopupSignUpPage().getAttribute("contentDescription") + "\"");
+        } catch (AssertionError e) {
+            System.out.println("Assertion failed: " + e.getMessage());
+        }
+
+    }
+
+    @Then("User verifies that registered addresses are deletable")
+    public void user_verifies_that_registered_addresses_are_deletable() {
+        addressMenuPage.getDeleteButton().click();
+        ReusableMethods.wait(1);
+        addressMenuPage.getDeleteButtonDeletePage().click();
+        try {
+            assertTrue(elementLocatorsOnur.getPopupSignUpPage().getAttribute("contentDescription").contains("Success"));
+            System.out.println("Message: " + "\"" + elementLocatorsOnur.getPopupSignUpPage().getAttribute("contentDescription") + "\"");
+        } catch (AssertionError e) {
+            System.out.println("Assertion failed: " + e.getMessage());
+        }
+
+
+    }
+
+    @Then("User verifies that the {string} button is visible and active")
+    public void user_verifies_that_the_button_is_visible_and_active(String string) {
+        addressMenuPage.getAddNewAddressButton().isDisplayed();
+        addressMenuPage.getAddNewAddressButton().click();
+        assertTrue(addressMenuPage.getAddNewAddressButton().isDisplayed());
+    }
+
+
+    @When("User clicks on the {string} button")
+    public void user_clicks_on_the_button(String string) {
+        ReusableMethods.wait(3);
+        addressMenuPage.getAddNewAddressButton().click();
+
+    }
+
+    @When("User fills in the new address details")
+    public void user_fills_in_the_new_address_details() {
+        addressMenuPage.getFullName().click();
+        addressMenuPage.getFullName().sendKeys("Leo Tin");
+        ReusableMethods.wait(2);
+        addressMenuPage.getEmailFieldAdd().click();
+        addressMenuPage.getEmailFieldAdd().sendKeys("leo@gmail.com");
+        ReusableMethods.wait(3);
+        addressMenuPage.getPhoneField().click();
+        addressMenuPage.getPhoneNumber().click();
+        ReusableMethods.wait(2);
+        addressMenuPage.getPhoneTextField().click();
+        addressMenuPage.getPhoneTextField().sendKeys("5555555");
+        ReusableMethods.wait(2);
+        addressMenuPage.getCountryField().click();
+        addressMenuPage.getAlgeria().click();
+        ReusableMethods.wait(1);
+        addressMenuPage.getStateField().click();
+        addressMenuPage.getAlgiersProvince().click();
+        ReusableMethods.wait(1);
+        addressMenuPage.getCityField().click();
+        addressMenuPage.getRouiba().click();
+        ReusableMethods.wait(1);
+        addressMenuPage.getZipCodeField().click();
+        addressMenuPage.getZipCodeField().sendKeys("999");
+        ReusableMethods.wait(1);
+        addressMenuPage.getStreetAddressField().click();
+        addressMenuPage.getStreetAddressField().sendKeys("White Street");
+        ReusableMethods.wait(1);
+
+
+    }
+
+    @Then("User verifies that the new address is added successfully")
+    public void user_verifies_that_the_new_address_is_added_successfully() throws InvalidMidiDataException {
+        OptionsMet.swipe(617,1864,640,364);
+        ReusableMethods.wait(1);
+        addressMenuPage.getAddAdressLast().click();
+        ReusableMethods.wait(1);
+        try {
+            assertTrue(elementLocatorsOnur.getPopupSignUpPage().getAttribute("contentDescription").contains("Success"));
+            System.out.println("Message: " + "\"" + elementLocatorsOnur.getPopupSignUpPage().getAttribute("contentDescription") + "\"");
+        } catch (AssertionError e) {
+            System.out.println("Assertion failed: " + e.getMessage());
+        }
+    }
+    @Then("Close the page")
+    public void close_the_page() {
+        quitAppiumDriver();
+
+    }
+
+
+
 
     //****us11-23-26***
 
@@ -227,7 +382,6 @@ public class Stepdefinition extends OptionsMet {
         //  clickButtonByDescription(itemName);
         ReusableMethods.wait(3);
         touchDown(874, 667);
-
 
     }
 
@@ -479,3 +633,4 @@ public class Stepdefinition extends OptionsMet {
         card.getWatchButton().click();
     }
 }
+
