@@ -449,6 +449,7 @@ public class Stepdefinition extends OptionsMet {
     public void theUserVerifiesThatThereAreItemsInTheShoppingBasket() {
         wait.until(ExpectedConditions.visibilityOf(basketPage.getProductPrice()));
         assertTrue(basketPage.getProductPrice().isDisplayed());
+    }
 
     @Given("The user swipes the screen twice to view the Most Popular section")
     public void theUserSwipesTheScreenTwiceToViewTheMostPopularSection() {
