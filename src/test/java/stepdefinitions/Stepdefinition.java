@@ -461,4 +461,17 @@ public class Stepdefinition extends OptionsMet {
         int swipeCount = 2;
         card.swipeMethotWithDuration(startX, startY, endX, endY, duration, swipeCount);
     }
+
+    @And("User presses the plus button")
+    public void userPressesThePlusButton() {
+        for (int i = 0; i < 1; i++) {
+            ReusableMethods.wait(2);
+            card.getPlusButton().click();
+        }
+    }
+
+    @And("User clicks on the watch product")
+    public void userClicksOnTheWatchProduct() {
+        card.getWatchButton().click();
+    }
 }

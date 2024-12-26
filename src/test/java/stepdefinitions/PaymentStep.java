@@ -3,6 +3,7 @@ package stepdefinitions;
 import Page.PaymentPage;
 import io.cucumber.java.en.*;
 import io.qameta.allure.Step;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.OptionsMet;
 import utilities.ReusableMethods;
 
@@ -21,6 +22,7 @@ public class PaymentStep {
     @Step("QueryCart customer makes address selection")
     @And("QueryCart customer makes address selection")
     public void querycartCustomerMakesAddressSelection() {
+        ReusableMethods.wait(5);
         paymentPage.AdressClick();
     }
 

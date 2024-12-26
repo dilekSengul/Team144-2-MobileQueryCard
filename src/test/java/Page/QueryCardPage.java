@@ -76,6 +76,12 @@ public class QueryCardPage {
     private WebElement aramaButonu;
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\")")
     private WebElement searchTextBox;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(9)")
+    private WebElement plusButton;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Men's Analog Watch | 100 Meter Water Resistance | LED Light | Date Display | Leather/Cloth Band\n" +
+            "0 (0  Reviews)\n" +
+            "$119.00\")")
+    private WebElement watchButton;
 
 
     public void LogoGorunurTest() {
