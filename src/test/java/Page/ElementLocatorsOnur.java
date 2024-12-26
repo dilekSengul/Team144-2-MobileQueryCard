@@ -40,7 +40,16 @@ public class ElementLocatorsOnur {
     @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"(0  Products Found)\"]")
     private WebElement zeroProductFoundWishlist;
 
-
+    //Categories page
+    //Categories toaster button
+    @AndroidFindBy (xpath = "//android.widget.ImageView[@content-desc=\"Category\"]")
+    private WebElement categoriesToaster;
+    //Filter icon
+    @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(2)")
+    private WebElement filterIconCategories;
+    //Filter page X button
+    @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(0)")
+    private WebElement filterXButton;
 
 
 
@@ -61,4 +70,17 @@ public class ElementLocatorsOnur {
     private WebElement passwordErrorSignUpPage;
     @AndroidFindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View[2]/android.view.View")
     private WebElement popupSignUpPage;
+    //OrderHistory
+    @AndroidFindBy(xpath = "//android.widget.ScrollView/android.view.View/android.view.View/android.widget.ImageView[1]")
+    private WebElement firstOrderDetailsButton;
+
+    public void firstOrderDetailsButton(){
+
+    };
+
+
+
+
+
+
 }
