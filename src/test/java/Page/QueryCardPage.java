@@ -306,22 +306,6 @@ public class QueryCardPage {
             }
         }
     }
-/*
-    public void removeWishlistProducts(String listName,String itemName, String reviews, String price) {
-        String xpathExpression = String.format("//android.view.View[contains(@content-desc, '%s') and contains(@content-desc, '%s') and contains(@content-desc, '%s')]/android.widget.ImageView", itemName, reviews, price);
-
-        // Öğeyi bulma
-        WebElement element = getAppiumDriver().findElement(MobileBy.xpath(xpathExpression));
-
-        if (!productList.isEmpty()) {
-            System.out.println("The wishlist '" + listName + "' is empty.");
-            element.click();
-            removedToaster.isDisplayed();
-        } else {
-            System.out.println("Product not found: " + itemName);Denemeeee
-        }
-    }*/
-
 
     /// Gulnar editProfile
     @AndroidFindBy(xpath = "//*[@content-desc='Profile']\n")
