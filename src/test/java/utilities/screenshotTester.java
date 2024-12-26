@@ -30,7 +30,7 @@ public class screenshotTester {
 
         AppiumDriver driver = Driver.getAppiumDriver();
         //Ekran görüntüsü
-        String screenPath = "screen.png";
+        String screenPath = "Order Canceled Successfully!.png";
         File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         Files.copy(screenshot.toPath(), new File(screenPath).toPath());
 
