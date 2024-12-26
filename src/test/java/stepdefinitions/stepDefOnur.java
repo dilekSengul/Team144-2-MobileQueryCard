@@ -338,5 +338,10 @@ public class stepDefOnur {
     public void userEntersAndAndClicksOnTheSignInButton(String phoneNumber, String password) {
         card.Login(phoneNumber, password);
     }
+
+    @And("User clicks the fav button of the product for adding it to the wishlist")
+    public void userClicksTheFavButtonOfTheProductForAddingItToTheWishlist() {
+        elementLocatorsOnur.getFavButtonSearchSmoke().click();
+    }
 }
 
