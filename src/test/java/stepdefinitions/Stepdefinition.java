@@ -449,6 +449,7 @@ public class Stepdefinition extends OptionsMet {
     public void theUserVerifiesThatThereAreItemsInTheShoppingBasket() {
         wait.until(ExpectedConditions.visibilityOf(basketPage.getProductPrice()));
         assertTrue(basketPage.getProductPrice().isDisplayed());
+    }
 
     @Given("The user swipes the screen twice to view the Most Popular section")
     public void theUserSwipesTheScreenTwiceToViewTheMostPopularSection() {
@@ -459,5 +460,18 @@ public class Stepdefinition extends OptionsMet {
         int duration = 500;
         int swipeCount = 2;
         card.swipeMethotWithDuration(startX, startY, endX, endY, duration, swipeCount);
+    }
+
+    @And("User presses the plus button")
+    public void userPressesThePlusButton() {
+        for (int i = 0; i < 1; i++) {
+            ReusableMethods.wait(2);
+            card.getPlusButton().click();
+        }
+    }
+
+    @And("User clicks on the watch product")
+    public void userClicksOnTheWatchProduct() {
+        card.getWatchButton().click();
     }
 }
